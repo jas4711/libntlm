@@ -39,27 +39,27 @@
 #ifdef HAVE_STRING_H
 # include <string.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_STRINGS_H
 # include <strings.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_UNISTD_H
 # include <unistd.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_SYS_ENDIAN_H
 # include <sys/endian.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_MACHINE_ENDIAN_H
 # include <machine/endian.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_ENDIAN_H
 # include <endian.h>
 #endif
-                                                                                                                                               
+
 #ifdef HAVE_BYTESWAP_H
 # include <byteswap.h>
 #endif

@@ -103,12 +103,14 @@ dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
 }
 
 static inline void
-dumpBuffer(FILE *fp, uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len)
+dumpBuffer (FILE * fp, uint32 offset, uint32 len, char *structPtr,
+	    size_t buf_start, size_t buf_len)
 {
   /* prevent buffer reading overflow */
-  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+  if (offset < buf_start || offset > buf_len + buf_start
+      || offset + len > buf_len + buf_start)
     len = 0;
-  dumpRaw(fp, structPtr + offset, len);
+  dumpRaw (fp, structPtr + offset, len);
 }
 
 static char *
@@ -130,12 +132,14 @@ unicodeToString (const char *p, size_t len, char *buf)
 }
 
 static inline char *
-getUnicodeString(uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len, char *output)
+getUnicodeString (uint32 offset, uint32 len, char *structPtr,
+		  size_t buf_start, size_t buf_len, char *output)
 {
   /* prevent buffer reading overflow */
-  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+  if (offset < buf_start || offset > buf_len + buf_start
+      || offset + len > buf_len + buf_start)
     len = 0;
-  return unicodeToString(structPtr + offset, len / 2, output);
+  return unicodeToString (structPtr + offset, len / 2, output);
 }
 
 static unsigned char *
@@ -143,8 +147,8 @@ strToUnicode (const char *p, size_t l, unsigned char *buf)
 {
   int i = 0;
 
-  if (l > (NTLM_BUFSIZE/2))
-    l = (NTLM_BUFSIZE/2);
+  if (l > (NTLM_BUFSIZE / 2))
+    l = (NTLM_BUFSIZE / 2);
 
   while (l--)
     {
@@ -167,12 +171,14 @@ toString (const char *p, size_t len, char *buf)
 }
 
 static inline char *
-getString(uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len, char *output)
+getString (uint32 offset, uint32 len, char *structPtr, size_t buf_start,
+	   size_t buf_len, char *output)
 {
   /* prevent buffer reading overflow */
-  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+  if (offset < buf_start || offset > buf_len + buf_start
+      || offset + len > buf_len + buf_start)
     len = 0;
-  return toString(structPtr + offset, len, output);
+  return toString (structPtr + offset, len, output);
 }
 
 void
@@ -180,16 +186,16 @@ dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
 {
   char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Request:\n"
-               "      Ident = %.8s\n"
-               "      mType = %d\n"
-               "      Flags = %08x\n"
-               "       User = %s\n"
-               "     Domain = %s\n",
-               request->ident,
-               UI32LE (request->msgType),
-               UI32LE (request->flags),
-               GetString (request, user, buf1),
-               GetString (request, domain, buf2));
+	   "      Ident = %.8s\n"
+	   "      mType = %d\n"
+	   "      Flags = %08x\n"
+	   "       User = %s\n"
+	   "     Domain = %s\n",
+	   request->ident,
+	   UI32LE (request->msgType),
+	   UI32LE (request->flags),
+	   GetString (request, user, buf1),
+	   GetString (request, domain, buf2));
 }
 
 void
@@ -197,15 +203,15 @@ dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
 {
   unsigned char buf[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Challenge:\n"
-               "      Ident = %.8s\n"
-               "      mType = %d\n"
-               "     Domain = %s\n"
-               "      Flags = %08x\n"
-               "  Challenge = ",
-               challenge->ident,
-               UI32LE (challenge->msgType),
-               GetUnicodeString (challenge, uDomain, buf),
-               UI32LE (challenge->flags));
+	   "      Ident = %.8s\n"
+	   "      mType = %d\n"
+	   "     Domain = %s\n"
+	   "      Flags = %08x\n"
+	   "  Challenge = ",
+	   challenge->ident,
+	   UI32LE (challenge->msgType),
+	   GetUnicodeString (challenge, uDomain, buf),
+	   UI32LE (challenge->flags));
   dumpRaw (fp, challenge->challengeData, 8);
 }
 
@@ -220,7 +226,8 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
   DumpBuffer (fp, response, lmResponse);
   fprintf (fp, "     NTResp = ");
   DumpBuffer (fp, response, ntResponse);
-  fprintf (fp, "     Domain = %s\n", GetUnicodeString (response, uDomain, buf));
+  fprintf (fp, "     Domain = %s\n",
+	   GetUnicodeString (response, uDomain, buf));
   fprintf (fp, "       User = %s\n", GetUnicodeString (response, uUser, buf));
   fprintf (fp, "        Wks = %s\n", GetUnicodeString (response, uWks, buf));
   fprintf (fp, "       sKey = ");
@@ -233,7 +240,7 @@ buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 			 const char *user, const char *domain)
 {
   const char *p = strchr (user, '@');
-  size_t user_len = strlen(user);
+  size_t user_len = strlen (user);
 
   if (p)
     {
@@ -244,8 +251,8 @@ buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 
   request->bufIndex = 0;
   memcpy (request->ident, "NTLMSSP\0\0\0", 8);
-  request->msgType = UI32LE(1);
-  request->flags = UI32LE(0x0000b207);	/* have to figure out what these mean */
+  request->msgType = UI32LE (1);
+  request->flags = UI32LE (0x0000b207);	/* have to figure out what these mean */
   AddBytes (request, user, user, user_len);
   AddString (request, domain, domain);
 }
@@ -260,7 +267,7 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
   unsigned char buf[NTLM_BUFSIZE];
   const char *domain = GetUnicodeString (challenge, uDomain, buf);
   const char *p = strchr (user, '@');
-  size_t user_len = strlen(user);
+  size_t user_len = strlen (user);
 
   if (p)
     {
@@ -273,7 +280,7 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
 
   response->bufIndex = 0;
   memcpy (response->ident, "NTLMSSP\0\0\0", 8);
-  response->msgType = UI32LE(3);
+  response->msgType = UI32LE (3);
 
   AddBytes (response, lmResponse, lmRespData, 24);
   AddBytes (response, ntResponse, ntRespData, 24);
