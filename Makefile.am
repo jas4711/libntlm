@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003 Simon Josefsson.
+# Copyright (C) 2002, 2003, 2004 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -17,7 +17,7 @@
 # License along with Libntlm; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 
-EXTRA_DIST = libntlm.pc.in
+EXTRA_DIST = libntlm.pc.in des.c md4.c smbencrypt.c test.txt
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libntlm.pc
@@ -26,8 +26,16 @@ lib_LTLIBRARIES = libntlm.la
 
 include_HEADERS = ntlm.h
 
-libntlm_la_SOURCES = smbdes.c smbencrypt.c smbmd4.c smbutil.c smbdes.h smbmd4.h smbbyteorder.h smbencrypt.h version.c
+libntlm_la_SOURCES = des.h md4.h smbutil.c version.c smbencrypt.h global.h
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
+
+# test
+
+TESTS = test_ntlm
+check_PROGRAMS = $(TESTS)
+LDADD = libntlm.la
+CLEANFILES = test.out
+AM_CPPFLAGS = -DNTLM_SRCDIR=\"$(srcdir)\"
 
 # Maintainer targets
 

@@ -1,3 +1,11 @@
+2004-09-19  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in, smbutil.c: Add.
+
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: [no log message]
+
 2004-09-18  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.3.

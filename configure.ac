@@ -18,7 +18,7 @@ dnl You should have received a copy of the GNU Lesser General Public
 dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 
-AC_INIT(libntlm, 0.3.3, bug-libntlm@josefsson.org)
+AC_INIT(libntlm, 0.3.4, bug-libntlm@josefsson.org)
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
@@ -40,14 +40,14 @@ AC_PROG_CC
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS(unistd.h)
+AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h sys/endian.h machine/endian.h endian.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_TYPE_SIZE_T
 
 # Checks for library functions.
-AC_CHECK_FUNCS([memset strchr strdup])
+AC_CHECK_FUNCS([memset strchr strdup bzero])
 
 AC_CONFIG_FILES([Makefile libntlm.pc ntlm.h])
 AC_OUTPUT

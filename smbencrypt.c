@@ -1,343 +1,170 @@
 /* 
-   Unix SMB/Netbios implementation.
-   Version 1.9.
-   SMB parameters and setup
-   Copyright (C) Andrew Tridgell 1992-1998
-   Modified by Jeremy Allison 1995.
-   
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-   
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Copyright (C) 1998-1999  Brian Bruns
+ * Copyright (C) 2004 Frediano Ziglio
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Library General Public License as published 
+ * by the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
 */
 
-#define DEBUG(a,b) ;
+#include "global.h"
 
-extern int DEBUGLEVEL;
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include "smbbyteorder.h"
-#include "smbdes.h"
-#include "smbmd4.h"
-
-typedef unsigned char uchar;
-typedef signed short int16;
-typedef unsigned short uint16;
-typedef int BOOL;
-#define False 0
-#define True  1
-
-/****************************************************************************
- Like strncpy but always null terminates. Make sure there is room!
- The variable n should always be one less than the available size.
-****************************************************************************/
-
-char *
-StrnCpy (char *dest, const char *src, size_t n)
-{
-  char *d = dest;
-  if (!dest)
-    return (NULL);
-  if (!src)
-    {
-      *dest = 0;
-      return (dest);
-    }
-  while (n-- && (*d++ = *src++));
-  *d = 0;
-  return (dest);
-}
-
-size_t
-skip_multibyte_char (char c)
-{
-  return 0;
-}
-
-
-/*******************************************************************
-safe string copy into a known length string. maxlength does not
-include the terminating zero.
-********************************************************************/
-
-char *
-safe_strcpy (char *dest, const char *src, size_t maxlength)
-{
-  size_t len;
-
-  if (!dest)
-    {
-      DEBUG (0, ("ERROR: NULL dest in safe_strcpy\n"));
-      return NULL;
-    }
-
-  if (!src)
-    {
-      *dest = 0;
-      return dest;
-    }
-
-  len = strlen (src);
-
-  if (len > maxlength)
-    {
-      DEBUG (0, ("ERROR: string overflow by %d in safe_strcpy [%.50s]\n",
-		 (int) (len - maxlength), src));
-      len = maxlength;
-    }
-
-  memcpy (dest, src, len);
-  dest[len] = 0;
-  return dest;
-}
-
-
-void
-strupper (char *s)
-{
-  while (*s)
-    {
-      {
-	size_t skip = skip_multibyte_char (*s);
-	if (skip != 0)
-	  s += skip;
-	else
-	  {
-	    if (islower (*s))
-	      *s = toupper (*s);
-	    s++;
-	  }
-      }
-    }
-}
-
-extern void SMBOWFencrypt (uchar passwd[16], uchar * c8, uchar p24[24]);
+#include "md4.h"
+#include "des.h"
 
 /*
- This implements the X/Open SMB password encryption
- It takes a password, a 8 byte "crypt key" and puts 24 bytes of 
- encrypted password into p24 
+ * The following code is based on some psuedo-C code from ronald@innovation.ch
  */
 
+static void ntlm_encrypt_answer(unsigned char *hash, const unsigned char *challenge, unsigned char *answer);
+static void ntlm_convert_key(unsigned char *key_56, DES_KEY * ks);
+static void ntlm_des_set_odd_parity(char * key);
+
+NTLM_STATIC
 void
-SMBencrypt (uchar * passwd, uchar * c8, uchar * p24)
+SMBencrypt (const char * passwd, const uint8 * challenge, uint8 * answer)
 {
-  uchar p14[15], p21[21];
+#define MAX_PW_SZ 14
+	int len;
+	int i;
+	static const char magic[8] = { 0x4B, 0x47, 0x53, 0x21, 0x40, 0x23, 0x24, 0x25 };
+	DES_KEY ks;
+	unsigned char hash[24];
+	unsigned char passwd_up[MAX_PW_SZ];
 
-  memset (p21, '\0', 21);
-  memset (p14, '\0', 14);
-  StrnCpy ((char *) p14, (char *) passwd, 14);
+	/* convert password to upper and pad to 14 chars */
+	memset(passwd_up, 0, MAX_PW_SZ);
+	len = strlen(passwd);
+	if (len > MAX_PW_SZ)
+		len = MAX_PW_SZ;
+	for (i = 0; i < len; i++)
+		passwd_up[i] = toupper((unsigned char) passwd[i]);
 
-  strupper ((char *) p14);
-  E_P16 (p14, p21);
+	/* hash the first 7 characters */
+	ntlm_convert_key(passwd_up, &ks);
+	ntlm_des_ecb_encrypt(&magic, sizeof(magic), &ks, (hash + 0));
 
-  SMBOWFencrypt (p21, c8, p24);
+	/* hash the second 7 characters */
+	ntlm_convert_key(passwd_up + 7, &ks);
+	ntlm_des_ecb_encrypt(&magic, sizeof(magic), &ks, (hash + 8));
 
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("SMBencrypt: lm#, challenge, response\n"));
-  dump_data (100, (char *) p21, 16);
-  dump_data (100, (char *) c8, 8);
-  dump_data (100, (char *) p24, 24);
-#endif
+	memset(hash + 16, 0, 5);
+
+	ntlm_encrypt_answer(hash, challenge, answer);
+
+	/* with security is best be pedantic */
+	memset(&ks, 0, sizeof(ks));
+	memset(hash, 0, sizeof(hash));
+	memset(passwd_up, 0, sizeof(passwd_up));
 }
 
-/* Routines for Windows NT MD4 Hash functions. */
-static int
-_my_wcslen (int16 * str)
+NTLM_STATIC
+void
+SMBNTencrypt (const char * passwd, const uint8 * challenge, uint8 * answer)
 {
-  int len = 0;
-  while (*str++ != 0)
-    len++;
-  return len;
+	int len;
+	int i;
+	DES_KEY ks;
+	unsigned char hash[24];
+	unsigned char nt_pw[256];
+	MD4_CTX context;
+
+	/* NT resp */
+	len = strlen(passwd);
+	if (len > 128)
+		len = 128;
+	for (i = 0; i < len; ++i) {
+		nt_pw[2 * i] = passwd[i];
+		nt_pw[2 * i + 1] = 0;
+	}
+
+	MD4Init(&context);
+	MD4Update(&context, nt_pw, len * 2);
+	MD4Final(&context, hash);
+
+	memset(hash + 16, 0, 5);
+	ntlm_encrypt_answer(hash, challenge, answer);
+
+	/* with security is best be pedantic */
+	memset(&ks, 0, sizeof(ks));
+	memset(hash, 0, sizeof(hash));
+	memset(nt_pw, 0, sizeof(nt_pw));
+	memset(&context, 0, sizeof(context));
 }
 
 /*
- * Convert a string into an NT UNICODE string.
- * Note that regardless of processor type 
- * this must be in intel (little-endian)
- * format.
- */
-
-static int
-_my_mbstowcs (int16 * dst, uchar * src, int len)
+* takes a 21 byte array and treats it as 3 56-bit DES keys. The
+* 8 byte plaintext is encrypted with each key and the resulting 24
+* bytes are stored in the results array.
+*/
+static void
+ntlm_encrypt_answer(unsigned char *hash, const unsigned char *challenge, unsigned char *answer)
 {
-  int i;
-  int16 val;
+	DES_KEY ks;
 
-  for (i = 0; i < len; i++)
-    {
-      val = *src;
-      SSVAL (dst, 0, val);
-      dst++;
-      src++;
-      if (val == 0)
-	break;
-    }
-  return i;
+	ntlm_convert_key(hash, &ks);
+	ntlm_des_ecb_encrypt(challenge, 8, &ks, answer);
+
+	ntlm_convert_key(&hash[7], &ks);
+	ntlm_des_ecb_encrypt(challenge, 8, &ks, &answer[8]);
+
+	ntlm_convert_key(&hash[14], &ks);
+	ntlm_des_ecb_encrypt(challenge, 8, &ks, &answer[16]);
+
+	memset(&ks, 0, sizeof(ks));
 }
 
-/* 
- * Creates the MD4 Hash of the users password in NT UNICODE.
- */
-
-void
-E_md4hash (uchar * passwd, uchar * p16)
+static void
+ntlm_des_set_odd_parity(char *key)
 {
-  int len;
-  int16 wpwd[129];
+	int i;
+	unsigned char parity;
 
-  /* Password cannot be longer than 128 characters */
-  len = strlen ((char *) passwd);
-  if (len > 128)
-    len = 128;
-  /* Password must be converted to NT unicode */
-  _my_mbstowcs (wpwd, passwd, len);
-  wpwd[len] = 0;		/* Ensure string is null terminated */
-  /* Calculate length in bytes */
-  len = _my_wcslen (wpwd) * sizeof (int16);
+	for (i = 0; i < 8; i++) {
+		parity = key[i];
 
-  mdfour (p16, (unsigned char *) wpwd, len);
+		parity ^= parity >> 4;
+		parity ^= parity >> 2;
+		parity ^= parity >> 1;
+
+		key[i] = (key[i] & 0xfe) | (parity & 1);
+	}
 }
 
-/* Does both the NT and LM owfs of a user's password */
-void
-nt_lm_owf_gen (char *pwd, uchar nt_p16[16], uchar p16[16])
+/*
+* turns a 56 bit key into the 64 bit, odd parity key and sets the key.
+* The key schedule ks is also set.
+*/
+static void
+ntlm_convert_key(unsigned char *key_56, DES_KEY * ks)
 {
-  char passwd[130];
+	unsigned char key[8];
 
-  memset (passwd, '\0', 130);
-  safe_strcpy (passwd, pwd, sizeof (passwd) - 1);
+	key[0] = key_56[0];
+	key[1] = ((key_56[0] << 7) & 0xFF) | (key_56[1] >> 1);
+	key[2] = ((key_56[1] << 6) & 0xFF) | (key_56[2] >> 2);
+	key[3] = ((key_56[2] << 5) & 0xFF) | (key_56[3] >> 3);
+	key[4] = ((key_56[3] << 4) & 0xFF) | (key_56[4] >> 4);
+	key[5] = ((key_56[4] << 3) & 0xFF) | (key_56[5] >> 5);
+	key[6] = ((key_56[5] << 2) & 0xFF) | (key_56[6] >> 6);
+	key[7] = (key_56[6] << 1) & 0xFF;
 
-  /* Calculate the MD4 hash (NT compatible) of the password */
-  memset (nt_p16, '\0', 16);
-  E_md4hash ((uchar *) passwd, nt_p16);
+	ntlm_des_set_odd_parity(key);
+	ntlm_des_set_key(ks, key, sizeof(key));
 
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("nt_lm_owf_gen: pwd, nt#\n"));
-  dump_data (120, passwd, strlen (passwd));
-  dump_data (100, (char *) nt_p16, 16);
-#endif
-
-  /* Mangle the passwords into Lanman format */
-  passwd[14] = '\0';
-  strupper (passwd);
-
-  /* Calculate the SMB (lanman) hash functions of the password */
-
-  memset (p16, '\0', 16);
-  E_P16 ((uchar *) passwd, (uchar *) p16);
-
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("nt_lm_owf_gen: pwd, lm#\n"));
-  dump_data (120, passwd, strlen (passwd));
-  dump_data (100, (char *) p16, 16);
-#endif
-  /* clear out local copy of user's password (just being paranoid). */
-  memset (passwd, '\0', sizeof (passwd));
-}
-
-/* Does the des encryption from the NT or LM MD4 hash. */
-void
-SMBOWFencrypt (uchar passwd[16], uchar * c8, uchar p24[24])
-{
-  uchar p21[21];
-
-  memset (p21, '\0', 21);
-
-  memcpy (p21, passwd, 16);
-  E_P24 (p21, c8, p24);
-}
-
-/* Does the des encryption from the FIRST 8 BYTES of the NT or LM MD4 hash. */
-void
-NTLMSSPOWFencrypt (uchar passwd[8], uchar * ntlmchalresp, uchar p24[24])
-{
-  uchar p21[21];
-
-  memset (p21, '\0', 21);
-  memcpy (p21, passwd, 8);
-  memset (p21 + 8, 0xbd, 8);
-
-  E_P24 (p21, ntlmchalresp, p24);
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("NTLMSSPOWFencrypt: p21, c8, p24\n"));
-  dump_data (100, (char *) p21, 21);
-  dump_data (100, (char *) ntlmchalresp, 8);
-  dump_data (100, (char *) p24, 24);
-#endif
+	memset(&key, 0, sizeof(key));
 }
 
 
-/* Does the NT MD4 hash then des encryption. */
-
-void
-SMBNTencrypt (uchar * passwd, uchar * c8, uchar * p24)
-{
-  uchar p21[21];
-
-  memset (p21, '\0', 21);
-
-  E_md4hash (passwd, p21);
-  SMBOWFencrypt (p21, c8, p24);
-
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("SMBNTencrypt: nt#, challenge, response\n"));
-  dump_data (100, (char *) p21, 16);
-  dump_data (100, (char *) c8, 8);
-  dump_data (100, (char *) p24, 24);
-#endif
-}
-
-#if 0
-
-BOOL
-make_oem_passwd_hash (char data[516], const char *passwd,
-		      uchar old_pw_hash[16], BOOL unicode)
-{
-  int new_pw_len = strlen (passwd) * (unicode ? 2 : 1);
-
-  if (new_pw_len > 512)
-    {
-      DEBUG (0, ("make_oem_passwd_hash: new password is too long.\n"));
-      return False;
-    }
-
-  /*
-   * Now setup the data area.
-   * We need to generate a random fill
-   * for this area to make it harder to
-   * decrypt. JRA.
-   */
-  generate_random_buffer ((unsigned char *) data, 516, False);
-  if (unicode)
-    {
-      struni2 (&data[512 - new_pw_len], passwd);
-    }
-  else
-    {
-      fstrcpy (&data[512 - new_pw_len], passwd);
-    }
-  SIVAL (data, 512, new_pw_len);
-
-#ifdef DEBUG_PASSWORD
-  DEBUG (100, ("make_oem_passwd_hash\n"));
-  dump_data (100, data, 516);
-#endif
-  SamOEMhash ((unsigned char *) data, (unsigned char *) old_pw_hash, True);
-
-  return True;
-}
-
-#endif
+/** \@} */

@@ -1,5 +1,7 @@
-/* smbutil.c --- SMB utilities.
- * Copyright (C) 1999 Grant Edwards
+/* smbutil.c    main library functions
+ * Copyright (C) 1999-2001 Grant Edwards
+ * Copyright (C) 2002  Simon Josefsson
+ * Copyright (C) 2004 Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,85 +19,80 @@
  *
  */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <ctype.h>
+#define NTLM_STATIC static
+#include "global.h"
 #include <assert.h>
-#include <string.h>
-#include "ntlm.h"
-#include "smbencrypt.h"
-#include "smbbyteorder.h"
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include "des.c"
+#include "md4.c"
+#include "smbencrypt.c"
 
 char versionString[] = PACKAGE_STRING;
 
 /* Utility routines that handle NTLM auth structures. */
 
-/* The [IS]VAL macros are to take care of byte order for non-Intel
- * Machines -- I think this file is OK, but it hasn't been tested.
- * The other files (the ones stolen from Samba) should be OK.
+/*
+ * Must be multiple of two
+ * We use a statis buffer of 1024 bytes for message
+ * At maximun we but 48 bytes (ntlm responses) and 3 unicode strings so
+ * NTLM_BUFSIZE * 3 + 48 <= 1024
  */
+#define NTLM_BUFSIZE 320
 
+/*
+ * all bytes in our structures are aligned so just swap bytes so 
+ * we have just to swap order 
+ */
+#ifdef WORDS_BIGENDIAN
+# define UI16LE(n) byteswap16(n)
+# define UI32LE(n) byteswap32(n)
+#else
+# define UI16LE(n) (n)
+# define UI32LE(n) (n)
+#endif
 
 /* I am not crazy about these macros -- they seem to have gotten
  * a bit complex.  A new scheme for handling string/buffer fields
  * in the structures probably needs to be designed
  */
-
 #define AddBytes(ptr, header, buf, count) \
 { \
-if (buf && count) \
-  { \
-  SSVAL(&ptr->header.len,0,count); \
-  SSVAL(&ptr->header.maxlen,0,count); \
-  SIVAL(&ptr->header.offset,0,((ptr->buffer - ((uint8*)ptr)) + ptr->bufIndex)); \
+  ptr->header.len = ptr->header.maxlen = UI16LE(count); \
+  ptr->header.offset = UI32LE((ptr->buffer - ((uint8*)ptr)) + ptr->bufIndex); \
   memcpy(ptr->buffer+ptr->bufIndex, buf, count); \
   ptr->bufIndex += count; \
-  } \
-else \
-  { \
-  ptr->header.len = \
-  ptr->header.maxlen = 0; \
-  SIVAL(&ptr->header.offset,0,ptr->bufIndex); \
-  } \
 }
 
 #define AddString(ptr, header, string) \
 { \
-char *p = string; \
-int len = 0; \
-if (p) len = strlen(p); \
-AddBytes(ptr, header, ((unsigned char*)p), len); \
+const char *p = (string); \
+int len = p ? strlen(p) : 0; \
+AddBytes(ptr, header, p, len); \
+}
+
+#define AddUnicodeStringLen(ptr, header, string, len) \
+{ \
+unsigned char buf[NTLM_BUFSIZE]; \
+unsigned char *b = strToUnicode(string, len, buf); \
+AddBytes(ptr, header, b, len*2); \
 }
 
 #define AddUnicodeString(ptr, header, string) \
 { \
-char *p = string; \
-unsigned char *b = NULL; \
-int len = 0; \
-if (p) \
-  { \
-  len = strlen(p); \
-  b = strToUnicode(p); \
-  } \
-AddBytes(ptr, header, b, len*2); \
+int len = strlen(string); \
+AddUnicodeStringLen(ptr, header, string, len); \
 }
 
-
-#define GetUnicodeString(structPtr, header) \
-unicodeToString(((char*)structPtr) + IVAL(&structPtr->header.offset,0) , SVAL(&structPtr->header.len,0)/2)
-#define GetString(structPtr, header) \
-toString((((char *)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&structPtr->header.len,0))
+#define GetUnicodeString(structPtr, header, output) \
+getUnicodeString(UI32LE(structPtr->header.offset), UI16LE(structPtr->header.len), ((char*)structPtr), (structPtr->buffer - (uint8*) structPtr), sizeof(structPtr->buffer), output)
+#define GetString(structPtr, header, output) \
+getString(UI32LE(structPtr->header.offset), UI16LE(structPtr->header.len), ((char*)structPtr), (structPtr->buffer - (uint8*) structPtr), sizeof(structPtr->buffer), output)
 #define DumpBuffer(fp, structPtr, header) \
-dumpRaw(fp,((unsigned char*)structPtr)+IVAL(&structPtr->header.offset,0),SVAL(&structPtr->header.len,0))
+dumpBuffer(fp, UI32LE(structPtr->header.offset), UI16LE(structPtr->header.len), ((char*)structPtr), (structPtr->buffer - (uint8*) structPtr), sizeof(structPtr->buffer))
 
 
 static void
-dumpRaw (FILE * fp, unsigned char *buf, size_t len)
+dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
 {
   int i;
 
@@ -105,13 +102,22 @@ dumpRaw (FILE * fp, unsigned char *buf, size_t len)
   fprintf (fp, "\n");
 }
 
+static inline void
+dumpBuffer(FILE *fp, uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len)
+{
+  /* prevent buffer reading overflow */
+  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+    len = 0;
+  dumpRaw(fp, structPtr + offset, len);
+}
+
 static char *
-unicodeToString (char *p, size_t len)
+unicodeToString (const char *p, size_t len, char *buf)
 {
   int i;
-  static char buf[1024];
 
-  assert (len + 1 < sizeof buf);
+  if (len >= NTLM_BUFSIZE)
+    len = NTLM_BUFSIZE - 1;
 
   for (i = 0; i < len; ++i)
     {
@@ -123,14 +129,22 @@ unicodeToString (char *p, size_t len)
   return buf;
 }
 
-static unsigned char *
-strToUnicode (char *p)
+static inline char *
+getUnicodeString(uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len, char *output)
 {
-  static unsigned char buf[1024];
-  size_t l = strlen (p);
+  /* prevent buffer reading overflow */
+  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+    len = 0;
+  return unicodeToString(structPtr + offset, len / 2, output);
+}
+
+static unsigned char *
+strToUnicode (const char *p, size_t l, unsigned char *buf)
+{
   int i = 0;
 
-  assert (l * 2 < sizeof buf);
+  if (l > (NTLM_BUFSIZE/2))
+    l = (NTLM_BUFSIZE/2);
 
   while (l--)
     {
@@ -141,80 +155,99 @@ strToUnicode (char *p)
   return buf;
 }
 
-static unsigned char *
-toString (char *p, size_t len)
+static char *
+toString (const char *p, size_t len, char *buf)
 {
-  static unsigned char buf[1024];
-
-  assert (len + 1 < sizeof buf);
+  if (len >= NTLM_BUFSIZE)
+    len = NTLM_BUFSIZE - 1;
 
   memcpy (buf, p, len);
   buf[len] = 0;
   return buf;
 }
 
+static inline char *
+getString(uint32 offset, uint32 len, char * structPtr, size_t buf_start, size_t buf_len, char *output)
+{
+  /* prevent buffer reading overflow */
+  if (offset < buf_start || offset > buf_len + buf_start || offset + len > buf_len + buf_start)
+    len = 0;
+  return toString(structPtr + offset, len, output);
+}
+
 void
 dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
 {
-  fprintf (fp, "NTLM Request:\n");
-  fprintf (fp, "      Ident = %s\n", request->ident);
-  fprintf (fp, "      mType = %d\n", IVAL (&request->msgType, 0));
-  fprintf (fp, "      Flags = %08x\n", IVAL (&request->flags, 0));
-  fprintf (fp, "       User = %s\n", GetString (request, user));
-  fprintf (fp, "     Domain = %s\n", GetString (request, domain));
+  char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE];
+  fprintf (fp, "NTLM Request:\n"
+               "      Ident = %.8s\n"
+               "      mType = %d\n"
+               "      Flags = %08x\n"
+               "       User = %s\n"
+               "     Domain = %s\n",
+               request->ident,
+               UI32LE (request->msgType),
+               UI32LE (request->flags),
+               GetString (request, user, buf1),
+               GetString (request, domain, buf2));
 }
 
 void
 dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
 {
-  fprintf (fp, "NTLM Challenge:\n");
-  fprintf (fp, "      Ident = %s\n", challenge->ident);
-  fprintf (fp, "      mType = %d\n", IVAL (&challenge->msgType, 0));
-  fprintf (fp, "     Domain = %s\n", GetUnicodeString (challenge, uDomain));
-  fprintf (fp, "      Flags = %08x\n", IVAL (&challenge->flags, 0));
-  fprintf (fp, "  Challenge = ");
+  unsigned char buf[NTLM_BUFSIZE];
+  fprintf (fp, "NTLM Challenge:\n"
+               "      Ident = %.8s\n"
+               "      mType = %d\n"
+               "     Domain = %s\n"
+               "      Flags = %08x\n"
+               "  Challenge = ",
+               challenge->ident,
+               UI32LE (challenge->msgType),
+               GetUnicodeString (challenge, uDomain, buf),
+               UI32LE (challenge->flags));
   dumpRaw (fp, challenge->challengeData, 8);
 }
 
 void
 dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
 {
+  unsigned char buf[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Response:\n");
-  fprintf (fp, "      Ident = %s\n", response->ident);
-  fprintf (fp, "      mType = %d\n", IVAL (&response->msgType, 0));
+  fprintf (fp, "      Ident = %.8s\n", response->ident);
+  fprintf (fp, "      mType = %d\n", UI32LE (response->msgType));
   fprintf (fp, "     LmResp = ");
   DumpBuffer (fp, response, lmResponse);
   fprintf (fp, "     NTResp = ");
   DumpBuffer (fp, response, ntResponse);
-  fprintf (fp, "     Domain = %s\n", GetUnicodeString (response, uDomain));
-  fprintf (fp, "       User = %s\n", GetUnicodeString (response, uUser));
-  fprintf (fp, "        Wks = %s\n", GetUnicodeString (response, uWks));
+  fprintf (fp, "     Domain = %s\n", GetUnicodeString (response, uDomain, buf));
+  fprintf (fp, "       User = %s\n", GetUnicodeString (response, uUser, buf));
+  fprintf (fp, "        Wks = %s\n", GetUnicodeString (response, uWks, buf));
   fprintf (fp, "       sKey = ");
   DumpBuffer (fp, response, sessionKey);
-  fprintf (fp, "      Flags = %08x\n", IVAL (&response->flags, 0));
+  fprintf (fp, "      Flags = %08x\n", UI32LE (response->flags));
 }
 
 void
 buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 			 const char *user, const char *domain)
 {
-  char *u = strdup (user);
-  char *p = strchr (u, '@');
+  const char *p = strchr (user, '@');
+  size_t user_len = strlen(user);
 
   if (p)
     {
       if (!domain)
 	domain = p + 1;
-      *p = '\0';
+      user_len = p - user;
     }
 
   request->bufIndex = 0;
   memcpy (request->ident, "NTLMSSP\0\0\0", 8);
-  SIVAL (&request->msgType, 0, 1);
-  SIVAL (&request->flags, 0, 0x0000b207);	/* have to figure out what these mean */
-  AddString (request, user, u);
+  request->msgType = UI32LE(1);
+  request->flags = UI32LE(0x0000b207);	/* have to figure out what these mean */
+  AddBytes (request, user, user, user_len);
   AddString (request, domain, domain);
-  free (u);
 }
 
 void
@@ -224,15 +257,15 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
 {
   uint8 lmRespData[24];
   uint8 ntRespData[24];
-  char *d = strdup (GetUnicodeString (challenge, uDomain));
-  char *domain = d;
-  char *u = strdup (user);
-  char *p = strchr (u, '@');
+  unsigned char buf[NTLM_BUFSIZE];
+  const char *domain = GetUnicodeString (challenge, uDomain, buf);
+  const char *p = strchr (user, '@');
+  size_t user_len = strlen(user);
 
   if (p)
     {
       domain = p + 1;
-      *p = '\0';
+      user_len = p - user;
     }
 
   SMBencrypt (password, challenge->challengeData, lmRespData);
@@ -240,17 +273,15 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
 
   response->bufIndex = 0;
   memcpy (response->ident, "NTLMSSP\0\0\0", 8);
-  SIVAL (&response->msgType, 0, 3);
+  response->msgType = UI32LE(3);
 
   AddBytes (response, lmResponse, lmRespData, 24);
   AddBytes (response, ntResponse, ntRespData, 24);
   AddUnicodeString (response, uDomain, domain);
-  AddUnicodeString (response, uUser, u);
-  AddUnicodeString (response, uWks, u);
+  AddUnicodeStringLen (response, uUser, user, user_len);
+  /* TODO just a dummy value for workstation */
+  AddUnicodeStringLen (response, uWks, user, user_len);
   AddString (response, sessionKey, NULL);
 
   response->flags = challenge->flags;
-
-  free (d);
-  free (u);
 }
