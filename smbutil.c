@@ -19,13 +19,21 @@
  *
  */
 
+#ifdef NTLM_UNIQUE_MODULE
 #define NTLM_STATIC static
+#endif
 #include "global.h"
 #include <assert.h>
 
-#include "des.c"
-#include "md4.c"
-#include "smbencrypt.c"
+#ifdef NTLM_UNIQUE_MODULE
+# include "des.c"
+# include "md4.c"
+# include "smbencrypt.c"
+#else
+# include "des.h"
+# include "md4.h"
+# include "smbencrypt.h"
+#endif
 
 char versionString[] = PACKAGE_STRING;
 
@@ -66,7 +74,7 @@ char versionString[] = PACKAGE_STRING;
 #define AddString(ptr, header, string) \
 { \
 const char *p = (string); \
-int len = p ? strlen(p) : 0; \
+size_t len = p ? strlen(p) : 0; \
 AddBytes(ptr, header, p, len); \
 }
 
@@ -79,7 +87,7 @@ AddBytes(ptr, header, b, len*2); \
 
 #define AddUnicodeString(ptr, header, string) \
 { \
-int len = strlen(string); \
+size_t len = strlen(string); \
 AddUnicodeStringLen(ptr, header, string, len); \
 }
 
@@ -102,7 +110,7 @@ dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
   fprintf (fp, "\n");
 }
 
-static void
+static inline void
 dumpBuffer (FILE * fp, uint32 offset, uint32 len, char *structPtr,
 	    size_t buf_start, size_t buf_len)
 {
@@ -131,7 +139,7 @@ unicodeToString (const char *p, size_t len, char *buf)
   return buf;
 }
 
-static char *
+static inline char *
 getUnicodeString (uint32 offset, uint32 len, char *structPtr,
 		  size_t buf_start, size_t buf_len, char *output)
 {
@@ -170,7 +178,7 @@ toString (const char *p, size_t len, char *buf)
   return buf;
 }
 
-static char *
+static inline char *
 getString (uint32 offset, uint32 len, char *structPtr, size_t buf_start,
 	   size_t buf_len, char *output)
 {
@@ -218,19 +226,23 @@ dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
 void
 dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
 {
-  unsigned char buf[NTLM_BUFSIZE];
-  fprintf (fp, "NTLM Response:\n");
-  fprintf (fp, "      Ident = %.8s\n", response->ident);
-  fprintf (fp, "      mType = %d\n", UI32LE (response->msgType));
-  fprintf (fp, "     LmResp = ");
+  unsigned char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE], buf3[NTLM_BUFSIZE];
+  fprintf (fp, "NTLM Response:\n"
+	       "      Ident = %.8s\n"
+	       "      mType = %d\n"
+	       "     LmResp = ",
+	       response->ident,
+	       UI32LE (response->msgType));
   DumpBuffer (fp, response, lmResponse);
   fprintf (fp, "     NTResp = ");
   DumpBuffer (fp, response, ntResponse);
-  fprintf (fp, "     Domain = %s\n",
-	   GetUnicodeString (response, uDomain, buf));
-  fprintf (fp, "       User = %s\n", GetUnicodeString (response, uUser, buf));
-  fprintf (fp, "        Wks = %s\n", GetUnicodeString (response, uWks, buf));
-  fprintf (fp, "       sKey = ");
+  fprintf (fp, "     Domain = %s\n"
+	       "       User = %s\n"
+	       "        Wks = %s\n"
+	       "       sKey = ",
+	       GetUnicodeString (response, uDomain, buf1),
+	       GetUnicodeString (response, uUser, buf2),
+	       GetUnicodeString (response, uWks, buf3));
   DumpBuffer (fp, response, sessionKey);
   fprintf (fp, "      Flags = %08x\n", UI32LE (response->flags));
 }
@@ -253,6 +265,7 @@ buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
   memcpy (request->ident, "NTLMSSP\0\0\0", 8);
   request->msgType = UI32LE (1);
   request->flags = UI32LE (0x0000b207);	/* have to figure out what these mean */
+  /* FIXME this should be workstation, not username */
   AddBytes (request, user, user, user_len);
   AddString (request, domain, domain);
 }
@@ -282,12 +295,12 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
   memcpy (response->ident, "NTLMSSP\0\0\0", 8);
   response->msgType = UI32LE (3);
 
-  AddBytes (response, lmResponse, lmRespData, 24);
-  AddBytes (response, ntResponse, ntRespData, 24);
   AddUnicodeString (response, uDomain, domain);
   AddUnicodeStringLen (response, uUser, user, user_len);
   /* TODO just a dummy value for workstation */
   AddUnicodeStringLen (response, uWks, user, user_len);
+  AddBytes (response, lmResponse, lmRespData, 24);
+  AddBytes (response, ntResponse, ntRespData, 24);
   AddString (response, sessionKey, NULL);
 
   response->flags = challenge->flags;
