@@ -1,6 +1,39 @@
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.3.
+
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* smbbyteorder.h, smbdes.c, smbdes.h, smbencrypt.c, smbencrypt.h,
+	smbmd4.c, smbmd4.h, smbutil.c, version.c: Use const.  Indent.
+
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump version.
+
+2004-09-18  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in: Use const.  Indent.
+
+2003-03-17  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix release target.
+
+2003-03-17  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: [no log message]
+
 2003-03-17  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.2.
+
+2003-03-17  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsignore: [no log message]
 
 2003-03-17  Simon Josefsson <simon@josefsson.org>
 
@@ -26,6 +59,10 @@
 
 	* AUTHORS: Fix.
 
+2003-03-17  Simon Josefsson <simon@josefsson.org>
+
+	* autogen.sh: Cleanup.
+
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* COPYING: Autoreconf updated it.
@@ -40,12 +77,20 @@
 
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
+	* .cvsignore: Add.
+
+2002-12-05  Simon Josefsson <simon@josefsson.org>
+
 	* configure.ac: Add copying conditions.  Remove some unnecessary
 	things.
 
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* AUTHORS: Add Andrew Tridgell and copying conditions.
+
+2002-12-05  Simon Josefsson <simon@josefsson.org>
+
+	* autogen.sh: Use autoreconf.
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
@@ -57,7 +102,15 @@
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
+	* ChangeLog: [no log message]
+
+2002-10-19  Simon Josefsson <simon@josefsson.org>
+
 	* NEWS: 0.3.1.
+
+2002-10-19  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
@@ -65,13 +118,29 @@
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
+	* .cvsignore: Fix.
+
+2002-10-19  Simon Josefsson <simon@josefsson.org>
+
 	* Makefile.am, configure.ac, libntlm-config.in, libntlm.m4,
 	libntlm.pc.in: Use pkg-config instead of libntlm.m4 +
 	libntlm-config.  Autogenerate ChangeLog's.
 
+2002-10-19  Simon Josefsson <simon@josefsson.org>
+
+	* autogen.sh: Gnits.
+
+2002-10-19  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsusers: New file, for ChangeLog names.
+
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
-	* NEWS: 
+	* .cvsignore: [no log message]
+
+2002-10-01  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS:
 	Version 0.3.0 released.  Renamed HISTORY to NEWS.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
@@ -92,6 +161,10 @@
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile: Makefile: Removed
+
+2002-10-01  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog, autogen.sh: [no log message]
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
