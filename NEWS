@@ -9,11 +9,11 @@ See the end for copying conditions.
 
 ** Slight changes in output vectors, contributed by Frediano Ziglio.
 
-* Version 0.3.5 (2004-09-23)
+* Version 0.3.5 (released 2004-09-23)
 
 ** Make it compile on C89 platforms.
 
-* Version 0.3.4 (2004-09-23)
+* Version 0.3.4 (released 2004-09-23)
 
 ** The license has been changed from GPL to LGPL.
 Thanks to a rewrite of several files, contributed by Frediano Ziglio.
@@ -21,38 +21,38 @@ Thanks to a rewrite of several files, contributed by Frediano Ziglio.
 ** The output may now be slightly different, due to a bug in earlier versions.
 Unused parts of the output string are now initialized to 0 consistently.
 
-* Version 0.3.3 (2004-09-18)
+* Version 0.3.3 (released 2004-09-18)
 
 ** Use const for buildSmbNtlmAuthRequest() and buildSmbNtlmAuthResponse().
 
 ** Source code is indented according to GNU Coding Standard.
 
-* Version 0.3.2 (2003-03-17)
+* Version 0.3.2 (released 2003-03-17)
 
 ** Further build cleanups.
 
-* Version 0.3.1 (2002-10-19)
+* Version 0.3.1 (released 2002-10-19)
 
 ** Uses automake 1.7, gnits and pkg-config.  Still no code changes.
 
-* Version 0.3.0 (2002-10-01)
+* Version 0.3.0 (released 2002-10-01)
 
 ** Added autoconf, automake and libtool support.  Unofficial release made
 ** by Simon Josefsson.
 
-* Revsion 0.21 (1999-10-07)
+* Revsion 0.21 (released 1999-10-07)
 
 ** Added support for usernames with embedded domain strings of the
 ** format username@domain.  If present, the domain will override the
 ** domain that is returned by the host in the challenge.
 
-* Version 0.2 (1999-10-06)
+* Version 0.2 (released 1999-10-06)
 
 ** Fixed another byte-order problem in unicode routine in smbutil.c.
 ** Added a copy of GPL to the distribution.  Added test driver
 ** program directory.
 
-* Version 0.1 (1999-10-05)
+* Version 0.1 (released 1999-10-05)
 
 ** Fixed usage of byte-order macros in smbutil.c.  Hopefully this
 ** will make it work on SPARC machines...
