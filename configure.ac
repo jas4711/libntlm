@@ -44,6 +44,7 @@ AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h sys/endian.h machine/en
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
+AC_C_INLINE
 AC_TYPE_SIZE_T
 
 # Checks for library functions.
