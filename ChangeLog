@@ -1,0 +1,17 @@
+2002-10-01  Simon Josefsson  <jas@extundo.com>
+
+	* Version 0.3.0 released.
+
+	* smbutil.c: Fixup version string.
+
+	* ntlm.h.in: Version define, protect from double inclusion,
+	protect C++.
+
+	* smb.h: Removed (not used).
+
+	* Renamed ntlm.h to ntlm.h.in.
+
+	* Renamed HISTORY to NEWS.
+
+	* AUTHORS, ChangeLog, configure.ac, Makefile.am,
+	libntlm-config.in, libntlm.m4, version.c: New files.
