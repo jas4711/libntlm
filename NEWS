@@ -8,6 +8,9 @@ See the end for copying conditions.
 ** The license has been changed from GPL to LGPL.
 Thanks to a rewrite of several files, contributed by Frediano Ziglio.
 
+** The output may now be slightly different, due to a bug in earlier versions.
+Unused parts of the output string are now initialized to 0 consistently.
+
 * Revision 0.3.3 (18 September 2004)
 
 ** Use const for buildSmbNtlmAuthRequest() and buildSmbNtlmAuthResponse().
