@@ -11,6 +11,6 @@ $ACLOCAL
 $LIBTOOLIZE --force --automake
 $ACLOCAL
 $AUTOCONF
-$AUTOMAKE --gnu --add-missing
+$AUTOMAKE --gnits --add-missing
 $AUTOHEADER
 : 'You can now run ./configure and then make.'
