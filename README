@@ -1,4 +1,6 @@
 Libntlm README -- important introductory notes
+Copyright (C) 2002, 2003 Simon Josefsson
+Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
 This directory contains sources for a library which provides
@@ -100,16 +102,6 @@ int imap_auth_ntlm(char *user, char *domain, char *pass)
 }
 
 ----------------------------------------------------------------------
-Copyright information:
-
-Copyright (C) 2002 Grant Edwards
-
-   Permission is granted to anyone to make or distribute verbatim copies
-   of this document as received, in any medium, provided that the
-   copyright notice and this permission notice are preserved,
-   thus giving the recipient permission to redistribute in turn.
-
-   Permission is granted to distribute modified versions
-   of this document, or of portions of it,
-   under the above conditions, provided also that they
-   carry prominent notices stating who last changed them.
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
