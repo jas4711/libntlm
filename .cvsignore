@@ -23,9 +23,9 @@ ltmain.sh
 missing
 mkinstalldirs
 ntlm.h
-smbdes.lo
 smbencrypt.lo
-smbmd4.lo
 smbutil.lo
 stamp-h*
+test.out
+test_ntlm
 version.lo
