@@ -22,6 +22,13 @@ Linux glibc systems -- though there shouldn't be anything all
 that system-specific anywhere.  System byte order differences
 should already be taken care of.
 
+TEST PROGRAM
+
+The test directory contains sources for a program named
+"dumper" that will dump out base64 NTLM auth messages in a
+readable format.  It will also take a challenge and generate a
+response if provided with a username and password.
+
 USAGE  
   
 The application program must convert these structures to/from

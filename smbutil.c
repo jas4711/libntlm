@@ -7,7 +7,7 @@
 #include "smbencrypt.h"
 #include "smbbyteorder.h"
 
-char versionString[] ="libntlm version 0.1";
+char versionString[] ="libntlm version 0.2";
 
 /* Utility routines that handle NTLM auth structures. */
 
@@ -63,7 +63,7 @@ AddBytes(ptr, header, b, len*2); \
 
 
 #define GetUnicodeString(structPtr, header) \
-unicodeToString((uint16*)(((char*)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&structPtr->header.len,0)/2)
+unicodeToString(((char*)structPtr) + IVAL(&structPtr->header.offset,0) , SVAL(&structPtr->header.len,0)/2)
 #define GetString(structPtr, header) \
 toString((((char *)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&structPtr->header.len,0))
 #define DumpBuffer(fp, structPtr, header) \
@@ -80,7 +80,7 @@ static void dumpRaw(FILE *fp, unsigned char *buf, size_t len)
     fprintf(fp,"\n");
   }
 
-static char *unicodeToString(uint16 *p, size_t len)
+static char *unicodeToString(char *p, size_t len)
   {
   int i;
   static char buf[1024];
@@ -88,7 +88,10 @@ static char *unicodeToString(uint16 *p, size_t len)
   assert(len+1 < sizeof buf);
   
   for (i=0; i<len; ++i)
-    buf[i] = p[i] & 0x7f;
+    {  
+    buf[i] = *p & 0x7f;
+    p += 2;
+    }
 
   buf[i] = '\0';
   return buf;
