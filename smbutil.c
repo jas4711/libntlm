@@ -75,148 +75,163 @@ toString((((char *)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&struct
 dumpRaw(fp,((unsigned char*)structPtr)+IVAL(&structPtr->header.offset,0),SVAL(&structPtr->header.len,0))
 
 
-static void dumpRaw(FILE *fp, unsigned char *buf, size_t len)
-  {
+static void
+dumpRaw (FILE * fp, unsigned char *buf, size_t len)
+{
   int i;
-  
-  for (i=0; i<len; ++i)
-    fprintf(fp,"%02x ",buf[i]);
-    
-    fprintf(fp,"\n");
-  }
 
-static char *unicodeToString(char *p, size_t len)
-  {
+  for (i = 0; i < len; ++i)
+    fprintf (fp, "%02x ", buf[i]);
+
+  fprintf (fp, "\n");
+}
+
+static char *
+unicodeToString (char *p, size_t len)
+{
   int i;
   static char buf[1024];
 
-  assert(len+1 < sizeof buf);
-  
-  for (i=0; i<len; ++i)
-    {  
-    buf[i] = *p & 0x7f;
-    p += 2;
+  assert (len + 1 < sizeof buf);
+
+  for (i = 0; i < len; ++i)
+    {
+      buf[i] = *p & 0x7f;
+      p += 2;
     }
 
   buf[i] = '\0';
   return buf;
-  }
+}
 
-static unsigned char *strToUnicode(char *p)
-  {
+static unsigned char *
+strToUnicode (char *p)
+{
   static unsigned char buf[1024];
-  size_t l = strlen(p);
+  size_t l = strlen (p);
   int i = 0;
-  
-  assert(l*2 < sizeof buf);
-  
+
+  assert (l * 2 < sizeof buf);
+
   while (l--)
     {
-    buf[i++] = *p++;
-    buf[i++] = 0;
+      buf[i++] = *p++;
+      buf[i++] = 0;
     }
-  
-  return buf;
-  }
 
-static unsigned char *toString(char *p, size_t len)
-  {
+  return buf;
+}
+
+static unsigned char *
+toString (char *p, size_t len)
+{
   static unsigned char buf[1024];
-  
-  assert(len+1 < sizeof buf);
-  
-  memcpy(buf,p,len);
+
+  assert (len + 1 < sizeof buf);
+
+  memcpy (buf, p, len);
   buf[len] = 0;
   return buf;
-  }
+}
 
-void dumpSmbNtlmAuthRequest(FILE *fp, tSmbNtlmAuthRequest *request)
-  {
-  fprintf(fp,"NTLM Request:\n");
-  fprintf(fp,"      Ident = %s\n",request->ident);
-  fprintf(fp,"      mType = %d\n",IVAL(&request->msgType,0));
-  fprintf(fp,"      Flags = %08x\n",IVAL(&request->flags,0));
-  fprintf(fp,"       User = %s\n",GetString(request,user));
-  fprintf(fp,"     Domain = %s\n",GetString(request,domain));
-  }
+void
+dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
+{
+  fprintf (fp, "NTLM Request:\n");
+  fprintf (fp, "      Ident = %s\n", request->ident);
+  fprintf (fp, "      mType = %d\n", IVAL (&request->msgType, 0));
+  fprintf (fp, "      Flags = %08x\n", IVAL (&request->flags, 0));
+  fprintf (fp, "       User = %s\n", GetString (request, user));
+  fprintf (fp, "     Domain = %s\n", GetString (request, domain));
+}
 
-void dumpSmbNtlmAuthChallenge(FILE *fp, tSmbNtlmAuthChallenge *challenge)
-  {
-  fprintf(fp,"NTLM Challenge:\n");
-  fprintf(fp,"      Ident = %s\n",challenge->ident);
-  fprintf(fp,"      mType = %d\n",IVAL(&challenge->msgType,0));
-  fprintf(fp,"     Domain = %s\n",GetUnicodeString(challenge,uDomain));
-  fprintf(fp,"      Flags = %08x\n",IVAL(&challenge->flags,0));
-  fprintf(fp,"  Challenge = "); dumpRaw(fp, challenge->challengeData,8);
-  }
+void
+dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
+{
+  fprintf (fp, "NTLM Challenge:\n");
+  fprintf (fp, "      Ident = %s\n", challenge->ident);
+  fprintf (fp, "      mType = %d\n", IVAL (&challenge->msgType, 0));
+  fprintf (fp, "     Domain = %s\n", GetUnicodeString (challenge, uDomain));
+  fprintf (fp, "      Flags = %08x\n", IVAL (&challenge->flags, 0));
+  fprintf (fp, "  Challenge = ");
+  dumpRaw (fp, challenge->challengeData, 8);
+}
 
-void dumpSmbNtlmAuthResponse(FILE *fp, tSmbNtlmAuthResponse *response)
-  {
-  fprintf(fp,"NTLM Response:\n");
-  fprintf(fp,"      Ident = %s\n",response->ident);
-  fprintf(fp,"      mType = %d\n",IVAL(&response->msgType,0));
-  fprintf(fp,"     LmResp = "); DumpBuffer(fp,response,lmResponse);
-  fprintf(fp,"     NTResp = "); DumpBuffer(fp,response,ntResponse);
-  fprintf(fp,"     Domain = %s\n",GetUnicodeString(response,uDomain));
-  fprintf(fp,"       User = %s\n",GetUnicodeString(response,uUser));
-  fprintf(fp,"        Wks = %s\n",GetUnicodeString(response,uWks));
-  fprintf(fp,"       sKey = "); DumpBuffer(fp, response,sessionKey);
-  fprintf(fp,"      Flags = %08x\n",IVAL(&response->flags,0));
-  }
+void
+dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
+{
+  fprintf (fp, "NTLM Response:\n");
+  fprintf (fp, "      Ident = %s\n", response->ident);
+  fprintf (fp, "      mType = %d\n", IVAL (&response->msgType, 0));
+  fprintf (fp, "     LmResp = ");
+  DumpBuffer (fp, response, lmResponse);
+  fprintf (fp, "     NTResp = ");
+  DumpBuffer (fp, response, ntResponse);
+  fprintf (fp, "     Domain = %s\n", GetUnicodeString (response, uDomain));
+  fprintf (fp, "       User = %s\n", GetUnicodeString (response, uUser));
+  fprintf (fp, "        Wks = %s\n", GetUnicodeString (response, uWks));
+  fprintf (fp, "       sKey = ");
+  DumpBuffer (fp, response, sessionKey);
+  fprintf (fp, "      Flags = %08x\n", IVAL (&response->flags, 0));
+}
 
-void buildSmbNtlmAuthRequest(tSmbNtlmAuthRequest *request, char *user, char *domain)
-  {
-    char *u = strdup(user);
-    char *p = strchr(u,'@');
-    
-    if (p)
-      {
-        if (!domain) 
-          domain = p+1;
-        *p = '\0';
-      }
-    
-    request->bufIndex = 0;
-    memcpy(request->ident,"NTLMSSP\0\0\0",8);
-    SIVAL(&request->msgType,0,1);
-    SIVAL(&request->flags,0,0x0000b207);  /* have to figure out what these mean */
-    AddString(request,user,u);
-    AddString(request,domain,domain);
-    free(u);
-  }
+void
+buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
+			 const char *user, const char *domain)
+{
+  char *u = strdup (user);
+  char *p = strchr (u, '@');
 
-void buildSmbNtlmAuthResponse(tSmbNtlmAuthChallenge *challenge, tSmbNtlmAuthResponse *response, char *user, char *password)
-  {
-    uint8 lmRespData[24];
-    uint8 ntRespData[24];
-    char *d = strdup(GetUnicodeString(challenge,uDomain));
-    char *domain = d;
-    char *u = strdup(user);
-    char *p = strchr(u,'@');
-    
-    if (p)
-      {
-        domain = p+1;
-        *p = '\0';
-      }
-    
-    SMBencrypt(password,   challenge->challengeData, lmRespData);
-    SMBNTencrypt(password, challenge->challengeData, ntRespData);
-    
-    response->bufIndex = 0;
-    memcpy(response->ident,"NTLMSSP\0\0\0",8);
-    SIVAL(&response->msgType,0,3);
-    
-    AddBytes(response,lmResponse,lmRespData,24);
-    AddBytes(response,ntResponse,ntRespData,24);
-    AddUnicodeString(response,uDomain,domain);
-    AddUnicodeString(response,uUser,u);
-    AddUnicodeString(response,uWks,u);
-    AddString(response,sessionKey,NULL);
-  
-    response->flags = challenge->flags;
-    
-    free(d);
-    free(u);
-  }
-    
+  if (p)
+    {
+      if (!domain)
+	domain = p + 1;
+      *p = '\0';
+    }
+
+  request->bufIndex = 0;
+  memcpy (request->ident, "NTLMSSP\0\0\0", 8);
+  SIVAL (&request->msgType, 0, 1);
+  SIVAL (&request->flags, 0, 0x0000b207);	/* have to figure out what these mean */
+  AddString (request, user, u);
+  AddString (request, domain, domain);
+  free (u);
+}
+
+void
+buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
+			  tSmbNtlmAuthResponse * response,
+			  const char *user, const char *password)
+{
+  uint8 lmRespData[24];
+  uint8 ntRespData[24];
+  char *d = strdup (GetUnicodeString (challenge, uDomain));
+  char *domain = d;
+  char *u = strdup (user);
+  char *p = strchr (u, '@');
+
+  if (p)
+    {
+      domain = p + 1;
+      *p = '\0';
+    }
+
+  SMBencrypt (password, challenge->challengeData, lmRespData);
+  SMBNTencrypt (password, challenge->challengeData, ntRespData);
+
+  response->bufIndex = 0;
+  memcpy (response->ident, "NTLMSSP\0\0\0", 8);
+  SIVAL (&response->msgType, 0, 3);
+
+  AddBytes (response, lmResponse, lmRespData, 24);
+  AddBytes (response, ntResponse, ntRespData, 24);
+  AddUnicodeString (response, uDomain, domain);
+  AddUnicodeString (response, uUser, u);
+  AddUnicodeString (response, uWks, u);
+  AddString (response, sessionKey, NULL);
+
+  response->flags = challenge->flags;
+
+  free (d);
+  free (u);
+}

@@ -229,7 +229,7 @@ it also defines lots of intermediate macros, just ignore those :-)
              tab_depth(depth), base,string)); \
     if (charmode) print_asc(5, (unsigned char*)(outbuf), (len)); else \
 	{ int idx; for (idx = 0; idx < len; idx++) { DEBUG(5,("%02x ", (outbuf)[idx])); } } \
-	DEBUG(5,("\n")); } 
+	DEBUG(5,("\n")); }
 
 #define DBG_RW_PSVAL(charmode,string,depth,base,read,big_endian,inbuf,outbuf,len) \
 	{ RW_PSVAL(read,big_endian,inbuf,outbuf,len) \
