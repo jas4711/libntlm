@@ -3,6 +3,11 @@ Copyright (C) 2002, 2003, 2004 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
+* Revision 0.3.4 (unreleased)
+
+** The license has been changed from GPL to LGPL.
+Thanks to a rewrite of several files, contributed by Frediano Ziglio.
+
 * Revision 0.3.3 (18 September 2004)
 
 ** Use const for buildSmbNtlmAuthRequest() and buildSmbNtlmAuthResponse().
