@@ -17,7 +17,7 @@
 # License along with Libntlm; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 
-EXTRA_DIST = libntlm.pc.in test.txt
+EXTRA_DIST = libntlm.pc.in des.c md4.c smbencrypt.c test.txt
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libntlm.pc
@@ -26,9 +26,7 @@ lib_LTLIBRARIES = libntlm.la
 
 include_HEADERS = ntlm.h
 
-libntlm_la_SOURCES = des.h des.c md4.h md4.c \
-	smbutil.c smbencrypt.c smbencrypt.h \
-	global.h version.c 
+libntlm_la_SOURCES = des.h md4.h smbutil.c version.c smbencrypt.h global.h
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
 # test
