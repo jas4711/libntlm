@@ -1,6 +1,6 @@
 /* smbutil.c    main library functions
  * Copyright (C) 1999-2001 Grant Edwards
- * Copyright (C) 2002  Simon Josefsson
+ * Copyright (C) 2002, 2004 Simon Josefsson
  * Copyright (C) 2004 Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or
@@ -102,7 +102,7 @@ dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
   fprintf (fp, "\n");
 }
 
-static inline void
+static void
 dumpBuffer (FILE * fp, uint32 offset, uint32 len, char *structPtr,
 	    size_t buf_start, size_t buf_len)
 {
@@ -131,7 +131,7 @@ unicodeToString (const char *p, size_t len, char *buf)
   return buf;
 }
 
-static inline char *
+static char *
 getUnicodeString (uint32 offset, uint32 len, char *structPtr,
 		  size_t buf_start, size_t buf_len, char *output)
 {
@@ -170,7 +170,7 @@ toString (const char *p, size_t len, char *buf)
   return buf;
 }
 
-static inline char *
+static char *
 getString (uint32 offset, uint32 len, char *structPtr, size_t buf_start,
 	   size_t buf_len, char *output)
 {
