@@ -7,7 +7,7 @@ Please send shishi bug reports to bug-libntlm@josefsson.org.
 
 * 18 September 2004   Revision 0.3.3
 
-** Use const for buildSmbNtlmAuthRequest and buildSmbNtlmAuthResponse.
+** Use const for buildSmbNtlmAuthRequest() and buildSmbNtlmAuthResponse().
 
 ** Source code is indented according to GNU Coding Standard.
 
