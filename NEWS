@@ -1,9 +1,13 @@
 Libntlm NEWS -- history of user-visible changes.                -*- outline -*-
-Copyright (C) 2002, 2003 Simon Josefsson
+Copyright (C) 2002, 2003, 2004 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
 Please send shishi bug reports to bug-libntlm@josefsson.org.
+
+* 18 September 2004   Revision 0.3.3
+
+** Use const for buildSmbNtlmAuthRequest and buildSmbNtlmAuthResponse.
 
 * 17 Mars 2003   Revision 0.3.2
 
