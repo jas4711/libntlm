@@ -1,18 +1,18 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(libntlm, 0.3.0, bug-libntlm@josefsson.org)
+AC_INIT(libntlm, 0.3.1, bug-libntlm@josefsson.org)
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
 # Interfaces added:      CURRENT++, AGE++, REVISION=0
 # No interfaces changed:                   REVISION++
 LT_CURRENT=0
-LT_REVISION=0
 LT_AGE=0
+LT_REVISION=1
 AC_SUBST(LT_CURRENT)
-AC_SUBST(LT_REVISION)
 AC_SUBST(LT_AGE)
+AC_SUBST(LT_REVISION)
 
-AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 
 # Checks for programs.
@@ -37,13 +37,5 @@ AC_TYPE_SIZE_T
 # Checks for library functions.
 AC_CHECK_FUNCS([memset strchr strdup])
 
-LIBNTLM_LIBS="$LIBS -L${libdir} -lntlm"
-LIBNTLM_CFLAGS="$CPPFLAGS -I${includedir}"
-AC_SUBST(LIBNTLM_LIBS)
-AC_SUBST(LIBNTLM_CFLAGS)
-
-AC_CONFIG_COMMANDS([chmod],[[chmod +x libntlm-config]])
-
-AC_CONFIG_FILES([Makefile libntlm-config ntlm.h])
-
+AC_CONFIG_FILES([Makefile libntlm.pc ntlm.h])
 AC_OUTPUT

@@ -9,12 +9,10 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-EXTRA_DIST = libntlm-config.in libntlm.m4
+EXTRA_DIST = libntlm.pc.in
 
-bin_SCRIPTS = libntlm-config
-
-m4datadir = $(datadir)/aclocal
-m4data_DATA = libntlm.m4
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libntlm.pc
 
 lib_LTLIBRARIES = libntlm.la
 
@@ -22,3 +20,6 @@ include_HEADERS = ntlm.h
 
 libntlm_la_SOURCES = smbdes.c smbencrypt.c smbmd4.c smbutil.c smbdes.h smbmd4.h smbbyteorder.h smbencrypt.h version.c
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
+
+ChangeLog:
+	cvs2cl --fsf --usermap .cvsusers --separate-header
