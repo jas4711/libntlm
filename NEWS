@@ -3,40 +3,42 @@ Copyright (C) 2002, 2003, 2004 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
-Please send shishi bug reports to bug-libntlm@josefsson.org.
+* Revision 0.3.4 (unreleased)
 
-* 18 September 2004   Revision 0.3.3
+** Several files rewritten, under LGPL, by Frediano Ziglio.
+
+* Revision 0.3.3 (18 September 2004)
 
 ** Use const for buildSmbNtlmAuthRequest() and buildSmbNtlmAuthResponse().
 
 ** Source code is indented according to GNU Coding Standard.
 
-* 17 Mars 2003   Revision 0.3.2
+* Revision 0.3.2 (17 Mars 2003)
 
 ** Further build cleanups.
 
-* 19 October 2002   Revision 0.3.1
+* Revision 0.3.1 (19 October 2002)
 
 ** Uses automake 1.7, gnits and pkg-config.  Still no code changes.
 
-* 1 October 2002   Revision 0.3.0
+* Revision 0.3.0 (1 October 2002)
 
 ** Added autoconf, automake and libtool support.  Unofficial release made
 ** by Simon Josefsson.
 
-* 7 October 1999   Revsion  0.21
+* Revsion 0.21 (7 October 1999)
 
 ** Added support for usernames with embedded domain strings of the
 ** format username@domain.  If present, the domain will override the
 ** domain that is returned by the host in the challenge.
 
-* 6 October 1999   Revision 0.2
+* Revision 0.2 (6 October 1999)
 
 ** Fixed another byte-order problem in unicode routine in smbutil.c.
 ** Added a copy of GPL to the distribution.  Added test driver
 ** program directory.
 
-* 5 October 1999   Revision 0.1
+* Revision 0.1 (5 October 1999)
 
 ** Fixed usage of byte-order macros in smbutil.c.  Hopefully this
 ** will make it work on SPARC machines...

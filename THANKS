@@ -1,8 +1,10 @@
-Shishi THANKS -- acknowledgements
-Copyright (C) 2002, 2003 Simon Josefsson
+Libntlm THANKS -- acknowledgements
+Copyright (C) 2002, 2003, 2004 Simon Josefsson
 See the end for copying conditions.
 
-Much of the code is written by Andrew Tridgell for the Samba project.
+Much of the code was originally written by Andrew Tridgell for the
+Samba project.  Frediano Ziglio contributed rewritten files, so the
+library could be released under LGPL instead of GPL.
 
 ----------------------------------------------------------------------
 Copying and distribution of this file, with or without modification,
