@@ -1,5 +1,10 @@
+19 October 2002 Revision 0.3.1
+------------------------------
+
+Uses automake 1.7, gnits and pkg-config.  Still no code changes.
+
 1 October 2002 Revision 0.3.0
----------------------------
+-----------------------------
 
 Added autoconf, automake and libtool support.  Unofficial release made
 by Simon Josefsson.
