@@ -14,12 +14,14 @@ config.status
 config.sub
 configure
 depcomp
+des.lo
 install-sh
 libntlm-*
 libntlm.pc
 libntlm.la
 libtool
 ltmain.sh
+md4.lo
 missing
 mkinstalldirs
 ntlm.h
