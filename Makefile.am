@@ -22,4 +22,5 @@ libntlm_la_SOURCES = smbdes.c smbencrypt.c smbmd4.c smbutil.c smbdes.h smbmd4.h 
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
 ChangeLog:
-	cvs2cl --fsf --usermap .cvsusers --separate-header
+	cvs2cl --fsf --usermap .cvsusers --separate-header -I \
+	"ChangeLog|.cvsignore|.cvsusers|autogen.sh"
