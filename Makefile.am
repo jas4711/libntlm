@@ -38,6 +38,7 @@ check_PROGRAMS = $(TESTS)
 LDADD = libntlm.la
 CLEANFILES = test.out
 AM_CPPFLAGS = -DNTLM_SRCDIR=\"$(srcdir)\"
+test_ntlm_LDFLAGS = -no-install
 
 # Maintainer targets
 
