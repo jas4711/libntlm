@@ -122,15 +122,14 @@ fillUnicode (tSmbStrHeader * header, char *buffer, int buffer_start,
 static void
 fillChallenge (tSmbNtlmAuthChallenge * challenge, const char *domain)
 {
-  int l = strlen (domain);
   int index = 0;
-  uint32 flags = intelEndian32 (0);
 
   Bzero (challenge, sizeof (*challenge));
   memcpy (challenge->ident, "NTLMSSP\0\0\0", 8);
   challenge->msgType = intelEndian32 (2);
   fillUnicode (&challenge->uDomain, challenge->buffer,
 	       challenge->buffer - ((uint8 *) challenge), &index, domain);
+  challenge->flags = intelEndian32 (0);
   memcpy (challenge->challengeData, "\x01\x02\x03\x04\xf5\xc3\xb2\x82", 8);
   challenge->bufIndex = intelEndian32 (index);
 }
