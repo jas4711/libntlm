@@ -15,6 +15,7 @@ config.sub
 configure
 depcomp
 install-sh
+libntlm-*
 libntlm.pc
 libntlm.la
 libtool
