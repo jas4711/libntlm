@@ -12,6 +12,9 @@ int dumpReq;
 int dumpChal;
 int dumpResp;
 int genResp;
+int dumpRaw;
+int dumpb64only;
+int genReq;
 
 char *username = "joeuser";
 char *password = "joespw";
@@ -19,9 +22,12 @@ char *password = "joespw";
 argSpec argSpecArray[] =
 {
  {'q', OptionBoolean, &dumpReq, NULL, "dump NTLM request", NULL},
+ {'Q', OptionBoolean, &genReq,  NULL, "generate (and dump) NTLM request", NULL},
  {'c', OptionBoolean, &dumpChal, NULL, "dump NTLM challange", NULL},
  {'g', OptionBoolean, &genResp, NULL, "generate (and dump) NTLM response given a challenge", NULL},
  {'r', OptionBoolean, &dumpResp, NULL, "dump NTLM response", NULL},
+ {'R', OptionBoolean, &dumpRaw, NULL, "dump raw bytes", NULL},
+ {'6', OptionBoolean, &dumpb64only, NULL, "dump generated base64 only", NULL},
  {'u', OptionString,  &username, NULL, "username", NULL},
  {'p', OptionString,  &password, NULL, "password", NULL},
 };
@@ -31,7 +37,7 @@ char *progName;
 
 void usage(void)
 {
-  printf("usage: %s [options] base-64-string\n", progName);
+  printf("usage: %s [options] [base-64-string]\n", progName);
   printf("       %s -?     will display options\n", progName);
 }
 
@@ -40,7 +46,7 @@ unsigned char buf2[4096];
 
 int main(int argc, char *argv[])
 {
-  int rawLen;
+  int rawLen = 0;
   int argsUsed;
   int i;
   
@@ -57,13 +63,28 @@ int main(int argc, char *argv[])
   argc -= argsUsed;
   argv += argsUsed;
 
-  if (argc != 1)
+  if (argc != 1 && argc != 0)
     {
       usage();
       exit(1);
     }
   
-  rawLen = from64tobits(buf,argv[0]);
+  
+  if (argc == 1)
+    {
+      rawLen = from64tobits(buf,argv[0]);
+      if (genReq)
+        fprintf(stderr,"%s: extra argument with -Q ignored\n",progName);
+    }
+  else
+    {
+      if (dumpReq || dumpChal || dumpResp || dumpRaw)
+        {
+          fprintf(stderr,"%s: -q -r -c -R specified but no base64 data\n",progName);
+          return 1;
+        }
+    }
+  
   
   printf("Converted base64 string to %d data bytes\n",rawLen);
   
@@ -73,9 +94,21 @@ int main(int argc, char *argv[])
     dumpSmbNtlmAuthChallenge(stdout,(tSmbNtlmAuthChallenge*)buf);
   else if (dumpResp)
     dumpSmbNtlmAuthResponse(stdout,(tSmbNtlmAuthResponse*)buf);
-  else
+  
+  if (dumpRaw)
     for (i=0; i<rawLen; ++i)
       printf("%3d: %02x\n",i,buf[i]);
+
+  if (genReq)
+    {
+      buildSmbNtlmAuthRequest((tSmbNtlmAuthRequest*)buf2,username,NULL);
+      to64frombits(buf, buf2, SmbLength((tSmbNtlmAuthResponse*)buf2));
+
+      printf("%s\n",buf);
+
+      if (!dumpb64only)
+        dumpSmbNtlmAuthRequest(stdout,(tSmbNtlmAuthRequest*)buf2);
+    }
   
   if (genResp)
     {
@@ -85,10 +118,13 @@ int main(int argc, char *argv[])
 
       to64frombits(buf, buf2, SmbLength((tSmbNtlmAuthResponse*)buf2));
       
-      printf("\nBase64 Resp='%s'\n\n",buf);
-      
-      dumpSmbNtlmAuthResponse(stdout,(tSmbNtlmAuthResponse*)buf2);
+      printf("%s\n",buf);
+
+      if (!dumpb64only)
+        dumpSmbNtlmAuthResponse(stdout,(tSmbNtlmAuthResponse*)buf2);
     }
+  
+  return 0;
 }
 
 
