@@ -1,17 +1,138 @@
-2002-10-01  Simon Josefsson  <jas@extundo.com>
+2002-10-19 10:53  Simon Josefsson <simon@josefsson.org>
 
-	* Version 0.3.0 released.
+	* THANKS:
 
-	* smbutil.c: Fixup version string.
+	Gnits wanted this.  
 
-	* ntlm.h.in: Version define, protect from double inclusion,
-	protect C++.
+2002-10-19 10:53  Simon Josefsson <simon@josefsson.org>
 
-	* smb.h: Removed (not used).
+	* .cvsignore:
 
-	* Renamed ntlm.h to ntlm.h.in.
+	Fix.  
 
-	* Renamed HISTORY to NEWS.
+2002-10-19 10:52  Simon Josefsson <simon@josefsson.org>
 
-	* AUTHORS, ChangeLog, configure.ac, Makefile.am,
-	libntlm-config.in, libntlm.m4, version.c: New files.
+	* Makefile.am, configure.ac, libntlm-config.in, libntlm.m4,
+	libntlm.pc.in:
+
+	Use pkg-config instead of libntlm.m4 + libntlm-config.  Autogenerate
+	ChangeLog's.  
+
+2002-10-19 10:50  Simon Josefsson <simon@josefsson.org>
+
+	* autogen.sh:
+
+	Gnits.  
+
+2002-10-19 10:50  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsusers:
+
+	New file, for ChangeLog names.  
+
+2002-10-01 05:34  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsignore:
+
+	[no log message] 
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog, autogen.sh:
+
+	[no log message] 
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* version.c:
+
+	* AUTHORS, ChangeLog, configure.ac, Makefile.am, libntlm-config.in,
+	libntlm.m4, version.c: New files.  
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile:
+
+	Makefile: Removed 
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS, Makefile.am, configure.ac, libntlm-config.in,
+	libntlm.m4:
+
+	AUTHORS, ChangeLog, configure.ac, Makefile.am, libntlm-config.in,
+	libntlm.m4, version.c: New files.  
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in:
+
+	ntlm.h.in: Version define, protect from double inclusion, protect
+	C++.  Renamed ntlm.h to ntlm.h.in.  
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS:
+
+	Version 0.3.0 released.  Renamed HISTORY to NEWS.  
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* smbutil.c:
+
+	* smbutil.c: Fixup version string.  
+
+2002-10-01 05:07  Simon Josefsson <simon@josefsson.org>
+
+	* smb.h:
+
+	smb.h: Removed (not used).  
+
+2002-10-01 04:56  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h, ntlm.h.in:
+
+	Moved ntlm.h to ntlm.h.in.  
+
+2002-10-01 04:49  Simon Josefsson <simon@josefsson.org>
+
+	* HISTORY, NEWS:
+
+	Moved HISTORY to NEWS.  
+
+2002-10-01 04:43  Simon Josefsson <simon@josefsson.org>
+
+	* HISTORY, Makefile, smbutil.c, test/dumper.c:
+
+	Imported version 0.21 of libntlm: 
+	ftp://ftp.visi.com/users/grante/ntlm/libntlm-0.21.tar.gz 
+	6c3bbf8cea65b2a78a416ec72cf2d6ee 
+
+2002-10-01 04:41  Simon Josefsson <simon@josefsson.org>
+
+	* COPYING, HISTORY, Makefile, README, smbutil.c, test/COPYING,
+	test/Makefile, test/README, test/dumper.c, test/getargs.c,
+	test/getargs.h:
+
+	Imported version 0.2 of libntlm: 
+	ftp://ftp.visi.com/users/grante/ntlm/libntlm-0.2.tar.gz 
+	0b8248a9d8f183522ddeaf88f2e18fc4 
+
+2002-10-01 04:38  Simon Josefsson <simon@josefsson.org>
+
+	* HISTORY, Makefile, smbutil.c:
+
+	Imported version 0.1 of libntlm: 
+	ftp://ftp.visi.com/users/grante/ntlm/libntlm-0.1.tar.gz 
+	101c0ffe2415f353caec270ddb34e7ac 
+
+2002-10-01 04:36  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile, README, ntlm.h, smb.h, smbbyteorder.h, smbdes.c,
+	smbdes.h, smbencrypt.c, smbencrypt.h, smbmd4.c, smbmd4.h,
+	smbutil.c:
+
+	Imported version 0.0 of libntlm: 
+	ftp://ftp.visi.com/users/grante/ntlm/libntlm-0.0.tar.gz MD5:
+	88403e851f297b227df9ca509fbabb7b 
+
