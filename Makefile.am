@@ -57,14 +57,13 @@ release:
 	if cvs upd -p -r $(tag) NEWS > /dev/null; then false else true; fi
 	rm -f ChangeLog && cvs upd ChangeLog
 	cvs commit
-	$(MAKE) distcheck
+	rm -f ChangeLog
+	$(MAKE) ChangeLog distcheck
 	cvs commit -m "" ChangeLog
-	rm -f $(distdir).tar.gz.asc
-	gpg -a --sign --detach $(distdir).tar.gz
-	gpg --verify $(distdir).tar.gz.asc
-	test -d $(htmldir) && \
-		cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/ && \
-		cd $(htmldir) && \
-		cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
-		cvs commit -m "Update." releases/$(distdir).tar.gz{,.sig}
 	cvs rtag $(tag) $(PACKAGE)
+	gpg -b $(distdir).tar.gz
+	gpg --verify $(distdir).tar.gz.sig
+	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
+	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
+		cvs commit -m "Update." manual/ javadoc/ reference/ \
+					doxygen/ releases/
