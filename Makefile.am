@@ -65,5 +65,4 @@ release:
 	gpg --verify $(distdir).tar.gz.sig
 	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
 	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
-		cvs commit -m "Update." manual/ javadoc/ reference/ \
-					doxygen/ releases/
+		cvs commit -m "Update." releases/
