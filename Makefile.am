@@ -54,7 +54,6 @@ release:
 	gpg -a --sign --detach $(distdir).tar.gz
 	gpg --verify $(distdir).tar.gz.asc
 	test -d $(htmldir) && cp -v $(distdir).tar.gz* $(htmldir)/releases/
-	test -d $(htmldir) && cp -v $(PACKAGE).{ps,pdf,html} $(htmldir)/
 	test -d $(htmldir) && cd $(htmldir) && cvs commit -m "Update." \
-		$(PACKAGE).{ps,pdf,html} releases/$(distdir).tar.gz*
+		releases/$(distdir).tar.gz*
 	cvs rtag $(tag) $(PACKAGE)
