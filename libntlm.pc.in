@@ -7,4 +7,4 @@ Name: Libntlm
 Description: Library for NTLM authentication
 Version: @VERSION@
 Libs: -L${libdir} -lntlm
-Cflags: -I${includedir} -I${libdir}
+Cflags: -I${includedir}
