@@ -5,7 +5,11 @@ See the end for copying conditions.
 
 Please send shishi bug reports to bug-libntlm@josefsson.org.
 
-* 19 October 2002  Revision 0.3.1
+* 17 Mars 2003   Revision 0.3.2
+
+** Further build cleanups.
+
+* 19 October 2002   Revision 0.3.1
 
 ** Uses automake 1.7, gnits and pkg-config.  Still no code changes.
 
