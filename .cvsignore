@@ -10,7 +10,7 @@ config.h.in
 config.log
 config.status
 configure
-libntlm-config
+libntlm.pc
 libntlm.la
 libtool
 ntlm.h
@@ -18,6 +18,5 @@ smbdes.lo
 smbencrypt.lo
 smbmd4.lo
 smbutil.lo
-stamp-h
-stamp-h.in
+stamp-h*
 version.lo
