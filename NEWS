@@ -1,5 +1,11 @@
+1 October 2002 Revision 0.3.0
+---------------------------
+
+Added autoconf, automake and libtool support.  Unofficial release made
+by Simon Josefsson.
 
 7 October 1999   Revsion  0.21
+------------------------------
 
 Added support for usernames with embedded domain strings of the
 format username@domain.  If present, the domain will override the
@@ -17,5 +23,3 @@ program directory.
 
 Fixed usage of byte-order macros in smbutil.c.  Hopefully this
 will make it work on SPARC machines...
-
-
