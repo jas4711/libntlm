@@ -1,50 +1,37 @@
 Libntlm NEWS -- history of user-visible changes.                -*- outline -*-
+Copyright (C) 2002, 2003 Simon Josefsson
+Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
 Please send shishi bug reports to bug-libntlm@josefsson.org.
 
-19 October 2002 Revision 0.3.1
-------------------------------
+* 19 October 2002  Revision 0.3.1
 
-Uses automake 1.7, gnits and pkg-config.  Still no code changes.
+** Uses automake 1.7, gnits and pkg-config.  Still no code changes.
 
-1 October 2002 Revision 0.3.0
------------------------------
+* 1 October 2002   Revision 0.3.0
 
-Added autoconf, automake and libtool support.  Unofficial release made
-by Simon Josefsson.
+** Added autoconf, automake and libtool support.  Unofficial release made
+** by Simon Josefsson.
 
-7 October 1999   Revsion  0.21
-------------------------------
+* 7 October 1999   Revsion  0.21
 
-Added support for usernames with embedded domain strings of the
-format username@domain.  If present, the domain will override the
-domain that is returned by the host in the challenge.
+** Added support for usernames with embedded domain strings of the
+** format username@domain.  If present, the domain will override the
+** domain that is returned by the host in the challenge.
 
-6 October 1999   Revision 0.2
------------------------------
+* 6 October 1999   Revision 0.2
 
-Fixed another byte-order problem in unicode routine in smbutil.c.
-Added a copy of GPL to the distribution.  Added test driver
-program directory.
+** Fixed another byte-order problem in unicode routine in smbutil.c.
+** Added a copy of GPL to the distribution.  Added test driver
+** program directory.
 
-5 October 1999   Revision 0.1
------------------------------
+* 5 October 1999   Revision 0.1
 
-Fixed usage of byte-order macros in smbutil.c.  Hopefully this
-will make it work on SPARC machines...
+** Fixed usage of byte-order macros in smbutil.c.  Hopefully this
+** will make it work on SPARC machines...
 
 ----------------------------------------------------------------------
-Copyright information:
-
-Copyright (C) 2002 Simon Josefsson
-
-   Permission is granted to anyone to make or distribute verbatim copies
-   of this document as received, in any medium, provided that the
-   copyright notice and this permission notice are preserved,
-   thus giving the recipient permission to redistribute in turn.
-
-   Permission is granted to distribute modified versions
-   of this document, or of portions of it,
-   under the above conditions, provided also that they
-   carry prominent notices stating who last changed them.
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
