@@ -1,10 +1,76 @@
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am:
+	(release): Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.4.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: ISO certify dates.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump so version.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* des.c, des.h, global.h, md4.c, md4.h, smbencrypt.c, smbutil.c,
+	test_ntlm.c: Indent.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am:
+	(ChangeLog): Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS: Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS: Add.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* smbbyteorder.h: Remove.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* COPYING: Use LGPL.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Fix.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* THANKS, NEWS: Add.
+
+2004-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, des.c, des.h, global.h, md4.c, md4.h,
+	ntlm.h.in, smbdes.c, smbdes.h, smbencrypt.c, smbencrypt.h,
+	smbmd4.c, smbmd4.h, smbutil.c, test.txt, test_ntlm.c, version.c:
+	Rewrite stuff to be LGPL, from Frediano Ziglio <freddyz77@tin.it>.
+
 2004-09-19  Simon Josefsson <simon@josefsson.org>
 
 	* ntlm.h.in, smbutil.c: Add.
-
-2004-09-18  Simon Josefsson <simon@josefsson.org>
-
-	* ChangeLog: [no log message]
 
 2004-09-18  Simon Josefsson <simon@josefsson.org>
 
@@ -33,15 +99,7 @@
 
 2003-03-17  Simon Josefsson <simon@josefsson.org>
 
-	* ChangeLog: [no log message]
-
-2003-03-17  Simon Josefsson <simon@josefsson.org>
-
 	* NEWS: Version 0.3.2.
-
-2003-03-17  Simon Josefsson <simon@josefsson.org>
-
-	* .cvsignore: [no log message]
 
 2003-03-17  Simon Josefsson <simon@josefsson.org>
 
@@ -67,10 +125,6 @@
 
 	* AUTHORS: Fix.
 
-2003-03-17  Simon Josefsson <simon@josefsson.org>
-
-	* autogen.sh: Cleanup.
-
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* COPYING: Autoreconf updated it.
@@ -85,20 +139,12 @@
 
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
-	* .cvsignore: Add.
-
-2002-12-05  Simon Josefsson <simon@josefsson.org>
-
 	* configure.ac: Add copying conditions.  Remove some unnecessary
 	things.
 
 2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* AUTHORS: Add Andrew Tridgell and copying conditions.
-
-2002-12-05  Simon Josefsson <simon@josefsson.org>
-
-	* autogen.sh: Use autoreconf.
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
@@ -110,15 +156,7 @@
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
-	* ChangeLog: [no log message]
-
-2002-10-19  Simon Josefsson <simon@josefsson.org>
-
 	* NEWS: 0.3.1.
-
-2002-10-19  Simon Josefsson <simon@josefsson.org>
-
-	* ChangeLog: Generated.
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
@@ -126,39 +164,26 @@
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
-	* .cvsignore: Fix.
-
-2002-10-19  Simon Josefsson <simon@josefsson.org>
-
 	* Makefile.am, configure.ac, libntlm-config.in, libntlm.m4,
 	libntlm.pc.in: Use pkg-config instead of libntlm.m4 +
 	libntlm-config.  Autogenerate ChangeLog's.
 
-2002-10-19  Simon Josefsson <simon@josefsson.org>
-
-	* autogen.sh: Gnits.
-
-2002-10-19  Simon Josefsson <simon@josefsson.org>
-
-	* .cvsusers: New file, for ChangeLog names.
-
-2002-10-01  Simon Josefsson <simon@josefsson.org>
-
-	* .cvsignore: [no log message]
-
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS:
+
 	Version 0.3.0 released.  Renamed HISTORY to NEWS.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
-	* version.c: * AUTHORS, ChangeLog, configure.ac, Makefile.am,
-	libntlm-config.in, libntlm.m4, version.c: New files.
+	* version.c:
+	* AUTHORS, ChangeLog, configure.ac, Makefile.am, libntlm-config.in,
+	libntlm.m4, version.c: New files.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
-	* smbutil.c: * smbutil.c: Fixup version string.
+	* smbutil.c:
+	* smbutil.c: Fixup version string.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
@@ -169,10 +194,6 @@
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile: Makefile: Removed
-
-2002-10-01  Simon Josefsson <simon@josefsson.org>
-
-	* ChangeLog, autogen.sh: [no log message]
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
@@ -220,3 +241,8 @@
 	ftp://ftp.visi.com/users/grante/ntlm/libntlm-0.0.tar.gz MD5:
 	88403e851f297b227df9ca509fbabb7b
 
+	----------------------------------------------------------------------
+	Copyright 2002, 2003, 2004  Simon Josefsson
+	Copying and distribution of this file, with or without modification,
+	are permitted in any medium without royalty provided the copyright
+	notice and this notice are preserved.
