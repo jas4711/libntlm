@@ -7,6 +7,8 @@
 #include "smbencrypt.h"
 #include "smbbyteorder.h"
 
+char versionString[] ="libntlm version 0.1";
+
 /* Utility routines that handle NTLM auth structures. */
 
 /* The [IS]VAL macros are to take care of byte order for non-Intel
@@ -61,11 +63,11 @@ AddBytes(ptr, header, b, len*2); \
 
 
 #define GetUnicodeString(structPtr, header) \
-unicodeToString((uint16*)(((char*)structPtr) + SVAL(&structPtr->header.offset,0)), structPtr->header.len/2)
+unicodeToString((uint16*)(((char*)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&structPtr->header.len,0)/2)
 #define GetString(structPtr, header) \
 toString((((char *)structPtr) + IVAL(&structPtr->header.offset,0)), SVAL(&structPtr->header.len,0))
 #define DumpBuffer(fp, structPtr, header) \
-dumpRaw(fp,((unsigned char*)structPtr)+IVAL(&structPtr->header.offset,0),structPtr->header.len)
+dumpRaw(fp,((unsigned char*)structPtr)+IVAL(&structPtr->header.offset,0),SVAL(&structPtr->header.len,0))
 
 
 static void dumpRaw(FILE *fp, unsigned char *buf, size_t len)

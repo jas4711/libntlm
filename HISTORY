@@ -1,0 +1,8 @@
+
+5 October 1999   Revision 0.1
+-----------------------------
+
+Fixed usage of byte-order macros in smbutil.c.  Hopefully this
+will make it work on SPARC machines...
+
+
