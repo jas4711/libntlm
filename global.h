@@ -25,7 +25,7 @@
 #define NTLM_GLOBAL_H_
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+# include "config.h"
 #endif
 
 #include <stdio.h>

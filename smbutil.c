@@ -102,7 +102,7 @@ dumpBuffer(fp, UI32LE(structPtr->header.offset), UI16LE(structPtr->header.len), 
 static void
 dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
 {
-  int i;
+  size_t i;
 
   for (i = 0; i < len; ++i)
     fprintf (fp, "%02x ", buf[i]);
@@ -124,7 +124,7 @@ dumpBuffer (FILE * fp, uint32 offset, uint32 len, char *structPtr,
 static char *
 unicodeToString (const char *p, size_t len, char *buf)
 {
-  int i;
+  size_t i;
 
   if (len >= NTLM_BUFSIZE)
     len = NTLM_BUFSIZE - 1;

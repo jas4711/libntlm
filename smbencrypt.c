@@ -74,8 +74,7 @@ SMBencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 NTLM_STATIC void
 SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 {
-  size_t len;
-  int i;
+  size_t len, i;
   DES_KEY ks;
   unsigned char hash[24];
   unsigned char nt_pw[256];
