@@ -228,21 +228,19 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
 {
   unsigned char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE], buf3[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Response:\n"
-	       "      Ident = %.8s\n"
-	       "      mType = %d\n"
-	       "     LmResp = ",
-	       response->ident,
-	       UI32LE (response->msgType));
+	   "      Ident = %.8s\n"
+	   "      mType = %d\n"
+	   "     LmResp = ", response->ident, UI32LE (response->msgType));
   DumpBuffer (fp, response, lmResponse);
   fprintf (fp, "     NTResp = ");
   DumpBuffer (fp, response, ntResponse);
   fprintf (fp, "     Domain = %s\n"
-	       "       User = %s\n"
-	       "        Wks = %s\n"
-	       "       sKey = ",
-	       GetUnicodeString (response, uDomain, buf1),
-	       GetUnicodeString (response, uUser, buf2),
-	       GetUnicodeString (response, uWks, buf3));
+	   "       User = %s\n"
+	   "        Wks = %s\n"
+	   "       sKey = ",
+	   GetUnicodeString (response, uDomain, buf1),
+	   GetUnicodeString (response, uUser, buf2),
+	   GetUnicodeString (response, uWks, buf3));
   DumpBuffer (fp, response, sessionKey);
   fprintf (fp, "      Flags = %08x\n", UI32LE (response->flags));
 }
