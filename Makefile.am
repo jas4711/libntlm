@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002 Simon Josefsson.
+# Copyright (C) 2002, 2003 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -29,6 +29,32 @@ include_HEADERS = ntlm.h
 libntlm_la_SOURCES = smbdes.c smbencrypt.c smbmd4.c smbutil.c smbdes.h smbmd4.h smbbyteorder.h smbencrypt.h version.c
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
+# Maintainer targets
+
+.PHONY: ChangeLog
 ChangeLog:
-	cvs2cl --fsf --usermap .cvsusers --separate-header -I \
-	"ChangeLog|.cvsignore|.cvsusers|autogen.sh"
+	test ! -f .cvsusers || \
+	cvs2cl --FSF --usermap .cvsusers -I \
+		"ChangeLog|.cvs|autogen.sh"
+
+indent:
+	indent $(SOURCES)
+
+htmldir = ../www-$(PACKAGE)
+tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
+
+release:
+	cvs upd -p -r HEAD NEWS > /dev/null
+	if cvs upd -p -r $(tag) NEWS > /dev/null; then false else true; fi
+	rm -f ChangeLog && cvs upd ChangeLog
+	cvs commit
+	$(MAKE) distcheck
+	cvs commit -m "" ChangeLog
+	rm -f $(distdir).tar.gz.asc
+	gpg -a --sign --detach $(distdir).tar.gz
+	gpg --verify $(distdir).tar.gz.asc
+	test -d $(htmldir) && cp -v $(distdir).tar.gz* $(htmldir)/releases/
+	test -d $(htmldir) && cp -v $(PACKAGE).{ps,pdf,html} $(htmldir)/
+	test -d $(htmldir) && cd $(htmldir) && cvs commit -m "Update." \
+		$(PACKAGE).{ps,pdf,html} releases/$(distdir).tar.gz*
+	cvs rtag $(tag) $(PACKAGE)
