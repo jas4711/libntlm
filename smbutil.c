@@ -8,7 +8,11 @@
 #include "smbencrypt.h"
 #include "smbbyteorder.h"
 
-char versionString[] ="libntlm version 0.21";
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+char versionString[] = PACKAGE_STRING;
 
 /* Utility routines that handle NTLM auth structures. */
 
