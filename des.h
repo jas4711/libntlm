@@ -9,4 +9,9 @@ typedef struct des_key
   char fperm[16][16][8];
 } DES_KEY;
 
+NTLM_STATIC int
+ntlm_des_ecb_encrypt (const void *plaintext, int len, DES_KEY * akey, char output[8]);
+NTLM_STATIC int
+ntlm_des_set_key (DES_KEY * dkey, char *user_key, int len);
+
 #endif /*  NTLM_DES_H_ */
