@@ -35,9 +35,9 @@ AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
 
 # Checks for programs.
-AC_PROG_LIBTOOL
 AC_PROG_CC
 gl_EARLY
+AC_PROG_LIBTOOL
 
 # For gnulib.
 gl_MODULES(strverscmp)
