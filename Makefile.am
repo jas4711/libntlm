@@ -30,6 +30,8 @@ lib_LTLIBRARIES = libntlm.la
 
 include_HEADERS = ntlm.h
 
+AM_CPPFLAGS = -I$(srcdir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
+
 libntlm_la_SOURCES = des.h des.c md4.h md4.c \
 	smbutil.c smbencrypt.c smbencrypt.h \
 	global.h version.c 
@@ -42,7 +44,6 @@ TESTS = test_ntlm
 check_PROGRAMS = $(TESTS)
 LDADD = libntlm.la
 CLEANFILES = test.out
-AM_CPPFLAGS = -DNTLM_SRCDIR=\"$(srcdir)\"
 test_ntlm_LDFLAGS = -no-install
 
 # Maintainer targets
