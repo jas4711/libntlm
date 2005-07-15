@@ -1,5 +1,5 @@
-/* global.h    global include
- * Copyright (C) 2004  Frediano Ziglio
+/* global.h --- Global internal include file for libntlm.
+ * Copyright (C) 2004, 2005  Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -13,7 +13,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this file; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301, USA
  *
  */
 
