@@ -11,6 +11,8 @@ See the end for copying conditions.
 
 ** Gnulib is used, currently only to provide more robust ntlm_check_version.
 
+** Address in license was updated to reflect the new FSF postal address.
+
 * Version 0.3.6 (released 2004-09-30)
 
 ** Some code cleanup and improvements, contributed by Frediano Ziglio.
