@@ -1,3 +1,100 @@
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.7.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Dist libntlm.spec.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, global.h, md4.c, ntlm.h.in,
+	smbencrypt.c, smbutil.c, test_ntlm.c: Fix license.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* COPYING: Update.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* THANKS: Update copyright.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Add -I for gnulib.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* version.c: Rewrite, using strverscmp.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in: Add ntlm_check_version.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/strverscmp.c, lib/strverscmp.h,
+	m4/gnulib.m4: Update.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Use LGPL.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Typo.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Reorder.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Pick up gnulib macros from m4/.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Link with gnulib.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, lib/Makefile.am, lib/strverscmp.c,
+	lib/strverscmp.h, m4/gnulib.m4, m4/onceonly_2_57.m4,
+	m4/strverscmp.m4: Use gnulib.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-07-15  Simon Josefsson <simon@josefsson.org>
+
+	* libntlm.spec: Add, contributed by anonymous.
+
+2004-10-06  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2004-10-06  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2004-10-06  Simon Josefsson <simon@josefsson.org>
+
+	* global.h, smbencrypt.c, smbutil.c: Fix warnings, from ZIGLIO,
+	Frediano.
+
+2004-09-30  Simon Josefsson <simon@josefsson.org>
+
+	* des.h, smbutil.c: Indent.
+
 2004-09-30  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.6.
