@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -37,6 +37,11 @@ AM_CONFIG_HEADER(config.h)
 # Checks for programs.
 AC_PROG_LIBTOOL
 AC_PROG_CC
+gl_EARLY
+
+# For gnulib.
+gl_MODULES(strverscmp)
+gl_INIT
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -50,5 +55,5 @@ AC_TYPE_SIZE_T
 # Checks for library functions.
 AC_CHECK_FUNCS([memset strchr strdup bzero])
 
-AC_CONFIG_FILES([Makefile libntlm.pc ntlm.h])
+AC_CONFIG_FILES([Makefile lib/Makefile libntlm.pc ntlm.h])
 AC_OUTPUT

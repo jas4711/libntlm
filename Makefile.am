@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004 Simon Josefsson.
+# Copyright (C) 2002, 2003, 2004, 2005 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with Libntlm; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+
+SUBDIRS = lib
 
 EXTRA_DIST = libntlm.pc.in test.txt
 
