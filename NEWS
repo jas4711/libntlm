@@ -9,6 +9,8 @@ See the end for copying conditions.
 
 ** Fix compiler warnings, contributed by Frediano Ziglio.
 
+** Gnulib is used, currently only to provide more robust ntlm_check_version.
+
 * Version 0.3.6 (released 2004-09-30)
 
 ** Some code cleanup and improvements, contributed by Frediano Ziglio.
