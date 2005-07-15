@@ -34,7 +34,7 @@ libntlm_la_SOURCES = des.h des.c md4.h md4.c \
 	smbutil.c smbencrypt.c smbencrypt.h \
 	global.h version.c 
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
-libntlm_la_LIBADD = lib/libgl.la
+libntlm_la_LIBADD = lib/libgnu.la
 
 # test
 
