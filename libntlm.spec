@@ -4,12 +4,13 @@ Version: 0.3.7
 Release: 1
 Group: Development/Libraries
 Summary: Microsoft WinNT domain authentication library
-License: GPL
+License: LGPL
 Source: http://josefsson.org/libntlm/releases/libntlm-%{version}.tar.gz
 URL: http://josefsson.org/libntlm/
 BuildRoot: %{_tmppath}/root-%{name}-%{version}
 
 %package devel
+License: GPL
 Group: Development/Libraries
 Summary: Microsoft WinNT domain authentication library for development
 
@@ -31,11 +32,13 @@ make
 %makeinstall
 
 %files
-%defattr(-,-,root)
+%defattr(-,root,root)
 %{_libdir}/libntlm.so*
 
 %files devel
+%defattr(-,root,root)
 %{_includedir}/ntlm.h
 %{_libdir}/libntlm.a
 %{_libdir}/libntlm.la
 %{_libdir}/pkgconfig/libntlm.pc
+%doc README THANKS NEWS
