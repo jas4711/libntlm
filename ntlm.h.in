@@ -103,6 +103,9 @@ extern "C"
 			      tSmbNtlmAuthResponse * response,
 			      const char *user, const char *password);
 
+  extern const char *
+  ntlm_check_version (const char *req_version);
+
 # ifdef __cplusplus
 }
 # endif
