@@ -41,6 +41,7 @@ AC_PROG_LIBTOOL
 
 # For gnulib.
 gl_MODULES(strverscmp)
+gl_LGPL
 gl_INIT
 
 # Checks for header files.
