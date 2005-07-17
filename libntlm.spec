@@ -10,7 +10,7 @@ URL: http://josefsson.org/libntlm/
 BuildRoot: %{_tmppath}/root-%{name}-%{version}
 
 %package devel
-License: GPL
+License: LGPL
 Group: Development/Libraries
 Summary: Microsoft WinNT domain authentication library for development
 
