@@ -246,6 +246,21 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
   fprintf (fp, "      Flags = %08x\n", UI32LE (response->flags));
 }
 
+static void
+buildSmbNtlmAuthRequest_userlen (tSmbNtlmAuthRequest * request,
+				 const char *user,
+				 size_t user_len,
+				 const char *domain)
+{
+  request->bufIndex = 0;
+  memcpy (request->ident, "NTLMSSP\0\0\0", 8);
+  request->msgType = UI32LE (1);
+  request->flags = UI32LE (0x0000b207);	/* have to figure out what these mean */
+  /* FIXME this should be workstation, not username */
+  AddBytes (request, user, user, user_len);
+  AddString (request, domain, domain);
+}
+
 void
 buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 			 const char *user, const char *domain)
@@ -260,32 +275,26 @@ buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
       user_len = p - user;
     }
 
-  request->bufIndex = 0;
-  memcpy (request->ident, "NTLMSSP\0\0\0", 8);
-  request->msgType = UI32LE (1);
-  request->flags = UI32LE (0x0000b207);	/* have to figure out what these mean */
-  /* FIXME this should be workstation, not username */
-  AddBytes (request, user, user, user_len);
-  AddString (request, domain, domain);
+  buildSmbNtlmAuthRequest_userlen (request, user, user_len, domain);
 }
 
 void
-buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
-			  tSmbNtlmAuthResponse * response,
-			  const char *user, const char *password)
+buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
+				   const char *user, const char *domain)
+{
+  buildSmbNtlmAuthRequest_userlen (request, user, strlen (user), domain);
+}
+
+
+static void
+buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge * challenge,
+				  tSmbNtlmAuthResponse * response,
+				  const char *user, size_t user_len,
+				  const char *domain,
+				  const char *password)
 {
   uint8 lmRespData[24];
   uint8 ntRespData[24];
-  unsigned char buf[NTLM_BUFSIZE];
-  const char *domain = GetUnicodeString (challenge, uDomain, buf);
-  const char *p = strchr (user, '@');
-  size_t user_len = strlen (user);
-
-  if (p)
-    {
-      domain = p + 1;
-      user_len = p - user;
-    }
 
   SMBencrypt (password, challenge->challengeData, lmRespData);
   SMBNTencrypt (password, challenge->challengeData, ntRespData);
@@ -303,4 +312,36 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
   AddString (response, sessionKey, NULL);
 
   response->flags = challenge->flags;
+}
+
+void
+buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
+			  tSmbNtlmAuthResponse * response,
+			  const char *user, const char *password)
+{
+  const char *p = strchr (user, '@');
+  size_t user_len = strlen (user);
+  unsigned char buf[NTLM_BUFSIZE];
+  const char *domain = GetUnicodeString (challenge, uDomain, buf);
+
+  if (p)
+    {
+      domain = p + 1;
+      user_len = p - user;
+    }
+
+  buildSmbNtlmAuthResponse_userlen (challenge, response,
+				    user, user_len, domain, password);
+}
+
+void
+buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge * challenge,
+				    tSmbNtlmAuthResponse * response,
+				    const char *user, const char *password)
+{
+  unsigned char buf[NTLM_BUFSIZE];
+  const char *domain = GetUnicodeString (challenge, uDomain, buf);
+
+  buildSmbNtlmAuthResponse_userlen (challenge, response,
+				    user, strlen (user), domain, password);
 }

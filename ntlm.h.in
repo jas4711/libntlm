@@ -99,10 +99,24 @@ extern "C"
   extern void
     buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 			     const char *user, const char *domain);
+
+  /* Same as buildSmbNtlmAuthRequest, but won't treat @ in USER as a
+     DOMAIN. */
   extern void
-    buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
-			      tSmbNtlmAuthResponse * response,
-			      const char *user, const char *password);
+  buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
+				     const char *user, const char *domain);
+
+  extern void
+  buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
+			    tSmbNtlmAuthResponse * response,
+			    const char *user, const char *password);
+
+  /* Same as buildSmbNtlmAuthResponse, but won't treat @ in USER as a
+     REALM. */
+  extern void
+  buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge * challenge,
+				      tSmbNtlmAuthResponse * response,
+				      const char *user, const char *password);
 
   extern const char *
   ntlm_check_version (const char *req_version);
