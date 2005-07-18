@@ -19,6 +19,7 @@ install-sh
 libntlm-*
 libntlm.pc
 libntlm.la
+libntlm.spec
 libtool
 ltmain.sh
 md4.lo
