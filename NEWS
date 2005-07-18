@@ -10,6 +10,8 @@ These functions can be used when your username contains '@' and you do
 not wish that the remainder of the string is treated as a REALM value.
 Suggested by David Leonard <davidl@vintela.com>.
 
+** Fix license typo in libntlm.spec.
+
 ** API and ABI modifications.
 buildSmbNtlmAuthRequest_noatsplit: ADD.
 buildSmbNtlmAuthResponse_noatsplit: ADD.
