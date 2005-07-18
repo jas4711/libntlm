@@ -1,5 +1,5 @@
 /* test_ntlm.c --- Test module for libntlm.
- * Copyright (C) 2004 Frediano Ziglio
+ * Copyright (C) 2004, 2005 Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -125,7 +125,7 @@ fillChallenge (tSmbNtlmAuthChallenge * challenge, const char *domain)
 {
   int index = 0;
 
-  Bzero (challenge, sizeof (*challenge));
+  memset (challenge, 0, sizeof (*challenge));
   memcpy (challenge->ident, "NTLMSSP\0\0\0", 8);
   challenge->msgType = intelEndian32 (2);
   fillUnicode (&challenge->uDomain, challenge->buffer,
