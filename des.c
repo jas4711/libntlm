@@ -205,7 +205,7 @@ ntlm_des_set_key (DES_KEY * dkey, char *user_key, int len)
   register int i, j, l;
   int m;
 
-  Bzero (dkey, sizeof (DES_KEY));
+  memset (dkey, 0, sizeof (DES_KEY));
   desinit (dkey);
 
   /* Clear key schedule */
@@ -385,7 +385,7 @@ permute_ip (char *inblock, DES_KEY * key, char *outblock)
   register int j;
 
   /* Clear output block */
-  Bzero (outblock, 8);
+  memset (outblock, 0, 8);
 
   ib = inblock;
   for (j = 0; j < 16; j += 2, ib++)
@@ -414,7 +414,7 @@ permute_fp (char *inblock, DES_KEY * key, char *outblock)
   register int j;
 
   /* Clear output block */
-  Bzero (outblock, 8);
+  memset (outblock, 0, 8);
 
   ib = inblock;
   for (j = 0; j < 16; j += 2, ib++)
@@ -495,7 +495,7 @@ perminit_ip (DES_KEY * key)
   int i, m;
 
   /* Clear the permutation array */
-  Bzero (key->iperm, 16 * 16 * 8);
+  memset (key->iperm, 0, 16 * 16 * 8);
 
   for (i = 0; i < 16; i++)	/* each input nibble position */
     for (j = 0; j < 16; j++)	/* each possible input nibble */
@@ -518,7 +518,7 @@ perminit_fp (DES_KEY * key)
   int i, m;
 
   /* Clear the permutation array */
-  Bzero (key->fperm, 16 * 16 * 8);
+  memset (key->fperm, 0, 16 * 16 * 8);
 
   for (i = 0; i < 16; i++)	/* each input nibble position */
     for (j = 0; j < 16; j++)	/* each possible input nibble */
