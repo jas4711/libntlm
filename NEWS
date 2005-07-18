@@ -14,7 +14,6 @@ Suggested by David Leonard <davidl@vintela.com>.
 buildSmbNtlmAuthRequest_noatsplit: ADD.
 buildSmbNtlmAuthResponse_noatsplit: ADD.
 
-
 * Version 0.3.7 (released 2005-07-15)
 
 ** A RPM *.spec file is included.
