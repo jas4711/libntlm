@@ -249,8 +249,7 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
 static void
 buildSmbNtlmAuthRequest_userlen (tSmbNtlmAuthRequest * request,
 				 const char *user,
-				 size_t user_len,
-				 const char *domain)
+				 size_t user_len, const char *domain)
 {
   request->bufIndex = 0;
   memcpy (request->ident, "NTLMSSP\0\0\0", 8);
@@ -290,8 +289,7 @@ static void
 buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge * challenge,
 				  tSmbNtlmAuthResponse * response,
 				  const char *user, size_t user_len,
-				  const char *domain,
-				  const char *password)
+				  const char *domain, const char *password)
 {
   uint8 lmRespData[24];
   uint8 ntRespData[24];

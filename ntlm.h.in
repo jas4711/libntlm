@@ -103,26 +103,26 @@ extern "C"
   /* Same as buildSmbNtlmAuthRequest, but won't treat @ in USER as a
      DOMAIN. */
   extern void
-  buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
-				     const char *user, const char *domain);
+    buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
+				       const char *user, const char *domain);
 
   extern void
-  buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
-			    tSmbNtlmAuthResponse * response,
-			    const char *user, const char *password);
+    buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
+			      tSmbNtlmAuthResponse * response,
+			      const char *user, const char *password);
 
   /* Same as buildSmbNtlmAuthResponse, but won't treat @ in USER as a
      REALM. */
   extern void
-  buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge * challenge,
-				      tSmbNtlmAuthResponse * response,
-				      const char *user, const char *password);
+    buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge * challenge,
+					tSmbNtlmAuthResponse * response,
+					const char *user,
+					const char *password);
 
-  extern const char *
-  ntlm_check_version (const char *req_version);
+  extern const char *ntlm_check_version (const char *req_version);
 
 # ifdef __cplusplus
 }
 # endif
 
-#endif /* NTLM_H */
+#endif				/* NTLM_H */
