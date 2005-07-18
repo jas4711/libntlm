@@ -5,6 +5,16 @@ See the end for copying conditions.
 
 * Version 0.3.8 (unreleased)
 
+** New: buildSmbNtlmAuthRequest_noatsplit, buildSmbNtlmAuthResponse_noatsplit.
+These functions can be used when your username contains '@' and you do
+not wish that the remainder of the string is treated as a REALM value.
+Suggested by David Leonard <davidl@vintela.com>.
+
+** API and ABI modifications.
+buildSmbNtlmAuthRequest_noatsplit: ADD.
+buildSmbNtlmAuthResponse_noatsplit: ADD.
+
+
 * Version 0.3.7 (released 2005-07-15)
 
 ** A RPM *.spec file is included.
