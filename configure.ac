@@ -38,9 +38,10 @@ gl_EARLY
 AC_PROG_LIBTOOL
 
 # For gnulib.
-gl_MODULES(strverscmp strdup)
+gl_MODULES(strverscmp strdup check-version)
 gl_LGPL
 gl_INIT
+AC_DEFINE(check_version, ntlm_check_version)
 
 # Checks for header files.
 AC_HEADER_STDC
