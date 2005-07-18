@@ -19,7 +19,7 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_INIT(libntlm, 0.3.8, bug-libntlm@josefsson.org)
+AC_INIT(libntlm, 0.3.8, simon@josefsson.org)
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
