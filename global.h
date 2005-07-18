@@ -99,13 +99,6 @@
 # endif
 #endif
 
-#undef Bzero
-#ifdef HAVE_BZERO
-# define Bzero(x, y) bzero(x, y)
-#else
-# define Bzero(x, y) memset(x, 0, y)
-#endif
-
 #ifndef NTLM_STATIC
 # define NTLM_STATIC
 #endif
