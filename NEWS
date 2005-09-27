@@ -10,6 +10,8 @@ These functions can be used when your username contains '@' and you do
 not wish that the remainder of the string is treated as a REALM value.
 Suggested by David Leonard <davidl@vintela.com>.
 
+** Uses memset instead of bzero.
+
 ** Fix license typo in libntlm.spec.
 
 ** Made the COPYING file contain LGPL, not GPL.
