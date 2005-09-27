@@ -1,5 +1,5 @@
 Libntlm README -- important introductory notes
-Copyright (C) 2002, 2003 Simon Josefsson
+Copyright (C) 2002, 2003, 2005 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
@@ -7,31 +7,20 @@ This directory contains sources for a library which provides
 routines to manipulate the structures used for the client end
 of Microsoft NTLM authentication.
 
-This code was taken mostly from the Samba project and was
-initially intended for use with Microsoft Exchange Server when
-it is configured to require NTLM authentication for clients of
-it's IMAP server.
+This code was initially taken mostly from the Samba project and was
+initially intended for use with Microsoft Exchange Server when it is
+configured to require NTLM authentication for clients of it's IMAP
+server.  Today, libntlm contain re-written code, so that the license
+is now LGPL instead of the GPL that would be inherited from the Samba
+files.
 
-BUILDING
+Build instructions are in INSTALL.  Typically, the following is
+sufficient:
 
-If you want the library installed in /usr/local/lib and
-the header in /usr/local/include, then
-
+ $ ./configure
  $ make
+ $ make check
  $ make install
-
-will probably work.  Not much effort has been put into making
-this portable, and I only know for sure that it works on i386
-Linux glibc systems -- though there shouldn't be anything all
-that system-specific anywhere.  System byte order differences
-should already be taken care of.
-
-TEST PROGRAM
-
-The test directory contains sources for a program named
-"dumper" that will dump out base64 NTLM auth messages in a
-readable format.  It will also take a challenge and generate a
-response if provided with a username and password.
 
 USAGE  
   
