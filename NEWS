@@ -12,6 +12,10 @@ Suggested by David Leonard <davidl@vintela.com>.
 
 ** Fix license typo in libntlm.spec.
 
+** Made the COPYING file contain LGPL, not GPL.
+
+** Updated gnulib files.
+
 ** API and ABI modifications.
 buildSmbNtlmAuthRequest_noatsplit: ADD.
 buildSmbNtlmAuthResponse_noatsplit: ADD.
