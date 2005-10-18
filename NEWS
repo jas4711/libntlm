@@ -5,7 +5,7 @@ See the end for copying conditions.
 
 * Version 0.3.9 (unreleased)
 
-** DES functionality replaced with gnulib module.
+** DES and MD4 functionality replaced with gnulib module.
 
 * Version 0.3.8 (released 2005-09-27)
 
