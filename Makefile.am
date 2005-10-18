@@ -33,9 +33,7 @@ include_HEADERS = ntlm.h
 
 AM_CPPFLAGS = -I$(srcdir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
 
-libntlm_la_SOURCES = md4.h md4.c \
-	smbutil.c smbencrypt.c smbencrypt.h \
-	global.h
+libntlm_la_SOURCES = smbutil.c smbencrypt.c smbencrypt.h global.h
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 libntlm_la_LIBADD = lib/libgnu.la
 

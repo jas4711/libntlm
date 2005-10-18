@@ -27,6 +27,7 @@ AC_DEFUN([gl_INIT],
 [
   gl_CHECK_VERSION
   gl_DES
+  gl_MD4
   AM_STDBOOL_H
   gl_STDINT_H
   gl_FUNC_STRDUP
@@ -40,6 +41,8 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/check-version.h
   lib/des.c
   lib/des.h
+  lib/md4.c
+  lib/md4.h
   lib/stdbool_.h
   lib/stdint_.h
   lib/strdup.c
@@ -49,6 +52,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/check-version.m4
   m4/des.m4
   m4/inttypes.m4
+  m4/md4.m4
   m4/onceonly_2_57.m4
   m4/stdbool.m4
   m4/stdint.m4

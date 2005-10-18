@@ -27,7 +27,6 @@ static int
 md4file (const char *name, unsigned char *hash)
 {
   FILE *f;
-  MD4_CTX context;
   char line[1024];
   int res = 0;
 
@@ -35,18 +34,7 @@ md4file (const char *name, unsigned char *hash)
   if (!f)
     return 1;
 
-  MD4Init (&context);
-  while (fgets (line, sizeof (line), f))
-    {
-      char *p = strstr (line, "\r\n");
-      if (p && p[2] == 0)
-	strcpy (p, "\n");
-      MD4Update (&context, line, strlen (line));
-    }
-  MD4Final (&context, hash);
-
-  if (ferror (f))
-    res = 1;
+  res = md4_stream (f, hash);
 
   fclose (f);
 

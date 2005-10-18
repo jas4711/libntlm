@@ -83,7 +83,6 @@ SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
   size_t len, i;
   unsigned char hash[24];
   unsigned char nt_pw[256];
-  MD4_CTX context;
 
   /* NT resp */
   len = strlen (passwd);
@@ -95,9 +94,7 @@ SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
       nt_pw[2 * i + 1] = 0;
     }
 
-  MD4Init (&context);
-  MD4Update (&context, nt_pw, len * 2);
-  MD4Final (&context, hash);
+  md4_buffer (nt_pw, len * 2, hash);
 
   memset (hash + 16, 0, 5);
   ntlm_encrypt_answer (hash, challenge, answer);
@@ -105,7 +102,6 @@ SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
   /* with security is best be pedantic */
   memset (hash, 0, sizeof (hash));
   memset (nt_pw, 0, sizeof (nt_pw));
-  memset (&context, 0, sizeof (context));
 }
 
 /*
