@@ -148,9 +148,9 @@ main ()
   if (!f)
     return 1;
 
-  printf ("ntlm.h %s libntlm %s\n", NTLM_VERSION, ntlm_check_version(NULL));
+  printf ("ntlm.h %s libntlm %s\n", NTLM_VERSION, ntlm_check_version (NULL));
 
-  if (!ntlm_check_version(NTLM_VERSION))
+  if (!ntlm_check_version (NTLM_VERSION))
     return 1;
 
   /* do some test then dump */

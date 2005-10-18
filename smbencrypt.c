@@ -35,8 +35,7 @@ to_uchar (char ch)
  */
 
 static void ntlm_encrypt_answer (char *hash,
-				 const char *challenge,
-				 char *answer);
+				 const char *challenge, char *answer);
 static void ntlm_convert_key (char *key_56, des_ctx * ks);
 static void ntlm_des_set_odd_parity (char *key);
 
@@ -159,7 +158,7 @@ ntlm_convert_key (char *key_56, des_ctx * ks)
   char key[8];
 
   key[0] = to_uchar (key_56[0]);
-  key[1] = ((to_uchar(key_56[0]) << 7) & 0xFF) | (to_uchar(key_56[1]) >> 1);
+  key[1] = ((to_uchar (key_56[0]) << 7) & 0xFF) | (to_uchar (key_56[1]) >> 1);
   key[2] = ((to_uchar (key_56[1]) << 6) & 0xFF) | (to_uchar (key_56[2]) >> 2);
   key[3] = ((to_uchar (key_56[2]) << 5) & 0xFF) | (to_uchar (key_56[3]) >> 3);
   key[4] = ((to_uchar (key_56[3]) << 4) & 0xFF) | (to_uchar (key_56[4]) >> 4);
