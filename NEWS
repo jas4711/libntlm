@@ -3,6 +3,10 @@ Copyright (C) 2002, 2003, 2004, 2005 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
+* Version 0.3.9 (unreleased)
+
+** DES functionality replaced with gnulib module.
+
 * Version 0.3.8 (released 2005-09-27)
 
 ** New: buildSmbNtlmAuthRequest_noatsplit, buildSmbNtlmAuthResponse_noatsplit.
