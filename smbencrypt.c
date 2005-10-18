@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2005 Simon Josefsson
  * Copyright (C) 1998-1999  Brian Bruns
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -37,7 +38,6 @@ to_uchar (char ch)
 static void ntlm_encrypt_answer (char *hash,
 				 const char *challenge, char *answer);
 static void ntlm_convert_key (char *key_56, des_ctx * ks);
-static void ntlm_des_set_odd_parity (char *key);
 
 NTLM_STATIC void
 SMBencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
@@ -109,10 +109,10 @@ SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 }
 
 /*
-* takes a 21 byte array and treats it as 3 56-bit DES keys. The
-* 8 byte plaintext is encrypted with each key and the resulting 24
-* bytes are stored in the results array.
-*/
+ * takes a 21 byte array and treats it as 3 56-bit DES keys. The
+ * 8 byte plaintext is encrypted with each key and the resulting 24
+ * bytes are stored in the results array.
+ */
 static void
 ntlm_encrypt_answer (char *hash, const char *challenge, char *answer)
 {
@@ -130,28 +130,9 @@ ntlm_encrypt_answer (char *hash, const char *challenge, char *answer)
   memset (&ks, 0, sizeof (ks));
 }
 
-static void
-ntlm_des_set_odd_parity (char *key)
-{
-  int i;
-  unsigned char parity;
-
-  for (i = 0; i < 8; i++)
-    {
-      parity = key[i];
-
-      parity ^= parity >> 4;
-      parity ^= parity >> 2;
-      parity ^= parity >> 1;
-
-      key[i] = (key[i] & 0xfe) | (parity & 1);
-    }
-}
-
 /*
-* turns a 56 bit key into the 64 bit, odd parity key and sets the key.
-* The key schedule ks is also set.
-*/
+ * turns a 56 bit key into the 64 bit, and sets the key schedule ks.
+ */
 static void
 ntlm_convert_key (char *key_56, des_ctx * ks)
 {
@@ -166,7 +147,6 @@ ntlm_convert_key (char *key_56, des_ctx * ks)
   key[6] = ((to_uchar (key_56[5]) << 2) & 0xFF) | (to_uchar (key_56[6]) >> 6);
   key[7] = (to_uchar (key_56[6]) << 1) & 0xFF;
 
-  ntlm_des_set_odd_parity (key);
   des_setkey (ks, key);
 
   memset (&key, 0, sizeof (key));
