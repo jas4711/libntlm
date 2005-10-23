@@ -65,10 +65,10 @@
 # include <byteswap.h>
 #endif
 
-#define rotl32(x,n)   (((x) << ((word32)(n))) | ((x) >> (32 - (word32)(n))))
-#define rotr32(x,n)   (((x) >> ((word32)(n))) | ((x) << (32 - (word32)(n))))
-#define rotl16(x,n)   (((x) << ((word16)(n))) | ((x) >> (16 - (word16)(n))))
-#define rotr16(x,n)   (((x) >> ((word16)(n))) | ((x) << (16 - (word16)(n))))
+#define rotl32(x,n)   (((x) << ((uint32)(n))) | ((x) >> (32 - (uint32)(n))))
+#define rotr32(x,n)   (((x) >> ((uint32)(n))) | ((x) << (32 - (uint32)(n))))
+#define rotl16(x,n)   (((x) << ((uint16)(n))) | ((x) >> (16 - (uint16)(n))))
+#define rotr16(x,n)   (((x) >> ((uint16)(n))) | ((x) << (16 - (uint16)(n))))
 
 /* Use hardware rotations.. when available */
 #ifdef swap32
@@ -104,6 +104,5 @@
 #endif
 
 #include "ntlm.h"
-typedef uint32 word32;
 
 #endif /* NTLM_GLOBAL_H_ */
