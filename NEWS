@@ -7,6 +7,9 @@ See the end for copying conditions.
 
 ** DES and MD4 functionality replaced with gnulib module.
 
+** API and ABI modifications.
+No changes since last version.
+
 * Version 0.3.8 (released 2005-09-27)
 
 ** New: buildSmbNtlmAuthRequest_noatsplit, buildSmbNtlmAuthResponse_noatsplit.
