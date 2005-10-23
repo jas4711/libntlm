@@ -4,7 +4,9 @@ See the end for copying conditions.
 
 Much of the code was originally written by Andrew Tridgell for the
 Samba project.  Frediano Ziglio contributed rewritten files, so the
-library could be released under LGPL instead of GPL.
+library could be released under LGPL instead of GPL.  The MD4 and DES
+implementation was replaced by the Gnulib LGPL copy, contributed by
+Simon Josefsson.
 
 Bug reports, patches and/or suggestions were also received from:
 
