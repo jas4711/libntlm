@@ -27,6 +27,9 @@ extern "C"
 {
 # endif
 
+  /* Get FILE. */
+#include <stdio.h>
+
   typedef unsigned short uint16;
   typedef unsigned int uint32;
   typedef unsigned char uint8;
