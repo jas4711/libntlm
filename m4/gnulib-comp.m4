@@ -59,4 +59,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdint.m4
   m4/strdup.m4
   m4/strverscmp.m4
+  tests/test-des.c
+  tests/test-md4.c
 ])
