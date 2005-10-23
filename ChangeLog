@@ -1,3 +1,79 @@
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.9.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, lib/Makefile.am, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, tests/Makefile.am, tests/test-des.c,
+	tests/test-md4.c: Add gnulib self tests.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* global.h: Avoid word16/word32.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* THANKS: Fix.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in: Need stdio.h, for FILE.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* lib/md4.o: Remove.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-10-23  Simon Josefsson <simon@josefsson.org>
+
+	* lib/md4.c, lib/md4.h, m4/gnulib-comp.m4: Update.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, md4.c, md4.h, smbencrypt.c, test_ntlm.c,
+	lib/Makefile.am, lib/md4.c, lib/md4.h, lib/md4.o,
+	m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/md4.m4: Use gnulib m4
+	module.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* smbencrypt.c: Remove unneeded stuff.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* smbencrypt.c, test_ntlm.c: Indent.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* smbencrypt.c: Use inline, we can.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump versions.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2005-10-18  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, des.c, des.h, smbencrypt.c, lib/Makefile.am,
+	lib/des.c, lib/des.h, lib/des.o, lib/stdbool_.h, lib/stdint_.h,
+	m4/des.m4, m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/inttypes.m4,
+	m4/stdbool.m4, m4/stdint.m4: Use des from gnulib.
+
 2005-09-27  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.8.
