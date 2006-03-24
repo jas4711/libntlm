@@ -1,5 +1,5 @@
 /* smbutil.c --- Main library functions.
- * Copyright (C) 2002, 2004, 2005 Simon Josefsson
+ * Copyright (C) 2002, 2004, 2005, 2006 Simon Josefsson
  * Copyright (C) 1999-2001 Grant Edwards
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -33,7 +33,6 @@
 #else
 # include "des.h"
 # include "md4.h"
-# include "smbencrypt.h"
 #endif
 
 char versionString[] = PACKAGE_STRING;
@@ -294,8 +293,8 @@ buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge * challenge,
   uint8 lmRespData[24];
   uint8 ntRespData[24];
 
-  SMBencrypt (password, challenge->challengeData, lmRespData);
-  SMBNTencrypt (password, challenge->challengeData, ntRespData);
+  ntlm_smb_encrypt (password, challenge->challengeData, lmRespData);
+  ntlm_smb_nt_encrypt (password, challenge->challengeData, ntRespData);
 
   response->bufIndex = 0;
   memcpy (response->ident, "NTLMSSP\0\0\0", 8);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005 Simon Josefsson
+ * Copyright (C) 2005, 2006 Simon Josefsson
  * Copyright (C) 1998-1999  Brian Bruns
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -39,8 +39,8 @@ static void ntlm_encrypt_answer (char *hash,
 				 const char *challenge, char *answer);
 static void ntlm_convert_key (char *key_56, des_ctx * ks);
 
-NTLM_STATIC void
-SMBencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
+void
+ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 {
 #define MAX_PW_SZ 14
   int len;
@@ -77,8 +77,10 @@ SMBencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
   memset (passwd_up, 0, sizeof (passwd_up));
 }
 
-NTLM_STATIC void
-SMBNTencrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
+void
+ntlm_smb_nt_encrypt (const char *passwd,
+		     const uint8 * challenge,
+		     uint8 * answer)
 {
   size_t len, i;
   unsigned char hash[24];

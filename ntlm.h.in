@@ -122,6 +122,16 @@ extern "C"
 					const char *user,
 					const char *password);
 
+  /* smbencrypt.c */
+  extern void
+  ntlm_smb_encrypt (const char *passwd,
+		    const uint8 * challenge,
+		    uint8 * answer);
+  extern void
+  ntlm_smb_nt_encrypt (const char *passwd,
+		       const uint8 * challenge,
+		       uint8 * answer);
+
   extern const char *ntlm_check_version (const char *req_version);
 
 # ifdef __cplusplus
