@@ -53,9 +53,6 @@ ChangeLog:
 		-I autogen.sh && \
 	cat .cvscopying >> ChangeLog
 
-indent:
-	indent $(SOURCES)
-
 htmldir = ../www-$(PACKAGE)
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
 
