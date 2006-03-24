@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004, 2005 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005, 2006 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -19,7 +19,7 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_INIT(libntlm, 0.3.9, simon@josefsson.org)
+AC_INIT(libntlm, 0.3.10, simon@josefsson.org)
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
@@ -27,7 +27,7 @@ AC_CONFIG_SRCDIR(ntlm.h.in)
 # No interfaces changed:                   REVISION++
 AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
-AC_SUBST(LT_REVISION, 8)
+AC_SUBST(LT_REVISION, 9)
 
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
@@ -44,10 +44,12 @@ AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h sys/endian.h machine/endian.h endian.h])
+AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h
+                  sys/endian.h machine/endian.h endian.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 
-AC_CONFIG_FILES([Makefile lib/Makefile tests/Makefile libntlm.pc libntlm.spec ntlm.h])
+AC_CONFIG_FILES([Makefile lib/Makefile tests/Makefile libntlm.pc
+                 libntlm.spec ntlm.h])
 AC_OUTPUT
