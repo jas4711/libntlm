@@ -5,7 +5,7 @@ See the end for copying conditions.
 
 * Version 0.3.10 (released 2006-03-24)
 
-** The libary is linked with -no-undefined, to enable building a Windows DLL.
+** The library is linked with -no-undefined, to enable building a Windows DLL.
 
 ** Add new APIs to access the SMBencrypt and SMBNTencrypt functions.
 Suggested by Pavel Fedin <fedin@matek.ru>.
