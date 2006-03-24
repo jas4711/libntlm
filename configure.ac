@@ -19,7 +19,7 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_INIT(libntlm, 0.3.10, simon@josefsson.org)
+AC_INIT(libntlm, 0.3.11, simon@josefsson.org)
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
@@ -27,7 +27,7 @@ AC_CONFIG_SRCDIR(ntlm.h.in)
 # No interfaces changed:                   REVISION++
 AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
-AC_SUBST(LT_REVISION, 9)
+AC_SUBST(LT_REVISION, 10)
 
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
