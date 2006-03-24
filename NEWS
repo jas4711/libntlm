@@ -1,7 +1,18 @@
 Libntlm NEWS -- history of user-visible changes.                -*- outline -*-
-Copyright (C) 2002, 2003, 2004, 2005 Simon Josefsson
+Copyright (C) 2002, 2003, 2004, 2005, 2006 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
+
+* Version 0.3.10 (unreleased)
+
+** The libary is linked with -no-undefined, to enable building a Windows DLL.
+
+** Add new APIs to access the SMBencrypt and SMBNTencrypt functions.
+Suggested by Pavel Fedin <fedin@matek.ru>.
+
+** API and ABI modifications.
+ntlm_smb_encrypt
+ntlm_smb_nt_encrypt
 
 * Version 0.3.9 (released 2005-10-23)
 
