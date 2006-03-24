@@ -11,8 +11,8 @@ See the end for copying conditions.
 Suggested by Pavel Fedin <fedin@matek.ru>.
 
 ** API and ABI modifications.
-ntlm_smb_encrypt
-ntlm_smb_nt_encrypt
+ntlm_smb_encrypt: ADD
+ntlm_smb_nt_encrypt: ADD
 
 * Version 0.3.9 (released 2005-10-23)
 

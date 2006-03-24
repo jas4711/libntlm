@@ -44,12 +44,12 @@ AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h
+AC_CHECK_HEADERS([unistd.h byteswap.h string.h strings.h \
                   sys/endian.h machine/endian.h endian.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 
-AC_CONFIG_FILES([Makefile lib/Makefile tests/Makefile libntlm.pc
+AC_CONFIG_FILES([Makefile lib/Makefile tests/Makefile libntlm.pc \
                  libntlm.spec ntlm.h])
 AC_OUTPUT
