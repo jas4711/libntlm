@@ -1,5 +1,5 @@
 Libntlm README -- important introductory notes
-Copyright (C) 2002, 2003, 2005 Simon Josefsson
+Copyright (C) 2002, 2003, 2005, 2006 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
@@ -13,6 +13,13 @@ configured to require NTLM authentication for clients of it's IMAP
 server.  Today, libntlm contain re-written code, so that the license
 is now LGPL instead of the GPL that would be inherited from the Samba
 files.
+
+If you need help to use Libntlm, or wish to help others, you are
+invited to join our mailing list libntlm at nongnu.org, see
+<http://lists.nongnu.org/mailman/listinfo/libntlm>.
+
+For more information, see <http://josefsson.org/libntlm/> and
+<http://savannah.nongnu.org/projects/libntlm/>.
 
 Build instructions are in INSTALL.  Typically, the following is
 sufficient:

@@ -2,6 +2,9 @@ Libntlm AUTHORS -- information about the authors
 Copyright (C) 2002, 2003, 2004, 2006 Simon Josefsson
 See the end for copying conditions.
 
+Please do not send general e-mail about the library to the addresses
+below.  Use the mailing list instead, see README.
+
 Grant Edwards <grante@visi.com>
 Original author of libntlm
 
