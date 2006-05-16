@@ -5,6 +5,8 @@ See the end for copying conditions.
 
 * Version 0.3.11 (unreleased)
 
+** Fix buggy MD4 implementation on 64-bit platforms.
+
 ** API and ABI modifications.
 No changes since last version.
 
