@@ -7,6 +7,8 @@ See the end for copying conditions.
 
 ** Fix buggy MD4 implementation on 64-bit platforms.
 
+** Self tests are run under valgrind, if available.
+
 ** Updated gnulib files.
 
 ** API and ABI modifications.
