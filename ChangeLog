@@ -1,3 +1,40 @@
+2006-05-16  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.11.
+
+2006-05-16  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Use valgrind, if available.
+
+2006-05-16  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2006-05-16  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/des.c, lib/md4.c, lib/stdint_.h,
+	m4/gnulib-cache.m4, m4/gnulib-comp.m4: Update.
+
+2006-03-29  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Fix bug report address.
+
+2006-03-29  Simon Josefsson <simon@josefsson.org>
+
+	* README, AUTHORS: Add.
+
+2006-03-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2006-03-24  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump version.
+
+2006-03-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Typo.
+
 2006-03-24  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.10.
