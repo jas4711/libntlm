@@ -9,7 +9,7 @@ Grant Edwards <grante@visi.com>
 Original author of libntlm
 
 Andrew Tridgell
-Wrote functions borrowed from SMB.
+Wrote functions borrowed from Samba.
 
 Simon Josefsson <simon@josefsson.org>
 Build environment, maintainer.
