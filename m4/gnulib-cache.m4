@@ -15,10 +15,10 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --aux-dir=. --lgpl --libtool --macro-prefix=gl check-version des des-tests maintainer-makefile md4 md4-tests strdup strverscmp
+#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --aux-dir=. --lgpl --libtool --macro-prefix=gl check-version des des-tests maintainer-makefile md4 md4-tests strdup strverscmp unistd
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
-gl_MODULES([check-version des des-tests maintainer-makefile md4 md4-tests strdup strverscmp])
+gl_MODULES([check-version des des-tests maintainer-makefile md4 md4-tests strdup strverscmp unistd])
 gl_AVOID([])
 gl_SOURCE_BASE([lib])
 gl_M4_BASE([m4])

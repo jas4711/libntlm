@@ -1,5 +1,5 @@
 /* global.h --- Global internal include file for libntlm.
- * Copyright (C) 2004, 2005  Frediano Ziglio
+ * Copyright (C) 2004, 2005, 2006  Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -30,24 +30,10 @@
 #endif
 
 #include <stdio.h>
-
-#ifdef HAVE_STDLIB_H
-# include <stdlib.h>
-#endif
-
+#include <stdlib.h>
 #include <ctype.h>
-
-#ifdef HAVE_STRING_H
-# include <string.h>
-#endif
-
-#ifdef HAVE_STRINGS_H
-# include <strings.h>
-#endif
-
-#ifdef HAVE_UNISTD_H
-# include <unistd.h>
-#endif
+#include <string.h>
+#include <unistd.h>
 
 #ifdef HAVE_SYS_ENDIAN_H
 # include <sys/endian.h>
