@@ -19,6 +19,8 @@
 # any checks for libraries, header files, types and library functions.
 AC_DEFUN([gl_EARLY],
 [
+  m4_pattern_forbid([^gl_[A-Z]])dnl the gnulib macro namespace
+  m4_pattern_allow([^gl_ES$])dnl a valid locale name
   AC_REQUIRE([AC_PROG_RANLIB])
   AC_REQUIRE([AC_GNU_SOURCE])
 ])
@@ -55,9 +57,10 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strdup.h
   lib/strverscmp.c
   lib/strverscmp.h
+  m4/absolute-header.m4
   m4/check-version.m4
   m4/des.m4
-  m4/inttypes.m4
+  m4/longlong.m4
   m4/md4.m4
   m4/onceonly_2_57.m4
   m4/stdbool.m4
