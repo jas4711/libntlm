@@ -3,6 +3,13 @@ Copyright (C) 2002, 2003, 2004, 2005, 2006 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
+* Version 0.3.12 (unreleased)
+
+** Update of gnulib files.
+
+** API and ABI modifications.
+No changes since last version.
+
 * Version 0.3.11 (released 2006-05-16)
 
 ** Fix buggy MD4 implementation on 64-bit platforms.
