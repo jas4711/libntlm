@@ -1,3 +1,54 @@
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.3.12.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Require autoconf 2.60, and automake 1.9.  Enable
+	gnits.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS: Update PGP key.  Typo.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS: Fix.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix valgrind use.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Check for valgrind.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac, global.h, lib/Makefile.am, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/unistd_h.m4: Use unistd module.  Don't use
+	strings.h (obsolete).
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump versions.
+
+2006-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/check-version.c, lib/stdint_.h,
+	lib/strverscmp.c, m4/absolute-header.m4, m4/check-version.m4,
+	m4/des.m4, m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/inttypes.m4,
+	m4/longlong.m4, m4/md4.m4, m4/onceonly_2_57.m4, m4/stdbool.m4,
+	m4/stdint.m4, m4/strdup.m4, m4/strverscmp.m4: Update.
+
+2006-06-22  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Make portable to mingw.
+
 2006-05-16  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.3.11.
