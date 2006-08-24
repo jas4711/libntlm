@@ -50,6 +50,23 @@ AC_CHECK_HEADERS([byteswap.h sys/endian.h machine/endian.h endian.h])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_INLINE
 
+# Run self-tests under valgrind?
+if test "$cross_compiling" = no; then
+  AC_CHECK_PROGS(VALGRIND, valgrind)
+fi
+if test -n "$VALGRIND" && $VALGRIND true > /dev/null 2>&1; then
+  opt_valgrind_tests=yes
+else
+  opt_valgrind_tests=no
+  VALGRIND=
+fi 
+AC_MSG_CHECKING([whether self tests are run under valgrind])
+AC_ARG_ENABLE(valgrind-tests,
+	AS_HELP_STRING([--enable-valgrind-tests],
+                       [run self tests under valgrind]),
+  opt_valgrind_tests=$enableval)
+AC_MSG_RESULT($opt_valgrind_tests)
+
 AC_CONFIG_FILES([Makefile lib/Makefile tests/Makefile libntlm.pc \
                  libntlm.spec ntlm.h])
 AC_OUTPUT
