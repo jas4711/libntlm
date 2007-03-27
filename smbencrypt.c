@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005, 2006 Simon Josefsson
+ * Copyright (C) 2005, 2006, 2007 Simon Josefsson
  * Copyright (C) 1998-1999  Brian Bruns
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -37,7 +37,7 @@ to_uchar (char ch)
 
 static void ntlm_encrypt_answer (char *hash,
 				 const char *challenge, char *answer);
-static void ntlm_convert_key (char *key_56, des_ctx * ks);
+static void ntlm_convert_key (char *key_56, gl_des_ctx * ks);
 
 void
 ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
@@ -47,7 +47,7 @@ ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
   int i;
   static const char magic[8] =
     { 0x4B, 0x47, 0x53, 0x21, 0x40, 0x23, 0x24, 0x25 };
-  des_ctx ks;
+  gl_des_ctx ks;
   char hash[24];
   char passwd_up[MAX_PW_SZ];
 
@@ -61,11 +61,11 @@ ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 
   /* hash the first 7 characters */
   ntlm_convert_key (passwd_up, &ks);
-  des_ecb_encrypt (&ks, magic, hash + 0);
+  gl_des_ecb_encrypt (&ks, magic, hash + 0);
 
   /* hash the second 7 characters */
   ntlm_convert_key (passwd_up + 7, &ks);
-  des_ecb_encrypt (&ks, magic, hash + 8);
+  gl_des_ecb_encrypt (&ks, magic, hash + 8);
 
   memset (hash + 16, 0, 5);
 
@@ -114,16 +114,16 @@ ntlm_smb_nt_encrypt (const char *passwd,
 static void
 ntlm_encrypt_answer (char *hash, const char *challenge, char *answer)
 {
-  des_ctx ks;
+  gl_des_ctx ks;
 
   ntlm_convert_key (hash, &ks);
-  des_ecb_encrypt (&ks, challenge, answer);
+  gl_des_ecb_encrypt (&ks, challenge, answer);
 
   ntlm_convert_key (&hash[7], &ks);
-  des_ecb_encrypt (&ks, challenge, &answer[8]);
+  gl_des_ecb_encrypt (&ks, challenge, &answer[8]);
 
   ntlm_convert_key (&hash[14], &ks);
-  des_ecb_encrypt (&ks, challenge, &answer[16]);
+  gl_des_ecb_encrypt (&ks, challenge, &answer[16]);
 
   memset (&ks, 0, sizeof (ks));
 }
@@ -132,7 +132,7 @@ ntlm_encrypt_answer (char *hash, const char *challenge, char *answer)
  * turns a 56 bit key into the 64 bit, and sets the key schedule ks.
  */
 static void
-ntlm_convert_key (char *key_56, des_ctx * ks)
+ntlm_convert_key (char *key_56, gl_des_ctx * ks)
 {
   char key[8];
 
@@ -145,7 +145,7 @@ ntlm_convert_key (char *key_56, des_ctx * ks)
   key[6] = ((to_uchar (key_56[5]) << 2) & 0xFF) | (to_uchar (key_56[6]) >> 6);
   key[7] = (to_uchar (key_56[6]) << 1) & 0xFF;
 
-  des_setkey (ks, key);
+  gl_des_setkey (ks, key);
 
   memset (&key, 0, sizeof (key));
 }
