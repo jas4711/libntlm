@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004, 2005, 2006 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005, 2006, 2007 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -19,7 +19,10 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_INIT(libntlm, 0.3.12, libntlm@josefsson.org)
+AC_PREREQ(2.61)
+AC_INIT(libntlm, 0.3.13, libntlm@josefsson.org)
+AC_CONFIG_AUX_DIR([build-aux])
+
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
@@ -29,8 +32,7 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
 AC_SUBST(LT_REVISION, 11)
 
-AC_PREREQ(2.60)
-AM_INIT_AUTOMAKE([1.9 gnits])
+AM_INIT_AUTOMAKE([1.10 gnits])
 AM_CONFIG_HEADER(config.h)
 
 # Checks for programs.
