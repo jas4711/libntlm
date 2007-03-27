@@ -1,4 +1,3 @@
-.cvsignore
 .deps
 .libs
 INSTALL
@@ -6,16 +5,12 @@ Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache
-config.guess
 config.h
 config.h.in
 config.log
 config.status
-config.sub
 configure
-depcomp
 des.lo
-install-sh
 libntlm-*
 libntlm.pc
 libntlm.la
@@ -23,7 +18,6 @@ libntlm.spec
 libtool
 ltmain.sh
 md4.lo
-missing
 mkinstalldirs
 ntlm.h
 smbencrypt.lo
