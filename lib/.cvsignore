@@ -8,5 +8,3 @@ stdint.h
 string_.h
 unistd_.h
 wchar_.h
-string.h
-unistd.h
