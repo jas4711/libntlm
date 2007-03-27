@@ -1,5 +1,5 @@
 /* des.c --- DES and Triple-DES encryption/decryption Algorithm
- * Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004, 2005, 2006
+ * Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004, 2005, 2006, 2007
  *    Free Software Foundation, Inc.
  *
  * This file is free software; you can redistribute it and/or modify
@@ -54,13 +54,13 @@
  *     unsigned char plaintext[8];
  *     unsigned char ciphertext[8];
  *     unsigned char recoverd[8];
- *     des_ctx context;
+ *     gl_des_ctx context;
  *
  *     // Fill 'key' and 'plaintext' with some data
  *     ....
  *
  *     // Set up the DES encryption context
- *     des_setkey(&context, key);
+ *     gl_des_setkey(&context, key);
  *
  *     // Encrypt the plaintext
  *     des_ecb_encrypt(&context, plaintext, ciphertext);
@@ -77,26 +77,24 @@
  *     unsigned char plaintext[8];
  *     unsigned char ciphertext[8];
  *     unsigned char recoverd[8];
- *     tripledes_ctx context;
+ *     gl_3des_ctx context;
  *
  *     // If you would like to use two 64bit keys, fill 'key1' and'key2'
  *     // then setup the encryption context:
- *     tripledes_set2keys(&context, key1, key2);
+ *     gl_3des_set2keys(&context, key1, key2);
  *
  *     // To use three 64bit keys with Triple-DES use:
- *     tripledes_set3keys(&context, key1, key2, key3);
+ *     gl_3des_set3keys(&context, key1, key2, key3);
  *
  *     // Encrypting plaintext with Triple-DES
- *     tripledes_ecb_encrypt(&context, plaintext, ciphertext);
+ *     gl_3des_ecb_encrypt(&context, plaintext, ciphertext);
  *
  *     // Decrypting ciphertext to recover the plaintext with Triple-DES
- *     tripledes_ecb_decrypt(&context, ciphertext, recoverd);
+ *     gl_3des_ecb_decrypt(&context, ciphertext, recoverd);
  */
 
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 
 #include "des.h"
 
@@ -320,13 +318,9 @@ static const unsigned char weak_keys[64][8] = {
   {0xfe, 0xfe, 0xe0, 0xe0, 0xfe, 0xfe, 0xf0, 0xf0},
   {0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe, 0xfe}	/*w */
 };
-static const unsigned char weak_keys_chksum[20] = {
-  0xD0, 0xCF, 0x07, 0x38, 0x93, 0x70, 0x8A, 0x83, 0x7D, 0xD7,
-  0x8A, 0x36, 0x65, 0x29, 0x6C, 0x1F, 0x7C, 0x3F, 0xD3, 0x41
-};
 
 bool
-des_is_weak_key (const char * key)
+gl_des_is_weak_key (const char * key)
 {
   char work[8];
   int i, left, right, middle, cmp_result;
@@ -420,18 +414,10 @@ des_is_weak_key (const char * key)
     right = (data[4] << 24) | (data[5] << 16) | (data[6] << 8) | data[7];
 
 #define WRITE_64BIT_DATA(data, left, right)				   \
-    data[0] = (left >> 24) &0xff; data[1] = (left >> 16) &0xff; 	   \
+    data[0] = (left >> 24) &0xff; data[1] = (left >> 16) &0xff;	   \
     data[2] = (left >> 8) &0xff; data[3] = left &0xff;			   \
     data[4] = (right >> 24) &0xff; data[5] = (right >> 16) &0xff;	   \
     data[6] = (right >> 8) &0xff; data[7] = right &0xff;
-
-/*
- * Handy macros for encryption and decryption of data
- */
-#define des_ecb_encrypt(ctx, from, to)	      des_ecb_crypt(ctx, from, to, 0)
-#define des_ecb_decrypt(ctx, from, to)	      des_ecb_crypt(ctx, from, to, 1)
-#define tripledes_ecb_encrypt(ctx, from, to) tripledes_ecb_crypt(ctx,from,to,0)
-#define tripledes_ecb_decrypt(ctx, from, to) tripledes_ecb_crypt(ctx,from,to,1)
 
 /*
  * des_key_schedule():	  Calculate 16 subkeys pairs (even/odd) for
@@ -532,7 +518,7 @@ des_key_schedule (const char * _rawkey, uint32_t * subkey)
 }
 
 void
-des_setkey (des_ctx *ctx, const char * key)
+gl_des_setkey (gl_des_ctx *ctx, const char * key)
 {
   int i;
 
@@ -546,18 +532,18 @@ des_setkey (des_ctx *ctx, const char * key)
 }
 
 bool
-des_makekey (des_ctx *ctx, const char * key, size_t keylen)
+gl_des_makekey (gl_des_ctx *ctx, const char * key, size_t keylen)
 {
   if (keylen != 8)
     return false;
 
-  des_setkey (ctx, key);
+  gl_des_setkey (ctx, key);
 
-  return !des_is_weak_key (key);
+  return !gl_des_is_weak_key (key);
 }
 
 void
-des_ecb_crypt (des_ctx *ctx, const char * _from, char * _to, int mode)
+gl_des_ecb_crypt (gl_des_ctx *ctx, const char * _from, char * _to, int mode)
 {
   const unsigned char *from = (const unsigned char *) _from;
   unsigned char *to = (unsigned char *) _to;
@@ -581,7 +567,7 @@ des_ecb_crypt (des_ctx *ctx, const char * _from, char * _to, int mode)
 }
 
 void
-tripledes_set2keys (tripledes_ctx *ctx, const char * key1, const char * key2)
+gl_3des_set2keys (gl_3des_ctx *ctx, const char * key1, const char * key2)
 {
   int i;
 
@@ -605,7 +591,7 @@ tripledes_set2keys (tripledes_ctx *ctx, const char * key1, const char * key2)
 }
 
 void
-tripledes_set3keys (tripledes_ctx *ctx, const char * key1,
+gl_3des_set3keys (gl_3des_ctx *ctx, const char * key1,
 		    const char * key2, const char * key3)
 {
   int i;
@@ -628,9 +614,9 @@ tripledes_set3keys (tripledes_ctx *ctx, const char * key1,
 }
 
 void
-tripledes_ecb_crypt (tripledes_ctx *ctx,
-		     const char * _from,
-		     char * _to, int mode)
+gl_3des_ecb_crypt (gl_3des_ctx *ctx,
+		   const char * _from,
+		   char * _to, int mode)
 {
   const unsigned char *from = (const unsigned char *) _from;
   unsigned char *to = (unsigned char *) _to;
@@ -670,14 +656,14 @@ tripledes_ecb_crypt (tripledes_ctx *ctx,
 }
 
 bool
-tripledes_makekey (tripledes_ctx *ctx, const char * key, size_t keylen)
+gl_3des_makekey (gl_3des_ctx *ctx, const char * key, size_t keylen)
 {
   if (keylen != 24)
     return false;
 
-  tripledes_set3keys (ctx, key, key + 8, key + 16);
+  gl_3des_set3keys (ctx, key, key + 8, key + 16);
 
-  return !(des_is_weak_key (key)
-	   || des_is_weak_key (key + 8)
-	   || des_is_weak_key (key + 16));
+  return !(gl_des_is_weak_key (key)
+	   || gl_des_is_weak_key (key + 8)
+	   || gl_des_is_weak_key (key + 16));
 }

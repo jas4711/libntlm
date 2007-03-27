@@ -1,5 +1,6 @@
-/* strdup.h -- duplicate a string
-   Copyright (C) 2004 Free Software Foundation, Inc.
+/* A substitute for ISO C99 <wchar.h>, for platforms that have issues.
+
+   Copyright (C) 2007 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU Lesser General Public License as published by
@@ -15,15 +16,27 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-#ifndef STRDUP_H_
-#define STRDUP_H_
+/* Written by Eric Blake.  */
 
-/* Get strdup declaration, if available.  */
-#include <string.h>
+/*
+ * ISO C 99 <wchar.h> for platforms that have issues.
+ * <http://www.opengroup.org/susv3xbd/wchar.h.html>
+ *
+ * For now, this just ensures proper prerequisite inclusion order.
+ */
 
-#if defined HAVE_DECL_STRDUP && !HAVE_DECL_STRDUP && !defined strdup
-/* Duplicate S, returning an identical malloc'd string.  */
-extern char *strdup (const char *s);
-#endif
+#ifndef _GL_WCHAR_H
+#define _GL_WCHAR_H
 
-#endif /* STRDUP_H_ */
+/* Tru64 with Desktop Toolkit C has a bug: <stdio.h> must be included before
+   <wchar.h>.
+   BSD/OS 4.0.1 has a bug: <stddef.h>, <stdio.h> and <time.h> must be
+   included before <wchar.h>.  */
+#include <stddef.h>
+#include <stdio.h>
+#include <time.h>
+
+/* Include the original <wchar.h>.  */
+#include @ABSOLUTE_WCHAR_H@
+
+#endif /* _GL_WCHAR_H */

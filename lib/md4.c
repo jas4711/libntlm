@@ -20,9 +20,7 @@
 /* Adapted by Simon Josefsson from gnulib md5.? and Libgcrypt
    cipher/md4.c . */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 
 #include "md4.h"
 
@@ -311,7 +309,6 @@ md4_process_block (const void *buffer, size_t len, struct md4_ctx *ctx)
      the loop.  */
   while (words < endp)
     {
-      uint32_t tm;
       int t;
       for (t = 0; t < 16; t++)
 	{

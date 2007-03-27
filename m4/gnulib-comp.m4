@@ -1,4 +1,5 @@
-# Copyright (C) 2004-2006 Free Software Foundation, Inc.
+# DO NOT EDIT! GENERATED AUTOMATICALLY!
+# Copyright (C) 2004-2007 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -21,29 +22,73 @@ AC_DEFUN([gl_EARLY],
 [
   m4_pattern_forbid([^gl_[A-Z]])dnl the gnulib macro namespace
   m4_pattern_allow([^gl_ES$])dnl a valid locale name
+  m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
+  m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
   AC_REQUIRE([AC_PROG_RANLIB])
   AC_REQUIRE([AC_GNU_SOURCE])
+  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
 # "Check for header files, types and library functions".
 AC_DEFUN([gl_INIT],
 [
+  m4_pushdef([AC_LIBOBJ], m4_defn([gl_LIBOBJ]))
+  m4_pushdef([AC_REPLACE_FUNCS], m4_defn([gl_REPLACE_FUNCS]))
+  m4_pushdef([AC_LIBSOURCES], m4_defn([gl_LIBSOURCES]))
   AM_CONDITIONAL([GL_COND_LIBTOOL], [true])
+  gl_cond_libtool=true
+  gl_source_base='lib'
   gl_CHECK_VERSION
   gl_DES
   gl_MD4
   AM_STDBOOL_H
   gl_STDINT_H
   gl_FUNC_STRDUP
+  gl_STRING_MODULE_INDICATOR([strdup])
+  gl_HEADER_STRING_H
   gl_FUNC_STRVERSCMP
-  gl_HEADER_UNISTD
+  gl_UNISTD_H
+  gl_WCHAR_H
+  m4_popdef([AC_LIBSOURCES])
+  m4_popdef([AC_REPLACE_FUNCS])
+  m4_popdef([AC_LIBOBJ])
+  AC_CONFIG_COMMANDS_PRE([
+    gl_libobjs=
+    gl_ltlibobjs=
+    if test -n "$gl_LIBOBJS"; then
+      # Remove the extension.
+      sed_drop_objext='s/\.o$//;s/\.obj$//'
+      for i in `for i in $gl_LIBOBJS; do echo "$i"; done | sed "$sed_drop_objext" | sort | uniq`; do
+        gl_libobjs="$gl_libobjs $i.$ac_objext"
+        gl_ltlibobjs="$gl_ltlibobjs $i.lo"
+      done
+    fi
+    AC_SUBST([gl_LIBOBJS], [$gl_libobjs])
+    AC_SUBST([gl_LTLIBOBJS], [$gl_ltlibobjs])
+  ])
 ])
+
+# Like AC_LIBOBJ, except that the module name goes
+# into gl_LIBOBJS instead of into LIBOBJS.
+AC_DEFUN([gl_LIBOBJ],
+  [gl_LIBOBJS="$gl_LIBOBJS $1.$ac_objext"])
+
+# Like AC_REPLACE_FUNCS, except that the module name goes
+# into gl_LIBOBJS instead of into LIBOBJS.
+AC_DEFUN([gl_REPLACE_FUNCS],
+  [AC_CHECK_FUNCS([$1], , [gl_LIBOBJ($ac_func)])])
+
+# Like AC_LIBSOURCES, except that it does nothing.
+# We rely on EXTRA_lib..._SOURCES instead.
+AC_DEFUN([gl_LIBSOURCES],
+  [])
 
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
   build-aux/GNUmakefile
+  build-aux/link-warning.h
   build-aux/maint.mk
   lib/check-version.c
   lib/check-version.h
@@ -55,20 +100,26 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdbool_.h
   lib/stdint_.h
   lib/strdup.c
-  lib/strdup.h
+  lib/string_.h
   lib/strverscmp.c
   lib/strverscmp.h
+  lib/unistd_.h
+  lib/wchar_.h
   m4/absolute-header.m4
   m4/check-version.m4
   m4/des.m4
+  m4/extensions.m4
+  m4/gnulib-common.m4
   m4/longlong.m4
   m4/md4.m4
-  m4/onceonly_2_57.m4
   m4/stdbool.m4
   m4/stdint.m4
   m4/strdup.m4
+  m4/string_h.m4
   m4/strverscmp.m4
+  m4/ulonglong.m4
   m4/unistd_h.m4
+  m4/wchar.m4
   tests/test-des.c
   tests/test-md4.c
 ])
