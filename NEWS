@@ -5,6 +5,9 @@ See the end for copying conditions.
 
 * Version 0.4.0 (unreleased)
 
+** Only public API functions are exported in shared library.
+Using libtool's -export-symbols-regex.
+
 ** Update of gnulib files.
 
 ** API and ABI modifications.
