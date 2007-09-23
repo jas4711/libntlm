@@ -3,7 +3,7 @@ Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
-* Version 0.4.0 (unreleased)
+* Version 0.4.0 (released 2007-09-23)
 
 ** Only public API functions are exported in shared library.
 Using libtool's -export-symbols-regex.
