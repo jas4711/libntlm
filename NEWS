@@ -3,6 +3,13 @@ Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
+* Version 0.4.0 (unreleased)
+
+** Update of gnulib files.
+
+** API and ABI modifications.
+No changes since last version.
+
 * Version 0.3.13 (released 2007-03-27)
 
 ** Update of gnulib files.
