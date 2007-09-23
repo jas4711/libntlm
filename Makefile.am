@@ -52,24 +52,20 @@ TESTS_ENVIRONMENT = $(VALGRIND)
 # Maintainer targets
 
 ChangeLog:
-	cvs2cl --FSF --fsf --usermap .cvsusers -I ChangeLog -I .cvs \
-		-I autogen.sh && \
+	git log --pretty --numstat --summary | git2cl > ChangeLog
 	cat .cvscopying >> ChangeLog
 
 htmldir = ../www-$(PACKAGE)
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
 
 release:
-	cvs upd -p -r HEAD NEWS > /dev/null
-	if cvs upd -p -r $(tag) NEWS > /dev/null; then false else true; fi
-	rm -f ChangeLog && cvs upd ChangeLog
-	cvs commit
+	! git-tag -l $(tag) | grep $(PACKAGE) > /dev/null
 	rm -f ChangeLog
 	$(MAKE) ChangeLog distcheck
-	cvs commit -m "" ChangeLog
-	cvs rtag $(tag) $(PACKAGE)
-	gpg -b $(distdir).tar.gz
-	gpg --verify $(distdir).tar.gz.sig
+	git commit -m Generated. ChangeLog
+	git-tag -u b565716f! -m $(VERSION) $(tag)
+	gpg -b $(distdir).tar.bz2
+	gpg --verify $(distdir).tar.bz2.sig
 	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
 	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
 		cvs commit -m "Update." releases/
