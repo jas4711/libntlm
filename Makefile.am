@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2005, 2006 Simon Josefsson.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -34,8 +34,9 @@ include_HEADERS = ntlm.h
 AM_CPPFLAGS = -I$(srcdir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
 
 libntlm_la_SOURCES = smbutil.c smbencrypt.c global.h
-libntlm_la_LDFLAGS = -no-undefined \
-	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
+libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
+	-export-symbols-regex '^(dumpSmb|buildSmb|ntlm_).*' -no-undefined
+
 libntlm_la_LIBADD = lib/libgnu.la
 
 # test
