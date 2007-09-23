@@ -42,8 +42,11 @@ AC_DEFUN([gl_INIT],
   gl_CHECK_VERSION
   gl_DES
   gl_MD4
+  gl_FUNC_MALLOC_POSIX
+  gl_STDLIB_MODULE_INDICATOR([malloc-posix])
   AM_STDBOOL_H
   gl_STDINT_H
+  gl_STDLIB_H
   gl_FUNC_STRDUP
   gl_STRING_MODULE_INDICATOR([strdup])
   gl_HEADER_STRING_H
@@ -95,10 +98,12 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/des.c
   lib/des.h
   lib/dummy.c
+  lib/malloc.c
   lib/md4.c
   lib/md4.h
   lib/stdbool_.h
   lib/stdint_.h
+  lib/stdlib_.h
   lib/strdup.c
   lib/string_.h
   lib/strverscmp.c
@@ -110,10 +115,13 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/des.m4
   m4/extensions.m4
   m4/gnulib-common.m4
+  m4/include_next.m4
   m4/longlong.m4
+  m4/malloc.m4
   m4/md4.m4
   m4/stdbool.m4
   m4/stdint.m4
+  m4/stdlib_h.m4
   m4/strdup.m4
   m4/string_h.m4
   m4/strverscmp.m4
