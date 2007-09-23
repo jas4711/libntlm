@@ -64,8 +64,8 @@ release:
 	$(MAKE) ChangeLog distcheck
 	git commit -m Generated. ChangeLog
 	git-tag -u b565716f! -m $(VERSION) $(tag)
-	gpg -b $(distdir).tar.bz2
-	gpg --verify $(distdir).tar.bz2.sig
+	gpg -b $(distdir).tar.gz
+	gpg --verify $(distdir).tar.gz.sig
 	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
 	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
 		cvs commit -m "Update." releases/
