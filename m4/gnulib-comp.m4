@@ -74,18 +74,31 @@ AC_DEFUN([gl_INIT],
 
 # Like AC_LIBOBJ, except that the module name goes
 # into gl_LIBOBJS instead of into LIBOBJS.
-AC_DEFUN([gl_LIBOBJ],
-  [gl_LIBOBJS="$gl_LIBOBJS $1.$ac_objext"])
+AC_DEFUN([gl_LIBOBJ], [
+  AS_LITERAL_IF([$1], [gl_LIBSOURCES([$1.c])])dnl
+  gl_LIBOBJS="$gl_LIBOBJS $1.$ac_objext"
+])
 
 # Like AC_REPLACE_FUNCS, except that the module name goes
 # into gl_LIBOBJS instead of into LIBOBJS.
-AC_DEFUN([gl_REPLACE_FUNCS],
-  [AC_CHECK_FUNCS([$1], , [gl_LIBOBJ($ac_func)])])
+AC_DEFUN([gl_REPLACE_FUNCS], [
+  m4_foreach_w([gl_NAME], [$1], [AC_LIBSOURCES(gl_NAME[.c])])dnl
+  AC_CHECK_FUNCS([$1], , [gl_LIBOBJ($ac_func)])
+])
 
-# Like AC_LIBSOURCES, except that it does nothing.
-# We rely on EXTRA_lib..._SOURCES instead.
-AC_DEFUN([gl_LIBSOURCES],
-  [])
+# Like AC_LIBSOURCES, except the directory where the source file is
+# expected is derived from the gnulib-tool parametrization,
+# and alloca is special cased (for the alloca-opt module).
+# We could also entirely rely on EXTRA_lib..._SOURCES.
+AC_DEFUN([gl_LIBSOURCES], [
+  m4_foreach([_gl_NAME], [$1], [
+    m4_if(_gl_NAME, [alloca.c], [], [
+      m4_syscmd([test -r lib/]_gl_NAME[ || test ! -d lib])dnl
+      m4_if(m4_sysval, [0], [],
+        [AC_FATAL([missing lib/]_gl_NAME)])
+    ])
+  ])
+])
 
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
@@ -101,15 +114,15 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/malloc.c
   lib/md4.c
   lib/md4.h
-  lib/stdbool_.h
-  lib/stdint_.h
-  lib/stdlib_.h
+  lib/stdbool.in.h
+  lib/stdint.in.h
+  lib/stdlib.in.h
   lib/strdup.c
-  lib/string_.h
+  lib/string.in.h
   lib/strverscmp.c
   lib/strverscmp.h
-  lib/unistd_.h
-  lib/wchar_.h
+  lib/unistd.in.h
+  lib/wchar.in.h
   m4/absolute-header.m4
   m4/check-version.m4
   m4/des.m4
