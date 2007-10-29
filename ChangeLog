@@ -1,3 +1,55 @@
+2007-10-29  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.4.1.
+
+2007-10-29  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Typo.
+
+2007-10-29  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2007-10-29  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/maint.mk, lib/Makefile.am, lib/stdbool.in.h,
+	lib/stdint.in.h, m4/gnulib-cache.m4, m4/gnulib-common.m4,
+	m4/longlong.m4, m4/ulonglong.m4: Update gnulib files.
+
+2007-10-16  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/dummy.c, lib/stdlib.in.h, lib/string.in.h: 
+	Update gnulib files.
+
+2007-10-02  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsusers: Remove unused .cvsusers.
+
+2007-10-02  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/string.in.h, m4/gnulib-comp.m4,
+	m4/stdint.m4, m4/string_h.m4: Update gnulib files.
+
+2007-10-02  Simon Josefsson <simon@josefsson.org>
+
+	* lib/stdbool.in.h, lib/stdbool_.h, lib/stdint.in.h, lib/stdint_.h,
+	lib/stdlib.in.h, lib/stdlib_.h, lib/string.in.h, lib/string_.h,
+	lib/unistd.in.h, lib/unistd_.h, lib/wchar.in.h, lib/wchar_.h: Update
+	gnulib files.
+
+2007-10-02  Simon Josefsson <simon@josefsson.org>
+
+	* .cvsignore, build-aux/.cvsignore, lib/.cvsignore,
+	tests/.cvsignore: Remove unused .cvsignore's.
+
+2007-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix bz2 vs gz.
+
+2007-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2007-09-23  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.4.0.
@@ -85,7 +137,7 @@
 
 2006-08-24  Simon Josefsson <simon@josefsson.org>
 
-	* configure.ac: Require autoconf 2.60, and automake 1.9. Enable
+	* configure.ac: Require autoconf 2.60, and automake 1.9.  Enable
 	gnits.
 
 2006-08-24  Simon Josefsson <simon@josefsson.org>
@@ -94,7 +146,7 @@
 
 2006-08-24  Simon Josefsson <simon@josefsson.org>
 
-	* AUTHORS: Update PGP key. Typo.
+	* AUTHORS: Update PGP key.  Typo.
 
 2006-08-24  Simon Josefsson <simon@josefsson.org>
 
@@ -193,7 +245,7 @@
 
 2006-03-24  Simon Josefsson <simon@josefsson.org>
 
-	* lib/des.o: Remove.
+	* : Remove.
 
 2006-03-24  Simon Josefsson <simon@josefsson.org>
 
@@ -234,8 +286,8 @@
 2006-03-24  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile.am, ntlm.h.in, smbencrypt.c, smbencrypt.h, smbutil.c: 
-	Rename SMBencrypt to ntlm_smb_encrypt. Rename SMBNTencrypt to
-	ntlm_smb_nt_encrypt. Export the new APIs.
+	Rename SMBencrypt to ntlm_smb_encrypt.  Rename SMBNTencrypt to
+	ntlm_smb_nt_encrypt.  Export the new APIs.
 
 2006-03-24  Simon Josefsson <simon@josefsson.org>
 
@@ -279,7 +331,7 @@
 
 2005-10-23  Simon Josefsson <simon@josefsson.org>
 
-	* lib/md4.o: Remove.
+	* : Remove.
 
 2005-10-23  Simon Josefsson <simon@josefsson.org>
 
@@ -295,7 +347,7 @@
 
 2005-10-18  Simon Josefsson <simon@josefsson.org>
 
-	* Makefile.am, lib/Makefile.am, lib/md4.c, lib/md4.h, lib/md4.o,
+	* Makefile.am, lib/Makefile.am, lib/md4.c, lib/md4.h,
 	m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/md4.m4, md4.c, md4.h,
 	smbencrypt.c, test_ntlm.c: Use gnulib m4 module.
 
@@ -322,9 +374,9 @@
 2005-10-18  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile.am, des.c, des.h, lib/Makefile.am, lib/des.c, lib/des.h,
-	lib/des.o, lib/stdbool_.h, lib/stdint_.h, m4/des.m4,
-	m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/inttypes.m4,
-	m4/stdbool.m4, m4/stdint.m4, smbencrypt.c: Use des from gnulib.
+	lib/stdbool_.h, lib/stdint_.h, m4/des.m4, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/inttypes.m4, m4/stdbool.m4, m4/stdint.m4,
+	smbencrypt.c: Use des from gnulib.
 
 2005-09-27  Simon Josefsson <simon@josefsson.org>
 
@@ -425,7 +477,7 @@
 
 2005-07-18  Simon Josefsson <simon@josefsson.org>
 
-	* configure.ac: Assume somewhat modern system. Add strdup as gnulib
+	* configure.ac: Assume somewhat modern system.  Add strdup as gnulib
 	module.
 
 2005-07-18  Simon Josefsson <simon@josefsson.org>
@@ -605,8 +657,8 @@
 2004-09-30  Simon Josefsson <simon@josefsson.org>
 
 	* smbutil.c: From Frediano Ziglio: Do not include c files (cause you
-	linked compiled versions). Remove warnings. Add inline again (now
-	safe). Minimize fprintf calls. Use ms order for fields.
+	linked compiled versions).  Remove warnings.  Add inline again (now
+	safe).  Minimize fprintf calls.  Use ms order for fields.
 
 2004-09-30  Simon Josefsson <simon@josefsson.org>
 
@@ -749,7 +801,7 @@
 2004-09-18  Simon Josefsson <simon@josefsson.org>
 
 	* smbbyteorder.h, smbdes.c, smbdes.h, smbencrypt.c, smbencrypt.h,
-	smbmd4.c, smbmd4.h, smbutil.c, version.c: Use const. Indent.
+	smbmd4.c, smbmd4.h, smbutil.c, version.c: Use const.  Indent.
 
 2004-09-18  Simon Josefsson <simon@josefsson.org>
 
@@ -765,7 +817,7 @@
 
 2004-09-18  Simon Josefsson <simon@josefsson.org>
 
-	* ntlm.h.in: Use const. Indent.
+	* ntlm.h.in: Use const.  Indent.
 
 2003-03-17  Simon Josefsson <simon@josefsson.org>
 
@@ -807,32 +859,32 @@
 
 	* autogen.sh: Cleanup.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* COPYING: Autoreconf updated it.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* configure.ac: Fix.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile.am, NEWS, README, THANKS: Fix copying conditions.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* .cvsignore: Add.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
-	* configure.ac: Add copying conditions. Remove some unnecessary
+	* configure.ac: Add copying conditions.  Remove some unnecessary
 	things.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* AUTHORS: Add Andrew Tridgell and copying conditions.
 
-2002-12-05  Simon Josefsson <simon@josefsson.org>
+2003-01-05  Simon Josefsson <simon@josefsson.org>
 
 	* autogen.sh: Use autoreconf.
 
@@ -868,7 +920,7 @@
 
 	* Makefile.am, configure.ac, libntlm-config.in, libntlm.m4,
 	libntlm.pc.in: Use pkg-config instead of libntlm.m4 +
-	libntlm-config. Autogenerate ChangeLog's.
+	libntlm-config.  Autogenerate ChangeLog's.
 
 2002-10-19  Simon Josefsson <simon@josefsson.org>
 
@@ -889,7 +941,7 @@
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
 	* ntlm.h.in: ntlm.h.in: Version define, protect from double
-	inclusion, protect C++. Renamed ntlm.h to ntlm.h.in.
+	inclusion, protect C++.  Renamed ntlm.h to ntlm.h.in.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
@@ -916,7 +968,7 @@
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
-	* NEWS: Version 0.3.0 released. Renamed HISTORY to NEWS.
+	* NEWS: Version 0.3.0 released.  Renamed HISTORY to NEWS.
 
 2002-10-01  Simon Josefsson <simon@josefsson.org>
 
