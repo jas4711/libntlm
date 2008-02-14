@@ -1,11 +1,11 @@
 Libntlm README -- important introductory notes
-Copyright (C) 2002, 2003, 2005, 2006 Simon Josefsson
+Copyright (C) 2002, 2003, 2005, 2006, 2008 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
-This directory contains sources for a library which provides
-routines to manipulate the structures used for the client end
-of Microsoft NTLM authentication.
+This directory contains sources for a library which provides routines
+to manipulate the structures used for the client end of Microsoft NTLM
+authentication.
 
 This code was initially taken mostly from the Samba project and was
 initially intended for use with Microsoft Exchange Server when it is
@@ -21,6 +21,17 @@ invited to join our mailing list libntlm at nongnu.org, see
 For more information, see <http://josefsson.org/libntlm/> and
 <http://savannah.nongnu.org/projects/libntlm/>.
 
+Warning
+-------
+
+You should note that I don't consider NTLM a secure authentication
+protocol -- it uses MD4 and single-DES, both which are obsolete by
+many years now.  You should only use libntlm for interoperability
+purposes, not to achieve good security.
+
+Building
+--------
+
 Build instructions are in INSTALL.  Typically, the following is
 sufficient:
 
@@ -29,7 +40,8 @@ sufficient:
  $ make check
  $ make install
 
-USAGE  
+Usage
+-----  
   
 The application program must convert these structures to/from
 base64 which is used to transfer data for IMAP authentication.
