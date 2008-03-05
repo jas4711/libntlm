@@ -47,7 +47,6 @@ gl_INIT
 AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
 
 # Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([byteswap.h sys/endian.h machine/endian.h endian.h])
 
 # Run self-tests under valgrind?
