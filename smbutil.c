@@ -1,5 +1,5 @@
 /* smbutil.c --- Main library functions.
- * Copyright (C) 2002, 2004, 2005, 2006 Simon Josefsson
+ * Copyright (C) 2002, 2004, 2005, 2006, 2008 Simon Josefsson
  * Copyright (C) 1999-2001 Grant Edwards
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -52,8 +52,8 @@ char versionString[] = PACKAGE_STRING;
  * we have just to swap order 
  */
 #ifdef WORDS_BIGENDIAN
-# define UI16LE(n) byteswap16(n)
-# define UI32LE(n) byteswap32(n)
+# define UI16LE(n) bswap_16(n)
+# define UI32LE(n) bswap_32(n)
 #else
 # define UI16LE(n) (n)
 # define UI32LE(n) (n)

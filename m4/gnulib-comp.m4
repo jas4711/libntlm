@@ -39,6 +39,7 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([AC_REPLACE_FUNCS], m4_defn([gl_REPLACE_FUNCS]))
   m4_pushdef([AC_LIBSOURCES], m4_defn([gl_LIBSOURCES]))
   gl_source_base='lib'
+  gl_BYTESWAP
   gl_CHECK_VERSION
   gl_DES
   gl_MD4
@@ -172,6 +173,7 @@ AC_DEFUN([gl_FILE_LIST], [
   build-aux/GNUmakefile
   build-aux/link-warning.h
   build-aux/maint.mk
+  lib/byteswap.in.h
   lib/check-version.c
   lib/check-version.h
   lib/des.c
@@ -190,6 +192,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/unistd.in.h
   lib/wchar.in.h
   m4/absolute-header.m4
+  m4/byteswap.m4
   m4/check-version.m4
   m4/des.m4
   m4/extensions.m4
