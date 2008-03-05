@@ -1,4 +1,5 @@
 /* test_ntlm.c --- Test module for libntlm.
+ * Copyright (C) 2008 Simon Josefsson
  * Copyright (C) 2004, 2005 Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or modify
@@ -120,7 +121,7 @@ fillChallenge (tSmbNtlmAuthChallenge * challenge, const char *domain)
 	       challenge->buffer - ((uint8 *) challenge), &index, domain);
   challenge->flags = intelEndian32 (0);
   memcpy (challenge->challengeData, "\x01\x02\x03\x04\xf5\xc3\xb2\x82", 8);
-  challenge->bufIndex = intelEndian32 (index);
+  challenge->bufIndex = index;
 }
 
 #define DUMP_REQUEST(req) dumpRaw(f, (unsigned char*) req, SmbLength(req))

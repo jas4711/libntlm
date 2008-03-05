@@ -5,6 +5,11 @@ See the end for copying conditions.
 
 * Version 0.4.2 (unreleased)
 
+** Fix endian related bug in self test.
+Reported by Andrej Kacian <ticho@gentoo.org>, see
+<https://savannah.nongnu.org/bugs/index.php?21288> and
+<https://bugs.gentoo.org/show_bug.cgi?id=194282>.
+
 ** Add a note in README about NTLM being a insecure protocol.
 
 ** Update of gnulib files.
