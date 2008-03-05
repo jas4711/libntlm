@@ -64,6 +64,8 @@ release:
 	$(MAKE) ChangeLog distcheck
 	git commit -m Generated. ChangeLog
 	git-tag -u b565716f! -m $(VERSION) $(tag)
+	git-push --tags
+	git-push
 	gpg -b $(distdir).tar.gz
 	gpg --verify $(distdir).tar.gz.sig
 	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
