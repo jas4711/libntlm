@@ -1,3 +1,86 @@
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 0.4.2.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Fix.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, global.h, smbencrypt.c, smbutil.c, test_ntlm.c: 
+	Remove global.h, move definitions into each file.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac, global.h: No need for endian header files.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Need bigendian test.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* global.h, lib/Makefile.am, lib/byteswap.in.h, m4/byteswap.m4,
+	m4/gnulib-cache.m4, m4/gnulib-comp.m4, smbutil.c: Use gnulib
+	byteswap module.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* THANKS: Add.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, test_ntlm.c: Fix endian related bug in self test.  Reported
+	by Andrej Kacian <ticho@gentoo.org>, see
+	<https://savannah.nongnu.org/bugs/index.php?21288> and
+	<https://bugs.gentoo.org/show_bug.cgi?id=194282>.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: We assume ANSI C headers.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac, lib/Makefile.am, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/inline.m4: Use gnulib inline module.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump versions.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* README: Fix security note.
+
+2008-03-02  Simon Josefsson <simon@josefsson.org>
+
+	* README: Fix warning.
+
+2008-03-02  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/unistd.in.h, m4/unistd_h.m4: Update.
+
+2008-02-14  Simon Josefsson <simon@josefsson.org>
+
+	* README: Note about security.
+
+2008-02-07  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/md4.c, lib/md4.h, lib/stdint.in.h,
+	lib/stdlib.in.h, lib/string.in.h, lib/unistd.in.h,
+	m4/gnulib-comp.m4, m4/longlong.m4, m4/md4.m4, m4/stdlib_h.m4,
+	m4/string_h.m4, m4/ulonglong.m4, m4/unistd_h.m4: Update gnulib
+	files.
+
+2007-10-29  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2007-10-29  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.4.1.
@@ -859,32 +942,32 @@
 
 	* autogen.sh: Cleanup.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* COPYING: Autoreconf updated it.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* configure.ac: Fix.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* Makefile.am, NEWS, README, THANKS: Fix copying conditions.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* .cvsignore: Add.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* configure.ac: Add copying conditions.  Remove some unnecessary
 	things.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* AUTHORS: Add Andrew Tridgell and copying conditions.
 
-2003-01-05  Simon Josefsson <simon@josefsson.org>
+2002-12-05  Simon Josefsson <simon@josefsson.org>
 
 	* autogen.sh: Use autoreconf.
 
