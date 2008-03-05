@@ -12,6 +12,8 @@ Reported by Andrej Kacian <ticho@gentoo.org>, see
 
 ** Add a note in README about NTLM being a insecure protocol.
 
+** Cleaned up internal endianness handling.
+
 ** Update of gnulib files.
 
 ** API and ABI modifications.
