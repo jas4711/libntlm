@@ -25,10 +25,10 @@ Warning
 -------
 
 I don't consider NTLM a secure authentication protocol -- it uses MD4
-and single-DES, both which are obsolete by many years now.  MD4 has
-been broken, and single-DES have a too small key size to be useful.
-You should only use libntlm for interoperability purposes, not to
-achieve any kind of security.
+and single-DES.  MD4 has been broken, and single-DES have a too small
+key size to be considered secure against brute-force attacks.  You
+should only use libntlm for interoperability purposes, not to achieve
+any kind of security.
 
 Building
 --------
