@@ -50,9 +50,6 @@ AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([byteswap.h sys/endian.h machine/endian.h endian.h])
 
-# Checks for typedefs, structures, and compiler characteristics.
-AC_C_INLINE
-
 # Run self-tests under valgrind?
 if test "$cross_compiling" = no; then
   AC_CHECK_PROGS(VALGRIND, valgrind)

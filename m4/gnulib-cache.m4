@@ -15,11 +15,11 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --aux-dir=build-aux --lgpl=2 --libtool --macro-prefix=gl check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests maintainer-makefile strdup strverscmp unistd
+#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --aux-dir=build-aux --lgpl=2 --libtool --macro-prefix=gl check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests inline maintainer-makefile strdup strverscmp unistd
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
-gl_MODULES([check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests maintainer-makefile strdup strverscmp unistd])
+gl_MODULES([check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests inline maintainer-makefile strdup strverscmp unistd])
 gl_AVOID([])
 gl_SOURCE_BASE([lib])
 gl_M4_BASE([m4])

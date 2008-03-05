@@ -42,6 +42,7 @@ AC_DEFUN([gl_INIT],
   gl_CHECK_VERSION
   gl_DES
   gl_MD4
+  gl_INLINE
   gl_FUNC_MALLOC_POSIX
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
   AM_STDBOOL_H
@@ -194,6 +195,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/extensions.m4
   m4/gnulib-common.m4
   m4/include_next.m4
+  m4/inline.m4
   m4/longlong.m4
   m4/malloc.m4
   m4/md4.m4
