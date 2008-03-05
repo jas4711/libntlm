@@ -1,7 +1,16 @@
 Libntlm NEWS -- history of user-visible changes.                -*- outline -*-
-Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Simon Josefsson
+Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
+
+* Version 0.4.2 (unreleased)
+
+** Add a note in README about NTLM being a insecure protocol.
+
+** Update of gnulib files.
+
+** API and ABI modifications.
+No changes since last version.
 
 * Version 0.4.1 (released 2007-10-29)
 
