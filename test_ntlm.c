@@ -19,8 +19,16 @@
  *
  */
 
-#define NTLM_STATIC static
-#include "global.h"
+#include <config.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <unistd.h>
+#include <byteswap.h>
+
+#include "ntlm.h"
 
 #include "md4.c"
 

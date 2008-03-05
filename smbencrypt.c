@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005, 2006, 2007 Simon Josefsson
+ * Copyright (C) 2005, 2006, 2007, 2008 Simon Josefsson
  * Copyright (C) 1998-1999  Brian Bruns
  * Copyright (C) 2004 Frediano Ziglio
  *
@@ -19,7 +19,16 @@
  * 02110-1301, USA.
  */
 
-#include "global.h"
+#include <config.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <unistd.h>
+#include <byteswap.h>
+
+#include "ntlm.h"
 
 #include "md4.h"
 #include "des.h"
