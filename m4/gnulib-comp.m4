@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2004-2007 Free Software Foundation, Inc.
+# Copyright (C) 2002-2008 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -43,6 +43,16 @@ AC_DEFUN([gl_INIT],
   gl_CHECK_VERSION
   gl_DES
   gl_MD4
+  # Autoconf 2.61a.99 and earlier don't support linking a file only
+  # in VPATH builds.  But since GNUmakefile is for maintainer use
+  # only, it does not matter if we skip the link with older autoconf.
+  # Automake 1.10.1 and earlier try to remove GNUmakefile in non-VPATH
+  # builds, so use a shell variable to bypass this.
+  GNUmakefile=GNUmakefile
+  m4_if(m4_version_compare([2.61a.100],
+  	m4_defn([m4_PACKAGE_VERSION])), [1], [],
+        [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
+  	[GNUmakefile=$GNUmakefile])])
   gl_INLINE
   gl_FUNC_MALLOC_POSIX
   gl_STDLIB_MODULE_INDICATOR([malloc-posix])
@@ -170,9 +180,7 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
-  build-aux/GNUmakefile
   build-aux/link-warning.h
-  build-aux/maint.mk
   lib/byteswap.in.h
   lib/check-version.c
   lib/check-version.h
@@ -191,7 +199,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strverscmp.h
   lib/unistd.in.h
   lib/wchar.in.h
-  m4/absolute-header.m4
   m4/byteswap.m4
   m4/check-version.m4
   m4/des.m4
@@ -212,4 +219,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/wchar.m4
   tests/test-des.c
   tests/test-md4.c
+  top/GNUmakefile
+  top/maint.mk
 ])
