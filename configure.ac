@@ -19,8 +19,8 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_PREREQ(2.61)
-AC_INIT(libntlm, 0.4.3, libntlm@josefsson.org)
+AC_PREREQ(2.62)
+AC_INIT([libntlm],[0.4.3],[libntlm@josefsson.org])
 AC_CONFIG_AUX_DIR([build-aux])
 
 AC_CONFIG_SRCDIR(ntlm.h.in)
