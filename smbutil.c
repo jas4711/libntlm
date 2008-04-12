@@ -31,8 +31,6 @@
 
 #include "ntlm.h"
 
-#include <assert.h>
-
 #ifdef NTLM_UNIQUE_MODULE
 # include "des.c"
 # include "md4.c"
