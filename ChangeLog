@@ -1,3 +1,61 @@
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 1.0.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* smbutil.c: Fix syntax-check warning.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk: Fix license header.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Revert required autoconf version.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Autoupdate.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* .clcopying, .cvscopying, Makefile.am: Rename changelog copying
+	conditions.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, lib/Makefile.am, lib/stdlib.in.h, lib/wchar.in.h,
+	m4/gnulib-common.m4, m4/gnulib-comp.m4, m4/include_next.m4,
+	m4/stdint.m4, m4/stdlib_h.m4: Update gnulib files.
+
+2008-03-25  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, build-aux/GNUmakefile, build-aux/maint.mk, cfg.mk,
+	lib/Makefile.am, m4/absolute-header.m4, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/include_next.m4, maint-cfg.mk, maint.mk: 
+	Update gnulib files.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Push release.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2008-03-05  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2008-03-05  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 0.4.2.
