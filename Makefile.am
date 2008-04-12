@@ -53,7 +53,7 @@ TESTS_ENVIRONMENT = $(VALGRIND)
 
 ChangeLog:
 	git log --pretty --numstat --summary | git2cl > ChangeLog
-	cat .cvscopying >> ChangeLog
+	cat .clcopying >> ChangeLog
 
 htmldir = ../www-$(PACKAGE)
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
