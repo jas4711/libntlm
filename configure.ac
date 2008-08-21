@@ -37,7 +37,6 @@ AM_CONFIG_HEADER(config.h)
 
 # Checks for programs.
 AC_PROG_CC
-AB_INIT
 gl_EARLY
 AC_LIBTOOL_WIN32_DLL
 AC_PROG_LIBTOOL
