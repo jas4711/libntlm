@@ -20,7 +20,7 @@ dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
 AC_PREREQ(2.61)
-AC_INIT([libntlm],[1.0],[libntlm@josefsson.org])
+AC_INIT([libntlm],[1.1],[libntlm@josefsson.org])
 AC_CONFIG_AUX_DIR([build-aux])
 
 AC_CONFIG_SRCDIR(ntlm.h.in)
@@ -30,7 +30,7 @@ AC_CONFIG_SRCDIR(ntlm.h.in)
 # No interfaces changed:                   REVISION++
 AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
-AC_SUBST(LT_REVISION, 15)
+AC_SUBST(LT_REVISION, 16)
 
 AM_INIT_AUTOMAKE([1.10 gnits])
 AM_CONFIG_HEADER(config.h)
