@@ -30,9 +30,9 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
 AC_SUBST(LT_REVISION, 16)
 
+AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.10 gnits -Wall -Werror])
 AM_CONFIG_HEADER(config.h)
-AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR(ntlm.h.in)
 
 # Checks for programs.
