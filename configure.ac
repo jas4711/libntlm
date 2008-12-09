@@ -47,6 +47,7 @@ sj_VALGRIND
 # For gnulib.
 gl_INIT
 AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
+gl_WARN_ADD([-Wall])
 
 AC_CONFIG_FILES([
   Makefile

@@ -66,6 +66,7 @@ AC_DEFUN([gl_INIT],
   gl_FUNC_STRVERSCMP
   gl_STRING_MODULE_INDICATOR([strverscmp])
   gl_UNISTD_H
+  AC_SUBST([WARN_CFLAGS])
   gl_WCHAR_H
   m4_ifval(gl_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
@@ -227,6 +228,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/string_h.m4
   m4/strverscmp.m4
   m4/unistd_h.m4
+  m4/warnings.m4
   m4/wchar.m4
   m4/wint_t.m4
   tests/test-des.c
