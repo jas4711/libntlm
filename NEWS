@@ -7,6 +7,9 @@ See the end for copying conditions.
 
 ** Update gnulib files.
 
+** The core library is now compiled with many warning flags.
+Some warnings have been fixed too.
+
 ** API and ABI modifications.
 No changes since last version.
 
