@@ -15,7 +15,7 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --lgpl=2 --libtool --macro-prefix=gl --no-vc-files autobuild byteswap check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests inline maintainer-makefile strdup strverscmp unistd warnings
+#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --lgpl=2 --libtool --macro-prefix=gl --no-vc-files autobuild byteswap check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests inline maintainer-makefile manywarnings strdup strverscmp unistd warnings
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
@@ -29,6 +29,7 @@ gl_MODULES([
   crypto/md4-tests
   inline
   maintainer-makefile
+  manywarnings
   strdup
   strverscmp
   unistd

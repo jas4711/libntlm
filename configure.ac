@@ -22,6 +22,8 @@ dnl 02110-1301, USA
 AC_PREREQ(2.61)
 AC_INIT([libntlm], [1.1], [libntlm@josefsson.org])
 AC_COPYRIGHT([Copyright (c) 2002-2008 Simon Josefsson <simon@josefsson.org>.])
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
 
 # Interfaces removed:    CURRENT++, AGE=0, REVISION=0
 # Interfaces added:      CURRENT++, AGE++, REVISION=0
@@ -30,7 +32,6 @@ AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
 AC_SUBST(LT_REVISION, 16)
 
-AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.10 gnits -Wall -Werror])
 AM_CONFIG_HEADER(config.h)
 AC_CONFIG_SRCDIR(ntlm.h.in)
@@ -47,7 +48,22 @@ sj_VALGRIND
 # For gnulib.
 gl_INIT
 AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
-gl_WARN_ADD([-Wall])
+
+# Add many warnings, except some...
+nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
+nw="$nw -Wconversion"             # Too many warnings for now
+nw="$nw -Wsign-conversion"        # Too many warnings for now
+nw="$nw -Wtraditional"            # Warns on #elif which we use often
+nw="$nw -Wtraditional-conversion" # Too many warnings for now
+nw="$nw -Wunreachable-code"       # Too many false positives
+gl_MANYWARN_ALL_GCC([ws])
+gl_MANYWARN_COMPLEMENT(ws, [$ws], [$nw])
+for w in $ws; do
+  gl_WARN_ADD([$w])
+done
+gl_WARN_ADD([-Wno-pointer-sign])     # Too many warnings for now
+gl_WARN_ADD([-fdiagnostics-show-option])
+export WARN_CFLAGS
 
 AC_CONFIG_FILES([
   Makefile

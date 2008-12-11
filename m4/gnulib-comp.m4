@@ -221,6 +221,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/include_next.m4
   m4/inline.m4
   m4/longlong.m4
+  m4/manywarnings.m4
   m4/md4.m4
   m4/stdbool.m4
   m4/stdint.m4
