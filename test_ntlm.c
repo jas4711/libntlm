@@ -29,14 +29,12 @@
 #include <byteswap.h>
 
 #include "ntlm.h"
-
-#include "md4.c"
+#include "md4.h"
 
 static int
 md4file (const char *name, unsigned char *hash)
 {
   FILE *f;
-  char line[1024];
   int res = 0;
 
   f = fopen (name, "r");
@@ -67,7 +65,7 @@ diffFile (const char *name1, const char *name2)
 static void
 dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
 {
-  int i;
+  size_t i;
 
   for (i = 0; i < len; ++i)
     {
@@ -103,12 +101,12 @@ intelEndian32 (uint32 n)
 
 static void
 fillUnicode (tSmbStrHeader * header, char *buffer, int buffer_start,
-	     int *index, const char *s)
+	     int *idx, const char *s)
 {
   int len = strlen (s);
   header->len = header->maxlen = intelEndian16 (len * 2);
-  header->offset = intelEndian32 (*index + buffer_start);
-  *index += len * 2;
+  header->offset = intelEndian32 (*idx + buffer_start);
+  *idx += len * 2;
 
   for (; len; --len)
     {
@@ -120,22 +118,22 @@ fillUnicode (tSmbStrHeader * header, char *buffer, int buffer_start,
 static void
 fillChallenge (tSmbNtlmAuthChallenge * challenge, const char *domain)
 {
-  int index = 0;
+  int idx = 0;
 
   memset (challenge, 0, sizeof (*challenge));
   memcpy (challenge->ident, "NTLMSSP\0\0\0", 8);
   challenge->msgType = intelEndian32 (2);
   fillUnicode (&challenge->uDomain, challenge->buffer,
-	       challenge->buffer - ((uint8 *) challenge), &index, domain);
+	       challenge->buffer - ((uint8 *) challenge), &idx, domain);
   challenge->flags = intelEndian32 (0);
   memcpy (challenge->challengeData, "\x01\x02\x03\x04\xf5\xc3\xb2\x82", 8);
-  challenge->bufIndex = index;
+  challenge->bufIndex = idx;
 }
 
 #define DUMP_REQUEST(req) dumpRaw(f, (unsigned char*) req, SmbLength(req))
 
 int
-main ()
+main (void)
 {
   tSmbNtlmAuthRequest request;
   tSmbNtlmAuthChallenge challenge;

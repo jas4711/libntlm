@@ -44,7 +44,7 @@ libntlm_la_LIBADD = lib/libgnu.la
 
 TESTS = test_ntlm
 check_PROGRAMS = $(TESTS)
-LDADD = libntlm.la
+LDADD = libntlm.la lib/libgnu.la
 CLEANFILES = test.out
 test_ntlm_LDFLAGS = -no-install
 
