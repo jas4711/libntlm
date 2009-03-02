@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2008 Free Software Foundation, Inc.
+# Copyright (C) 2002-2009 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -25,7 +25,6 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
   AC_REQUIRE([AC_PROG_RANLIB])
-  AC_REQUIRE([AC_GNU_SOURCE])
   AB_INIT
   AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
 ])
@@ -58,6 +57,7 @@ AC_DEFUN([gl_INIT],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
   	[GNUmakefile=$GNUmakefile])])
   gl_INLINE
+  AC_REQUIRE([gl_MULTIARCH])
   AM_STDBOOL_H
   gl_STDINT_H
   gl_FUNC_STRDUP
@@ -212,6 +212,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strverscmp.c
   lib/unistd.in.h
   lib/wchar.in.h
+  m4/00gnulib.m4
   m4/autobuild.m4
   m4/byteswap.m4
   m4/check-version.m4
@@ -223,6 +224,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/longlong.m4
   m4/manywarnings.m4
   m4/md4.m4
+  m4/multiarch.m4
   m4/stdbool.m4
   m4/stdint.m4
   m4/strdup.m4
