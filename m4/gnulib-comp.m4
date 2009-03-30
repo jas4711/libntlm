@@ -60,8 +60,6 @@ AC_DEFUN([gl_INIT],
   AC_REQUIRE([gl_MULTIARCH])
   AM_STDBOOL_H
   gl_STDINT_H
-  gl_FUNC_STRDUP
-  gl_STRING_MODULE_INDICATOR([strdup])
   gl_HEADER_STRING_H
   gl_FUNC_STRVERSCMP
   gl_STRING_MODULE_INDICATOR([strverscmp])
@@ -207,7 +205,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/md4.h
   lib/stdbool.in.h
   lib/stdint.in.h
-  lib/strdup.c
   lib/string.in.h
   lib/strverscmp.c
   lib/unistd.in.h
@@ -227,7 +224,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/multiarch.m4
   m4/stdbool.m4
   m4/stdint.m4
-  m4/strdup.m4
   m4/string_h.m4
   m4/strverscmp.m4
   m4/unistd_h.m4
