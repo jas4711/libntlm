@@ -1,3 +1,5 @@
+#include <config.h>
+
 #include "getargs.h"
 #include <stdio.h>
 #include <string.h>

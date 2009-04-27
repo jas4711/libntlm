@@ -1,4 +1,4 @@
-# Copyright (C) 2006, 2007, 2008 Simon Josefsson.
+# Copyright (C) 2006, 2007, 2008, 2009 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -22,6 +22,9 @@ CFGFLAGS ?= WARN_CFLAGS=-Werror
 ifeq ($(.DEFAULT_GOAL),abort-due-to-no-makefile)
 .DEFAULT_GOAL := bootstrap
 endif
+
+local-checks-to-skip = sc_prohibit_strcmp sc_program_name	\
+	sc_trailing_blank sc_GPL_version sc_immutable_NEWS
 
 autoreconf:
 	test -f ./configure || autoreconf --install

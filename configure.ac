@@ -47,7 +47,7 @@ sj_VALGRIND
 
 # For gnulib.
 gl_INIT
-AC_DEFINE(check_version, ntlm_check_version, [Rename to public API name.])
+AC_DEFINE([check_version], ntlm_check_version, [Rename to public API name.])
 
 # Add many warnings, except some...
 if test "$GCC" = "yes"; then

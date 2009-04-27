@@ -1,5 +1,5 @@
 Libntlm README -- important introductory notes
-Copyright (C) 2002, 2003, 2005, 2006, 2008 Simon Josefsson
+Copyright (C) 2002, 2003, 2005, 2006, 2008, 2009 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
@@ -73,7 +73,7 @@ int imap_auth_ntlm(char *user, char *domain, char *pass)
 
   /* 
    * prepare the request, convert to base64, and send it to
-   * the the server.  My server didn't care about domain, and NULL
+   * the server.  My server didn't care about domain, and NULL
    * worked fine.
    */
 
