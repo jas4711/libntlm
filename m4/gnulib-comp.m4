@@ -57,7 +57,7 @@ AC_DEFUN([gl_INIT],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
   	[GNUmakefile=$GNUmakefile])])
   gl_INLINE
-  AC_REQUIRE([gl_MULTIARCH])
+  gl_MULTIARCH
   AM_STDBOOL_H
   gl_STDINT_H
   gl_HEADER_STRING_H
