@@ -1,3 +1,140 @@
+2009-05-08  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 1.1.
+
+2009-05-08  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, cfg.mk: Fix release target.
+
+2009-05-05  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/wchar.in.h, m4/gnulib-comp.m4,
+	m4/multiarch.m4, m4/wchar.m4, maint.mk: Update gnulib files.
+
+2009-05-05  Simon Josefsson <simon@josefsson.org>
+
+	* .gitmodules: Drop gitmodules for now.
+
+2009-04-29  Simon Josefsson <simon@josefsson.org>
+
+	* .gitmodules, gnulib: add gnulib as a submodule
+
+2009-04-27  Simon Josefsson <simon@josefsson.org>
+
+	* .x-sc_makefile_check, .x-sc_prohibit_HAVE_MBRTOWC,
+	.x-sc_prohibit_atoi_atof, .x-sc_require_config_h,
+	.x-sc_require_config_h_first, .x-sc_space_tab, README, cfg.mk,
+	configure.ac, m4/valgrind.m4, test/dumper.c, test/getargs.c: Fix
+	syntax-check nits.
+
+2009-04-27  Simon Josefsson <simon@josefsson.org>
+
+	* maint.mk: Update gnulib files.
+
+2009-04-27  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/useless-if-before-free, build-aux/vc-list-files,
+	lib/Makefile.am, m4/gnulib-comp.m4, maint.mk: Update gnulib files.
+
+2009-04-15  Simon Josefsson <simon@josefsson.org>
+
+	* maint.mk: Update gnulib files.
+
+2009-03-30  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Only check for warning flags when using gcc.
+
+2009-03-30  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, lib/Makefile.am, lib/strdup.c, lib/unistd.in.h,
+	m4/gnulib-cache.m4, m4/gnulib-comp.m4, m4/strdup.m4, maint.mk: 
+	Update gnulib files.
+
+2009-03-02  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/stdint.in.h, lib/unistd.in.h,
+	lib/wchar.in.h, m4/00gnulib.m4, m4/byteswap.m4, m4/extensions.m4,
+	m4/gnulib-cache.m4, m4/gnulib-common.m4, m4/gnulib-comp.m4,
+	m4/include_next.m4, m4/inline.m4, m4/longlong.m4, m4/md4.m4,
+	m4/multiarch.m4, m4/stdbool.m4, m4/stdint.m4, m4/strdup.m4,
+	m4/strverscmp.m4, m4/unistd_h.m4, m4/wchar.m4, m4/wint_t.m4: Update
+	gnulib files.
+
+2008-12-11  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2008-12-11  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, test_ntlm.c: Fix warnings.
+
+2008-12-11  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk, configure.ac, lib/Makefile.am, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/manywarnings.m4, maint.mk: Use manywarnings
+	module.
+
+2008-12-09  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, lib/Makefile.am, m4/gnulib-cache.m4,
+	m4/gnulib-comp.m4, m4/warnings.m4: Use warnings module.
+
+2008-12-09  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac, lib/stdint.in.h, lib/unistd.in.h,
+	m4/include_next.m4, m4/valgrind.m4, maint.mk: Update gnulib files.
+	Use valgrind.m4.
+
+2008-10-22  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/unistd.in.h, m4/unistd_h.m4: Update gnulib
+	files.
+
+2008-10-20  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, lib/Makefile.am, lib/stdint.in.h, lib/string.in.h,
+	lib/unistd.in.h, lib/wchar.in.h, m4/gnulib-cache.m4,
+	m4/gnulib-common.m4, m4/unistd_h.m4, m4/wchar.m4: Update gnulib
+	files.
+
+2008-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Reorder.
+
+2008-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Use automake warnings.  Add copyright notice.
+	Fixes.
+
+2008-09-23  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, lib/Makefile.am, lib/malloc.c, lib/stdint.in.h,
+	lib/stdlib.in.h, lib/string.in.h, lib/unistd.in.h, lib/wchar.in.h,
+	m4/gnulib-comp.m4, m4/include_next.m4, m4/malloc.m4,
+	m4/stdlib_h.m4, m4/strdup.m4, m4/string_h.m4, m4/wchar.m4,
+	m4/wint_t.m4, maint.mk: Update gnulib files.
+
+2008-08-21  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Autobuild used via gnulib.
+
+2008-08-21  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Update gnulib files.
+
+2008-08-21  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, lib/Makefile.am, lib/check-version.c,
+	lib/stdbool.in.h, lib/stdlib.in.h, lib/string.in.h,
+	lib/strverscmp.h, m4/autobuild.m4, m4/extensions.m4,
+	m4/gnulib-cache.m4, m4/gnulib-common.m4, m4/gnulib-comp.m4,
+	m4/gnulib-tool.m4, m4/stdint.m4, m4/stdlib_h.m4, m4/string_h.m4,
+	m4/strverscmp.m4, maint.mk: Update gnulib files.
+
+2008-04-12  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2008-04-12  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.0.
