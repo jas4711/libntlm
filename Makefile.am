@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008 Simon Josefsson.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -49,26 +49,3 @@ CLEANFILES = test.out
 test_ntlm_LDFLAGS = -no-install
 
 TESTS_ENVIRONMENT = $(VALGRIND)
-
-# Maintainer targets
-
-ChangeLog:
-	git log --pretty --numstat --summary | git2cl > ChangeLog
-	cat .clcopying >> ChangeLog
-
-htmldir = ../www-$(PACKAGE)
-tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
-
-release:
-	! git-tag -l $(tag) | grep $(PACKAGE) > /dev/null
-	rm -f ChangeLog
-	$(MAKE) ChangeLog distcheck
-	git commit -m Generated. ChangeLog
-	git-tag -u b565716f! -m $(VERSION) $(tag)
-	git-push --tags
-	git-push
-	gpg -b $(distdir).tar.gz
-	gpg --verify $(distdir).tar.gz.sig
-	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
-	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
-		cvs commit -m "Update." releases/

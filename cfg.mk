@@ -38,3 +38,29 @@ mingw32: autoreconf
 	./configure --host=i586-mingw32msvc --build=`./config.guess` --prefix=$(W32ROOT)
 
 INDENT_SOURCES = $(SOURCES)
+
+# Maintainer targets
+
+ChangeLog:
+	git2cl > ChangeLog
+	cat .clcopying >> ChangeLog
+
+htmldir = ../www-$(PACKAGE)
+tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
+
+release: prepare upload
+
+prepare:
+	! git tag -l $(tag) | grep $(PACKAGE) > /dev/null
+	rm -f ChangeLog
+	$(MAKE) ChangeLog distcheck
+	git commit -m Generated. ChangeLog
+	git tag -u b565716f! -m $(VERSION) $(tag)
+
+upload:
+	git push
+	git push --tags
+	cp $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
+	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
+	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
+		cvs commit -m "Update." releases/
