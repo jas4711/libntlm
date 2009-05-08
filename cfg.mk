@@ -54,6 +54,8 @@ prepare:
 	! git tag -l $(tag) | grep $(PACKAGE) > /dev/null
 	rm -f ChangeLog
 	$(MAKE) ChangeLog distcheck
+	gpg -b $(distdir).tar.gz
+	gpg --verify $(distdir).tar.gz.sig
 	git commit -m Generated. ChangeLog
 	git tag -u b565716f! -m $(VERSION) $(tag)
 
