@@ -17,7 +17,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-CFGFLAGS ?= WARN_CFLAGS=-Werror
+WFLAGS ?= WARN_CFLAGS=-Werror
+CFGFLAGS ?= $(WFLAGS)
 
 ifeq ($(.DEFAULT_GOAL),abort-due-to-no-makefile)
 .DEFAULT_GOAL := bootstrap
