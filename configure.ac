@@ -29,8 +29,8 @@ AC_CONFIG_MACRO_DIR([m4])
 # Interfaces added:      CURRENT++, AGE++, REVISION=0
 # No interfaces changed:                   REVISION++
 AC_SUBST(LT_CURRENT, 0)
-AC_SUBST(LT_AGE, 1)
-AC_SUBST(LT_REVISION, 16)
+AC_SUBST(LT_AGE, 0)
+AC_SUBST(LT_REVISION, 17)
 
 AM_INIT_AUTOMAKE([1.10 gnits -Wall -Werror])
 AM_CONFIG_HEADER(config.h)
