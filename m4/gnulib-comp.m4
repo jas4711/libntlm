@@ -59,6 +59,7 @@ AC_DEFUN([gl_INIT],
   gl_INLINE
   gl_MULTIARCH
   AM_STDBOOL_H
+  gl_STDDEF_H
   gl_STDINT_H
   gl_HEADER_STRING_H
   gl_FUNC_STRVERSCMP
@@ -206,6 +207,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/md4.c
   lib/md4.h
   lib/stdbool.in.h
+  lib/stddef.in.h
   lib/stdint.in.h
   lib/string.in.h
   lib/strverscmp.c
@@ -224,13 +226,16 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/manywarnings.m4
   m4/md4.m4
   m4/multiarch.m4
+  m4/openat.m4
   m4/stdbool.m4
+  m4/stddef_h.m4
   m4/stdint.m4
   m4/string_h.m4
   m4/strverscmp.m4
   m4/unistd_h.m4
   m4/warnings.m4
   m4/wchar.m4
+  m4/wchar_t.m4
   m4/wint_t.m4
   tests/test-des.c
   tests/test-md4.c
