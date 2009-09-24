@@ -226,7 +226,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/manywarnings.m4
   m4/md4.m4
   m4/multiarch.m4
-  m4/openat.m4
   m4/stdbool.m4
   m4/stddef_h.m4
   m4/stdint.m4
