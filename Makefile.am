@@ -32,7 +32,7 @@ lib_LTLIBRARIES = libntlm.la
 include_HEADERS = ntlm.h
 
 AM_CFLAGS = $(WARN_CFLAGS)
-AM_CPPFLAGS = -I$(srcdir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
+AM_CPPFLAGS = -I$(srcdir)/lib -I$(builddir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
 
 libntlm_la_SOURCES = smbutil.c smbencrypt.c
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
