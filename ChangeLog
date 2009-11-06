@@ -1,3 +1,65 @@
+2009-11-06  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 1.2.
+
+2009-11-06  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/useless-if-before-free, lib/Makefile.am, lib/md4.c,
+	lib/unistd.in.h, m4/unistd_h.m4, maint.mk: Update gnulib files.
+
+2009-09-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2009-09-24  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix build problem related to missing byteswap.h, for
+	mingw.
+
+2009-09-24  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/string.in.h, lib/unistd.in.h,
+	m4/gnulib-comp.m4, m4/openat.m4, m4/string_h.m4, m4/unistd_h.m4,
+	maint.mk: Update gnulib files.
+
+2009-09-06  Simon Josefsson <simon@josefsson.org>
+
+	* lib/Makefile.am, lib/md4.h, lib/stddef.in.h, lib/string.in.h,
+	lib/unistd.in.h, m4/gnulib-comp.m4, m4/openat.m4, m4/stddef_h.m4,
+	m4/string_h.m4, m4/unistd_h.m4, m4/wchar.m4, m4/wchar_t.m4,
+	maint.mk: Update gnulib files.
+
+2009-07-23  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/vc-list-files, lib/Makefile.am, lib/md4.h,
+	lib/string.in.h, lib/unistd.in.h, m4/string_h.m4, m4/unistd_h.m4,
+	maint.mk: Update gnulib files.
+
+2009-06-10  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump version properly.
+
+2009-06-03  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2009-06-03  Simon Josefsson <simon@josefsson.org>
+
+	* m4/include_next.m4, m4/manywarnings.m4, maint.mk: Update gnulib
+	files.
+
+2009-05-08  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk: Fix -Werror handling.
+
+2009-05-08  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk: Fix release target.
+
+2009-05-08  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2009-05-08  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.1.
