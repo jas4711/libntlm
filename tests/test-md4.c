@@ -4,7 +4,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
+ * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -43,10 +43,10 @@ main (int argc, char *argv[])
       size_t i;
       printf ("expected:\n");
       for (i = 0; i < MD4_DIGEST_SIZE; i++)
-	printf ("%02x ", out1[i] & 0xFF);
+        printf ("%02x ", out1[i] & 0xFF);
       printf ("\ncomputed:\n");
       for (i = 0; i < MD4_DIGEST_SIZE; i++)
-	printf ("%02x ", buf[i] & 0xFF);
+        printf ("%02x ", buf[i] & 0xFF);
       printf ("\n");
       return 1;
     }
@@ -57,10 +57,10 @@ main (int argc, char *argv[])
       size_t i;
       printf ("expected:\n");
       for (i = 0; i < MD4_DIGEST_SIZE; i++)
-	printf ("%02x ", out2[i] & 0xFF);
+        printf ("%02x ", out2[i] & 0xFF);
       printf ("\ncomputed:\n");
       for (i = 0; i < MD4_DIGEST_SIZE; i++)
-	printf ("%02x ", buf[i] & 0xFF);
+        printf ("%02x ", buf[i] & 0xFF);
       printf ("\n");
       return 1;
     }

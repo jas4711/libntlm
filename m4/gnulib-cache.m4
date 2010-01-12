@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2009 Free Software Foundation, Inc.
+# Copyright (C) 2002-2010 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -15,7 +15,7 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --lgpl=2 --libtool --macro-prefix=gl --no-vc-files autobuild byteswap check-version crypto/des crypto/des-tests crypto/md4 crypto/md4-tests inline maintainer-makefile manywarnings strverscmp unistd warnings
+#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --with-tests --lgpl=2 --libtool --macro-prefix=gl --no-vc-files autobuild byteswap check-version crypto/des crypto/md4 inline maintainer-makefile manywarnings strverscmp unistd warnings
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
@@ -24,9 +24,7 @@ gl_MODULES([
   byteswap
   check-version
   crypto/des
-  crypto/des-tests
   crypto/md4
-  crypto/md4-tests
   inline
   maintainer-makefile
   manywarnings
@@ -40,6 +38,7 @@ gl_M4_BASE([m4])
 gl_PO_BASE([])
 gl_DOC_BASE([doc])
 gl_TESTS_BASE([tests])
+gl_WITH_TESTS
 gl_LIB([libgnu])
 gl_LGPL([2])
 gl_MAKEFILE_NAME([])
