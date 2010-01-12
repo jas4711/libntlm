@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -69,7 +69,7 @@ fi
 
 AC_CONFIG_FILES([
   Makefile
-  lib/Makefile
+  gl/Makefile
   tests/Makefile
   libntlm.pc
   libntlm.spec
