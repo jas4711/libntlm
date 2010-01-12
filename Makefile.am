@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-SUBDIRS = gl tests
+SUBDIRS = gl
 
 ACLOCAL_AMFLAGS = -I m4 -I gl/m4
 
