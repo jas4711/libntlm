@@ -68,3 +68,9 @@ upload:
 	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
 	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
 		cvs commit -m "Update." releases/
+
+review-diff:
+	git diff `git describe --abbrev=0`.. \
+	| grep -v -e ^index -e '^diff --git' \
+	| filterdiff -p 1 -x 'build-aux/*' -x 'gl/*' -x 'maint.mk' -x '.gitignore' -x '.x-sc*' -x ChangeLog -x GNUmakefile \
+	| less
