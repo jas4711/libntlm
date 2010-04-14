@@ -26,7 +26,7 @@ endif
 
 local-checks-to-skip = sc_prohibit_strcmp sc_program_name	\
 	sc_trailing_blank sc_GPL_version sc_immutable_NEWS
-VC_LIST_NEVER = ^(gl|tests|test)/.*
+VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(gl|tests|test)/.*
 
 autoreconf:
 	test -f ./configure || autoreconf --install

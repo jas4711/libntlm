@@ -12,7 +12,7 @@
 
 AUTOMAKE_OPTIONS = 1.5 foreign
 
-SUBDIRS =
+SUBDIRS = .
 TESTS =
 XFAIL_TESTS =
 TESTS_ENVIRONMENT =
@@ -31,6 +31,7 @@ DISTCLEANFILES =
 MAINTAINERCLEANFILES =
 
 AM_CPPFLAGS = \
+  -D@gltests_WITNESS@=1 \
   -I. -I$(srcdir) \
   -I../.. -I$(srcdir)/../.. \
   -I../../gl -I$(srcdir)/../../gl
@@ -42,6 +43,8 @@ libtests_a_LIBADD = $(gltests_LIBOBJS)
 libtests_a_DEPENDENCIES = $(gltests_LIBOBJS)
 EXTRA_libtests_a_SOURCES =
 AM_LIBTOOLFLAGS = --preserve-dup-deps
+
+TESTS_ENVIRONMENT += EXEEXT='@EXEEXT@' srcdir='$(srcdir)'
 
 ## begin gnulib module arg-nonnull
 
@@ -75,6 +78,30 @@ EXTRA_DIST += test-byteswap.c macros.h
 
 ## end   gnulib module byteswap-tests
 
+## begin gnulib module c++defs
+
+# The BUILT_SOURCES created by this Makefile snippet are not used via #include
+# statements but through direct file reference. Therefore this snippet must be
+# present in all Makefile.am that need it. This is ensured by the applicability
+# 'all' defined above.
+
+BUILT_SOURCES += c++defs.h
+# The c++defs.h that gets inserted into generated .h files is the same as
+# build-aux/c++defs.h, except that it has the copyright header cut off.
+c++defs.h: $(top_srcdir)/build-aux/c++defs.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	sed -n -e '/_GL_CXXDEFS/,$$p' \
+	  < $(top_srcdir)/build-aux/c++defs.h \
+	  > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += c++defs.h c++defs.h-t
+
+CXXDEFS_H=c++defs.h
+
+EXTRA_DIST += $(top_srcdir)/build-aux/c++defs.h
+
+## end   gnulib module c++defs
+
 ## begin gnulib module crypto/des-tests
 
 TESTS += test-des
@@ -97,30 +124,6 @@ EXTRA_DIST += test-md4.c
 EXTRA_DIST += intprops.h
 
 ## end   gnulib module intprops
-
-## begin gnulib module link-warning
-
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
-
-BUILT_SOURCES += link-warning.h
-# The link-warning.h that gets inserted into generated .h files is the same as
-# build-aux/link-warning.h, except that it has the copyright header cut off.
-link-warning.h: $(top_srcdir)/build-aux/link-warning.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_LINK_WARNING/,$$p' \
-	  < $(top_srcdir)/build-aux/link-warning.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += link-warning.h link-warning.h-t
-
-LINK_WARNING_H=link-warning.h
-
-EXTRA_DIST += $(top_srcdir)/build-aux/link-warning.h
-
-## end   gnulib module link-warning
 
 ## begin gnulib module stdbool-tests
 

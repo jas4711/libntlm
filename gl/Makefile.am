@@ -81,6 +81,30 @@ EXTRA_DIST += byteswap.in.h
 
 ## end   gnulib module byteswap
 
+## begin gnulib module c++defs
+
+# The BUILT_SOURCES created by this Makefile snippet are not used via #include
+# statements but through direct file reference. Therefore this snippet must be
+# present in all Makefile.am that need it. This is ensured by the applicability
+# 'all' defined above.
+
+BUILT_SOURCES += c++defs.h
+# The c++defs.h that gets inserted into generated .h files is the same as
+# build-aux/c++defs.h, except that it has the copyright header cut off.
+c++defs.h: $(top_srcdir)/build-aux/c++defs.h
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	sed -n -e '/_GL_CXXDEFS/,$$p' \
+	  < $(top_srcdir)/build-aux/c++defs.h \
+	  > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += c++defs.h c++defs.h-t
+
+CXXDEFS_H=c++defs.h
+
+EXTRA_DIST += $(top_srcdir)/build-aux/c++defs.h
+
+## end   gnulib module c++defs
+
 ## begin gnulib module check-version
 
 
@@ -117,30 +141,6 @@ clean-GNUmakefile:
 EXTRA_DIST += $(top_srcdir)/GNUmakefile
 
 ## end   gnulib module gnumakefile
-
-## begin gnulib module link-warning
-
-# The BUILT_SOURCES created by this Makefile snippet are not used via #include
-# statements but through direct file reference. Therefore this snippet must be
-# present in all Makefile.am that need it. This is ensured by the applicability
-# 'all' defined above.
-
-BUILT_SOURCES += link-warning.h
-# The link-warning.h that gets inserted into generated .h files is the same as
-# build-aux/link-warning.h, except that it has the copyright header cut off.
-link-warning.h: $(top_srcdir)/build-aux/link-warning.h
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	sed -n -e '/GL_LINK_WARNING/,$$p' \
-	  < $(top_srcdir)/build-aux/link-warning.h \
-	  > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += link-warning.h link-warning.h-t
-
-LINK_WARNING_H=link-warning.h
-
-EXTRA_DIST += $(top_srcdir)/build-aux/link-warning.h
-
-## end   gnulib module link-warning
 
 ## begin gnulib module maintainer-makefile
 
@@ -237,7 +237,7 @@ BUILT_SOURCES += string.h
 
 # We need the following in order to create <string.h> when the system
 # doesn't have one that works with the given compiler.
-string.h: string.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
+string.h: string.in.h $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
 	$(AM_V_GEN)rm -f $@-t $@ && \
 	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
 	  sed -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
@@ -266,6 +266,7 @@ string.h: string.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
 	      -e 's|@''GNULIB_STPNCPY''@|$(GNULIB_STPNCPY)|g' \
 	      -e 's|@''GNULIB_STRCHRNUL''@|$(GNULIB_STRCHRNUL)|g' \
 	      -e 's|@''GNULIB_STRDUP''@|$(GNULIB_STRDUP)|g' \
+	      -e 's|@''GNULIB_STRNCAT''@|$(GNULIB_STRNCAT)|g' \
 	      -e 's|@''GNULIB_STRNDUP''@|$(GNULIB_STRNDUP)|g' \
 	      -e 's|@''GNULIB_STRNLEN''@|$(GNULIB_STRNLEN)|g' \
 	      -e 's|@''GNULIB_STRPBRK''@|$(GNULIB_STRPBRK)|g' \
@@ -276,7 +277,9 @@ string.h: string.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
 	      -e 's|@''GNULIB_STRERROR''@|$(GNULIB_STRERROR)|g' \
 	      -e 's|@''GNULIB_STRSIGNAL''@|$(GNULIB_STRSIGNAL)|g' \
 	      -e 's|@''GNULIB_STRVERSCMP''@|$(GNULIB_STRVERSCMP)|g' \
-	      -e 's|@''HAVE_MBSLEN''@|$(HAVE_MBSLEN)|g' \
+	      < $(srcdir)/string.in.h | \
+	  sed -e 's|@''HAVE_MBSLEN''@|$(HAVE_MBSLEN)|g' \
+	      -e 's|@''HAVE_MEMCHR''@|$(HAVE_MEMCHR)|g' \
 	      -e 's|@''HAVE_DECL_MEMMEM''@|$(HAVE_DECL_MEMMEM)|g' \
 	      -e 's|@''HAVE_MEMPCPY''@|$(HAVE_MEMPCPY)|g' \
 	      -e 's|@''HAVE_DECL_MEMRCHR''@|$(HAVE_DECL_MEMRCHR)|g' \
@@ -291,21 +294,24 @@ string.h: string.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
 	      -e 's|@''HAVE_STRSEP''@|$(HAVE_STRSEP)|g' \
 	      -e 's|@''HAVE_STRCASESTR''@|$(HAVE_STRCASESTR)|g' \
 	      -e 's|@''HAVE_DECL_STRTOK_R''@|$(HAVE_DECL_STRTOK_R)|g' \
-	      -e 's|@''HAVE_DECL_STRERROR''@|$(HAVE_DECL_STRERROR)|g' \
 	      -e 's|@''HAVE_DECL_STRSIGNAL''@|$(HAVE_DECL_STRSIGNAL)|g' \
 	      -e 's|@''HAVE_STRVERSCMP''@|$(HAVE_STRVERSCMP)|g' \
+	      -e 's|@''REPLACE_STPNCPY''@|$(REPLACE_STPNCPY)|g' \
 	      -e 's|@''REPLACE_MEMCHR''@|$(REPLACE_MEMCHR)|g' \
 	      -e 's|@''REPLACE_MEMMEM''@|$(REPLACE_MEMMEM)|g' \
 	      -e 's|@''REPLACE_STRCASESTR''@|$(REPLACE_STRCASESTR)|g' \
 	      -e 's|@''REPLACE_STRDUP''@|$(REPLACE_STRDUP)|g' \
 	      -e 's|@''REPLACE_STRSTR''@|$(REPLACE_STRSTR)|g' \
 	      -e 's|@''REPLACE_STRERROR''@|$(REPLACE_STRERROR)|g' \
+	      -e 's|@''REPLACE_STRNCAT''@|$(REPLACE_STRNCAT)|g' \
 	      -e 's|@''REPLACE_STRNDUP''@|$(REPLACE_STRNDUP)|g' \
+	      -e 's|@''REPLACE_STRNLEN''@|$(REPLACE_STRNLEN)|g' \
 	      -e 's|@''REPLACE_STRSIGNAL''@|$(REPLACE_STRSIGNAL)|g' \
 	      -e 's|@''REPLACE_STRTOK_R''@|$(REPLACE_STRTOK_R)|g' \
 	      -e 's|@''UNDEFINE_STRTOK_R''@|$(UNDEFINE_STRTOK_R)|g' \
-	      -e '/definition of GL_LINK_WARNING/r $(LINK_WARNING_H)' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
 	      < $(srcdir)/string.in.h; \
 	} > $@-t && \
 	mv $@-t $@
@@ -330,7 +336,7 @@ BUILT_SOURCES += unistd.h
 
 # We need the following in order to create an empty placeholder for
 # <unistd.h> when the system doesn't have one.
-unistd.h: unistd.in.h $(LINK_WARNING_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
+unistd.h: unistd.in.h $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
 	$(AM_V_GEN)rm -f $@-t $@ && \
 	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
 	  sed -e 's|@''HAVE_UNISTD_H''@|$(HAVE_UNISTD_H)|g' \
@@ -369,17 +375,20 @@ unistd.h: unistd.in.h $(LINK_WARNING_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
 	      -e 's|@''GNULIB_SLEEP''@|$(GNULIB_SLEEP)|g' \
 	      -e 's|@''GNULIB_SYMLINK''@|$(GNULIB_SYMLINK)|g' \
 	      -e 's|@''GNULIB_SYMLINKAT''@|$(GNULIB_SYMLINKAT)|g' \
+	      -e 's|@''GNULIB_TTYNAME_R''@|$(GNULIB_TTYNAME_R)|g' \
 	      -e 's|@''GNULIB_UNISTD_H_GETOPT''@|$(GNULIB_UNISTD_H_GETOPT)|g' \
 	      -e 's|@''GNULIB_UNISTD_H_SIGPIPE''@|$(GNULIB_UNISTD_H_SIGPIPE)|g' \
 	      -e 's|@''GNULIB_UNLINK''@|$(GNULIB_UNLINK)|g' \
 	      -e 's|@''GNULIB_UNLINKAT''@|$(GNULIB_UNLINKAT)|g' \
 	      -e 's|@''GNULIB_USLEEP''@|$(GNULIB_USLEEP)|g' \
 	      -e 's|@''GNULIB_WRITE''@|$(GNULIB_WRITE)|g' \
-	      -e 's|@''HAVE_CHOWN''@|$(HAVE_CHOWN)|g' \
+	      < $(srcdir)/unistd.in.h | \
+	  sed -e 's|@''HAVE_CHOWN''@|$(HAVE_CHOWN)|g' \
 	      -e 's|@''HAVE_DUP2''@|$(HAVE_DUP2)|g' \
 	      -e 's|@''HAVE_DUP3''@|$(HAVE_DUP3)|g' \
 	      -e 's|@''HAVE_EUIDACCESS''@|$(HAVE_EUIDACCESS)|g' \
 	      -e 's|@''HAVE_FACCESSAT''@|$(HAVE_FACCESSAT)|g' \
+	      -e 's|@''HAVE_FCHDIR''@|$(HAVE_FCHDIR)|g' \
 	      -e 's|@''HAVE_FCHOWNAT''@|$(HAVE_FCHOWNAT)|g' \
 	      -e 's|@''HAVE_FSYNC''@|$(HAVE_FSYNC)|g' \
 	      -e 's|@''HAVE_FTRUNCATE''@|$(HAVE_FTRUNCATE)|g' \
@@ -389,7 +398,6 @@ unistd.h: unistd.in.h $(LINK_WARNING_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
 	      -e 's|@''HAVE_GETHOSTNAME''@|$(HAVE_GETHOSTNAME)|g' \
 	      -e 's|@''HAVE_GETLOGIN''@|$(HAVE_GETLOGIN)|g' \
 	      -e 's|@''HAVE_GETPAGESIZE''@|$(HAVE_GETPAGESIZE)|g' \
-	      -e 's|@''HAVE_GETUSERSHELL''@|$(HAVE_GETUSERSHELL)|g' \
 	      -e 's|@''HAVE_LCHOWN''@|$(HAVE_LCHOWN)|g' \
 	      -e 's|@''HAVE_LINK''@|$(HAVE_LINK)|g' \
 	      -e 's|@''HAVE_LINKAT''@|$(HAVE_LINKAT)|g' \
@@ -400,17 +408,19 @@ unistd.h: unistd.in.h $(LINK_WARNING_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
 	      -e 's|@''HAVE_SLEEP''@|$(HAVE_SLEEP)|g' \
 	      -e 's|@''HAVE_SYMLINK''@|$(HAVE_SYMLINK)|g' \
 	      -e 's|@''HAVE_SYMLINKAT''@|$(HAVE_SYMLINKAT)|g' \
+	      -e 's|@''HAVE_TTYNAME_R''@|$(HAVE_TTYNAME_R)|g' \
 	      -e 's|@''HAVE_UNLINKAT''@|$(HAVE_UNLINKAT)|g' \
 	      -e 's|@''HAVE_USLEEP''@|$(HAVE_USLEEP)|g' \
 	      -e 's|@''HAVE_DECL_ENVIRON''@|$(HAVE_DECL_ENVIRON)|g' \
 	      -e 's|@''HAVE_DECL_GETLOGIN_R''@|$(HAVE_DECL_GETLOGIN_R)|g' \
+	      -e 's|@''HAVE_DECL_GETPAGESIZE''@|$(HAVE_DECL_GETPAGESIZE)|g' \
+	      -e 's|@''HAVE_DECL_GETUSERSHELL''@|$(HAVE_DECL_GETUSERSHELL)|g' \
 	      -e 's|@''HAVE_OS_H''@|$(HAVE_OS_H)|g' \
 	      -e 's|@''HAVE_SYS_PARAM_H''@|$(HAVE_SYS_PARAM_H)|g' \
 	      -e 's|@''REPLACE_CHOWN''@|$(REPLACE_CHOWN)|g' \
 	      -e 's|@''REPLACE_CLOSE''@|$(REPLACE_CLOSE)|g' \
 	      -e 's|@''REPLACE_DUP''@|$(REPLACE_DUP)|g' \
 	      -e 's|@''REPLACE_DUP2''@|$(REPLACE_DUP2)|g' \
-	      -e 's|@''REPLACE_FCHDIR''@|$(REPLACE_FCHDIR)|g' \
 	      -e 's|@''REPLACE_FCHOWNAT''@|$(REPLACE_FCHOWNAT)|g' \
 	      -e 's|@''REPLACE_GETCWD''@|$(REPLACE_GETCWD)|g' \
 	      -e 's|@''REPLACE_GETGROUPS''@|$(REPLACE_GETGROUPS)|g' \
@@ -430,10 +440,9 @@ unistd.h: unistd.in.h $(LINK_WARNING_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
 	      -e 's|@''REPLACE_WRITE''@|$(REPLACE_WRITE)|g' \
 	      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H''@|$(UNISTD_H_HAVE_WINSOCK2_H)|g' \
 	      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|$(UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS)|g' \
-	      -e '/definition of GL_LINK_WARNING/r $(LINK_WARNING_H)' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/unistd.in.h; \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)'; \
 	} > $@-t && \
 	mv $@-t $@
 MOSTLYCLEANFILES += unistd.h unistd.h-t
@@ -481,7 +490,7 @@ BUILT_SOURCES += wchar.h
 
 # We need the following in order to create <wchar.h> when the system
 # version does not work standalone.
-wchar.h: wchar.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
+wchar.h: wchar.in.h $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
 	$(AM_V_GEN)rm -f $@-t $@ && \
 	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
 	  sed -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
@@ -523,8 +532,9 @@ wchar.h: wchar.in.h $(LINK_WARNING_H) $(ARG_NONNULL_H)
 	      -e 's|@''REPLACE_WCSRTOMBS''@|$(REPLACE_WCSRTOMBS)|g' \
 	      -e 's|@''REPLACE_WCSNRTOMBS''@|$(REPLACE_WCSNRTOMBS)|g' \
 	      -e 's|@''REPLACE_WCWIDTH''@|$(REPLACE_WCWIDTH)|g' \
-	      -e '/definition of GL_LINK_WARNING/r $(LINK_WARNING_H)' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
 	    < $(srcdir)/wchar.in.h; \
 	} > $@-t && \
 	mv $@-t $@

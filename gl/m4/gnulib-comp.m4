@@ -25,8 +25,46 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
   AC_REQUIRE([AC_PROG_RANLIB])
+  # Code from module arg-nonnull:
+  # Code from module autobuild:
   AB_INIT
+  # Code from module byteswap:
+  # Code from module byteswap-tests:
+  # Code from module c++defs:
+  # Code from module check-version:
+  # Code from module crypto/des:
+  # Code from module crypto/des-tests:
+  # Code from module crypto/md4:
+  # Code from module crypto/md4-tests:
+  # Code from module extensions:
   AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
+  # Code from module gnumakefile:
+  # Code from module include_next:
+  # Code from module inline:
+  # Code from module intprops:
+  # Code from module maintainer-makefile:
+  # Code from module manywarnings:
+  # Code from module multiarch:
+  # Code from module stdbool:
+  # Code from module stdbool-tests:
+  # Code from module stddef:
+  # Code from module stddef-tests:
+  # Code from module stdint:
+  # Code from module stdint-tests:
+  # Code from module string:
+  # Code from module string-tests:
+  # Code from module strverscmp:
+  # Code from module strverscmp-tests:
+  # Code from module unistd:
+  # Code from module unistd-tests:
+  # Code from module useless-if-before-free:
+  # Code from module vc-list-files:
+  # Code from module vc-list-files-tests:
+  # Code from module verify:
+  # Code from module warn-on-use:
+  # Code from module warnings:
+  # Code from module wchar:
+  # Code from module wchar-tests:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -35,6 +73,7 @@ AC_DEFUN([gl_INIT],
 [
   AM_CONDITIONAL([GL_COND_LIBTOOL], [true])
   gl_cond_libtool=true
+  gl_m4_base='gl/m4'
   m4_pushdef([AC_LIBOBJ], m4_defn([gl_LIBOBJ]))
   m4_pushdef([AC_REPLACE_FUNCS], m4_defn([gl_REPLACE_FUNCS]))
   m4_pushdef([AC_LIBSOURCES], m4_defn([gl_LIBSOURCES]))
@@ -42,10 +81,19 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gl_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gl'
+  # Code from module arg-nonnull:
+  # Code from module autobuild:
+  # Code from module byteswap:
   gl_BYTESWAP
+  # Code from module c++defs:
+  # Code from module check-version:
   gl_CHECK_VERSION
+  # Code from module crypto/des:
   gl_DES
+  # Code from module crypto/md4:
   gl_MD4
+  # Code from module extensions:
+  # Code from module gnumakefile:
   # Autoconf 2.61a.99 and earlier don't support linking a file only
   # in VPATH builds.  But since GNUmakefile is for maintainer use
   # only, it does not matter if we skip the link with older autoconf.
@@ -56,17 +104,37 @@ AC_DEFUN([gl_INIT],
   	m4_defn([m4_PACKAGE_VERSION])), [1], [],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
   	[GNUmakefile=$GNUmakefile])])
+  # Code from module include_next:
+  # Code from module inline:
   gl_INLINE
+  # Code from module maintainer-makefile:
+  AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
+    [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
+  # Code from module manywarnings:
+  # Code from module multiarch:
   gl_MULTIARCH
+  # Code from module stdbool:
   AM_STDBOOL_H
+  # Code from module stddef:
   gl_STDDEF_H
+  # Code from module stdint:
   gl_STDINT_H
+  # Code from module string:
   gl_HEADER_STRING_H
+  # Code from module strverscmp:
   gl_FUNC_STRVERSCMP
   gl_STRING_MODULE_INDICATOR([strverscmp])
+  # Code from module unistd:
   gl_UNISTD_H
+  # Code from module useless-if-before-free:
+  # Code from module vc-list-files:
+  # Code from module warn-on-use:
+  # Code from module warnings:
   AC_SUBST([WARN_CFLAGS])
+  # Code from module wchar:
   gl_WCHAR_H
+  # Code from module dummy:
+  # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
       for gl_file in ]gl_LIBSOURCES_LIST[ ; do
@@ -106,10 +174,17 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gltests_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gl/tests'
+changequote(,)dnl
+  gltests_WITNESS=IN_`echo "${PACKAGE-$PACKAGE_TARNAME}" | LC_ALL=C tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ | LC_ALL=C sed -e 's/[^A-Z0-9_]/_/g'`_GNULIB_TESTS
+changequote([, ])dnl
+  AC_SUBST([gltests_WITNESS])
+  gl_module_indicator_condition=$gltests_WITNESS
+  m4_pushdef([gl_MODULE_INDICATOR_CONDITION], [$gl_module_indicator_condition])
   gt_TYPE_WCHAR_T
   gt_TYPE_WINT_T
   abs_aux_dir=`cd "$ac_aux_dir"; pwd`
   AC_SUBST([abs_aux_dir])
+  m4_popdef([gl_MODULE_INDICATOR_CONDITION])
   m4_ifval(gltests_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gltests_LIBSOURCES_DIR])[ ||
       for gl_file in ]gltests_LIBSOURCES_LIST[ ; do
@@ -202,7 +277,7 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
   build-aux/arg-nonnull.h
-  build-aux/link-warning.h
+  build-aux/c++defs.h
   build-aux/useless-if-before-free
   build-aux/vc-list-files
   build-aux/warn-on-use.h
@@ -242,7 +317,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/unistd_h.m4
   m4/warn-on-use.m4
   m4/warnings.m4
-  m4/wchar.m4
+  m4/wchar_h.m4
   m4/wchar_t.m4
   m4/wint_t.m4
   tests/macros.h
