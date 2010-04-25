@@ -178,7 +178,7 @@ EXTRA_DIST += test-unistd.c
 TESTS += test-vc-list-files-git.sh
 TESTS += test-vc-list-files-cvs.sh
 TESTS_ENVIRONMENT += PATH='$(abs_aux_dir)'$(PATH_SEPARATOR)"$$PATH"
-EXTRA_DIST += test-vc-list-files-git.sh test-vc-list-files-cvs.sh
+EXTRA_DIST += test-vc-list-files-git.sh test-vc-list-files-cvs.sh init.sh
 
 ## end   gnulib module vc-list-files-tests
 
