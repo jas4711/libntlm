@@ -1,3 +1,185 @@
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 1.3.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* .x-sc_makefile_check, .x-sc_prohibit_HAVE_MBRTOWC,
+	.x-sc_prohibit_atoi_atof, .x-sc_prohibit_empty_lines_at_EOF,
+	.x-sc_require_config_h, .x-sc_require_config_h_first,
+	.x-sc_space_tab, COPYING, GNUmakefile, build-aux/arg-nonnull.h,
+	build-aux/c++defs.h, build-aux/useless-if-before-free,
+	build-aux/vc-list-files, build-aux/warn-on-use.h, cfg.mk,
+	gl/Makefile.am, gl/byteswap.in.h, gl/check-version.c,
+	gl/check-version.h, gl/des.c, gl/des.h, gl/dummy.c,
+	gl/m4/00gnulib.m4, gl/m4/autobuild.m4, gl/m4/byteswap.m4,
+	gl/m4/check-version.m4, gl/m4/des.m4, gl/m4/extensions.m4,
+	gl/m4/gnulib-cache.m4, gl/m4/gnulib-common.m4,
+	gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4, gl/m4/include_next.m4,
+	gl/m4/inline.m4, gl/m4/inttypes-pri.m4, gl/m4/inttypes.m4,
+	gl/m4/longlong.m4, gl/m4/manywarnings.m4, gl/m4/md4.m4,
+	gl/m4/multiarch.m4, gl/m4/stdbool.m4, gl/m4/stddef_h.m4,
+	gl/m4/stdint.m4, gl/m4/string_h.m4, gl/m4/strverscmp.m4,
+	gl/m4/unistd_h.m4, gl/m4/warn-on-use.m4, gl/m4/warnings.m4,
+	gl/m4/wchar_h.m4, gl/m4/wchar_t.m4, gl/m4/wint_t.m4, gl/md4.c,
+	gl/md4.h, gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h,
+	gl/string.in.h, gl/strverscmp.c, gl/tests/Makefile.am,
+	gl/tests/dummy.c, gl/tests/init.sh, gl/tests/intprops.h,
+	gl/tests/inttypes.in.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c,
+	gl/tests/test-intprops.c, gl/tests/test-inttypes.c,
+	gl/tests/test-md4.c, gl/tests/test-stdbool.c,
+	gl/tests/test-stddef.c, gl/tests/test-stdint.c,
+	gl/tests/test-string.c, gl/tests/test-strverscmp.c,
+	gl/tests/test-unistd.c, gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify.c,
+	gl/tests/test-verify.sh, gl/tests/test-wchar.c, gl/tests/verify.h,
+	gl/tests/wchar.in.h, gl/unistd.in.h, gl/wchar.in.h, maint.mk: Update
+	gnulib files.  Fix syntax-check rules.
+
+2010-04-25  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/vc-list-files, gl/m4/gnulib-comp.m4,
+	gl/tests/Makefile.am, gl/tests/init.sh,
+	gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh: Update gnulib files.
+
+2010-04-22  Simon Josefsson <simon@josefsson.org>
+
+	* m4/valgrind.m4: Use valgrind -q.
+
+2010-04-22  Simon Josefsson <simon@josefsson.org>
+
+	* gl/m4/gnulib-cache.m4~, gl/stdbool.in.h, gl/tests/test-stdbool.c,
+	gl/tests/test-stdint.c, maint.mk: Update gnulib files and fix new
+	syntax-check warnings.
+
+2010-04-14  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk: Add review-diff target.
+
+2010-04-14  Simon Josefsson <simon@josefsson.org>
+
+	* .x-sc_prohibit_empty_lines_at_EOF, GNUmakefile,
+	build-aux/c++defs.h, build-aux/link-warning.h,
+	build-aux/vc-list-files, build-aux/warn-on-use.h, cfg.mk,
+	gl/Makefile.am, gl/m4/gnulib-common.m4, gl/m4/gnulib-comp.m4,
+	gl/m4/stddef_h.m4, gl/m4/string_h.m4, gl/m4/unistd_h.m4,
+	gl/m4/warn-on-use.m4, gl/m4/warnings.m4, gl/m4/wchar.m4,
+	gl/m4/wchar_h.m4, gl/stdint.in.h, gl/string.in.h,
+	gl/tests/Makefile.am, gl/tests/test-des.c, gl/tests/test-md4.c,
+	gl/tests/test-vc-list-files-git.sh, gl/unistd.in.h, gl/wchar.in.h,
+	maint.mk: Update gnulib files.  Fix new syntax-check warnings.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Fix e-mail address.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Add.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac: Fix paths.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* gl/Makefile.am, gl/m4/gnulib-cache.m4, gl/m4/gnulib-cache.m4~,
+	gl/m4/gnulib-comp.m4, gl/tests/Makefile.am, gl/tests/dummy.c,
+	gl/tests/intprops.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c, gl/tests/test-md4.c,
+	gl/tests/test-stdbool.c, gl/tests/test-stddef.c,
+	gl/tests/test-stdint.c, gl/tests/test-string.c,
+	gl/tests/test-strverscmp.c, gl/tests/test-unistd.c,
+	gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-wchar.c,
+	gl/tests/verify.h, tests/Makefile.am, tests/dummy.c,
+	tests/intprops.h, tests/macros.h, tests/signature.h,
+	tests/test-byteswap.c, tests/test-des.c, tests/test-md4.c,
+	tests/test-stdbool.c, tests/test-stddef.c, tests/test-stdint.c,
+	tests/test-string.c, tests/test-strverscmp.c, tests/test-unistd.c,
+	tests/test-vc-list-files-cvs.sh, tests/test-vc-list-files-git.sh,
+	tests/test-wchar.c, tests/verify.h: Move gnulib tests to gl/.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk, maint.mk: Fix syntax-check rules.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Fix paths.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* gnulib: Remove gnulib/
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* gl/Makefile.am, gl/byteswap.in.h, gl/check-version.c,
+	gl/check-version.h, gl/des.c, gl/des.h, gl/dummy.c,
+	gl/m4/00gnulib.m4, gl/m4/autobuild.m4, gl/m4/byteswap.m4,
+	gl/m4/check-version.m4, gl/m4/des.m4, gl/m4/extensions.m4,
+	gl/m4/gnulib-cache.m4, gl/m4/gnulib-cache.m4~,
+	gl/m4/gnulib-common.m4, gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4,
+	gl/m4/include_next.m4, gl/m4/inline.m4, gl/m4/longlong.m4,
+	gl/m4/manywarnings.m4, gl/m4/md4.m4, gl/m4/multiarch.m4,
+	gl/m4/stdbool.m4, gl/m4/stddef_h.m4, gl/m4/stdint.m4,
+	gl/m4/string_h.m4, gl/m4/strverscmp.m4, gl/m4/unistd_h.m4,
+	gl/m4/warn-on-use.m4, gl/m4/warnings.m4, gl/m4/wchar.m4,
+	gl/m4/wchar_t.m4, gl/m4/wint_t.m4, gl/md4.c, gl/md4.h,
+	gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h, gl/string.in.h,
+	gl/strverscmp.c, gl/unistd.in.h, gl/wchar.in.h: Move gnulib files to
+	gl/.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, configure.ac, lib/Makefile.am, lib/byteswap.in.h,
+	lib/check-version.c, lib/check-version.h, lib/des.c, lib/des.h,
+	lib/dummy.c, lib/md4.c, lib/md4.h, lib/stdbool.in.h,
+	lib/stddef.in.h, lib/stdint.in.h, lib/string.in.h,
+	lib/strverscmp.c, lib/unistd.in.h, lib/wchar.in.h, m4/00gnulib.m4,
+	m4/autobuild.m4, m4/byteswap.m4, m4/check-version.m4, m4/des.m4,
+	m4/extensions.m4, m4/gnulib-cache.m4, m4/gnulib-common.m4,
+	m4/gnulib-comp.m4, m4/gnulib-tool.m4, m4/include_next.m4,
+	m4/inline.m4, m4/longlong.m4, m4/manywarnings.m4, m4/md4.m4,
+	m4/multiarch.m4, m4/stdbool.m4, m4/stddef_h.m4, m4/stdint.m4,
+	m4/string_h.m4, m4/strverscmp.m4, m4/unistd_h.m4, m4/valgrind.m4,
+	m4/warn-on-use.m4, m4/warnings.m4, m4/wchar.m4, m4/wchar_t.m4,
+	m4/wint_t.m4, tests/Makefile.am: Move gnulib files to gl/.
+
+2010-01-12  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, build-aux/arg-nonnull.h, build-aux/link-warning.h,
+	build-aux/useless-if-before-free, build-aux/vc-list-files,
+	build-aux/warn-on-use.h, lib/Makefile.am, lib/byteswap.in.h,
+	lib/check-version.c, lib/check-version.h, lib/des.c, lib/des.h,
+	lib/dummy.c, lib/md4.c, lib/md4.h, lib/stdbool.in.h,
+	lib/stddef.in.h, lib/stdint.in.h, lib/string.in.h,
+	lib/strverscmp.c, lib/unistd.in.h, lib/wchar.in.h, m4/00gnulib.m4,
+	m4/autobuild.m4, m4/byteswap.m4, m4/check-version.m4, m4/des.m4,
+	m4/extensions.m4, m4/gnulib-cache.m4, m4/gnulib-common.m4,
+	m4/gnulib-comp.m4, m4/gnulib-tool.m4, m4/include_next.m4,
+	m4/inline.m4, m4/longlong.m4, m4/manywarnings.m4, m4/md4.m4,
+	m4/multiarch.m4, m4/stdbool.m4, m4/stddef_h.m4, m4/stdint.m4,
+	m4/string_h.m4, m4/strverscmp.m4, m4/unistd_h.m4,
+	m4/warn-on-use.m4, m4/warnings.m4, m4/wchar.m4, m4/wchar_t.m4,
+	m4/wint_t.m4, maint.mk, tests/Makefile.am, tests/dummy.c,
+	tests/intprops.h, tests/macros.h, tests/signature.h,
+	tests/test-byteswap.c, tests/test-des.c, tests/test-md4.c,
+	tests/test-stdbool.c, tests/test-stddef.c, tests/test-stdint.c,
+	tests/test-string.c, tests/test-strverscmp.c, tests/test-unistd.c,
+	tests/test-vc-list-files-cvs.sh, tests/test-vc-list-files-git.sh,
+	tests/test-wchar.c, tests/verify.h: Update gnulib files.
+
+2009-11-06  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2009-11-06  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.2.
