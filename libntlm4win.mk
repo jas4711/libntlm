@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+SHELL=bash
+
 PACKAGE = libntlm
 distdir = $(PACKAGE)-$(VERSION)
 TGZ = $(distdir).tar.gz
@@ -47,9 +49,9 @@ doit:
 htmldir = ../www-$(PACKAGE)
 upload:
 	gpg -b $(distdir)-win32.zip
-	gpg --verify $(distdir)-win32.zip
+	gpg --verify $(distdir)-win32.zip.sig
 	gpg -b $(distdir)-win64.zip
-	gpg --verify $(distdir)-win64.zip
+	gpg --verify $(distdir)-win64.zip.sig
 	cp -v $(distdir)-win{32,64}.zip{,.sig} $(htmldir)/releases/
 	cp -v $(distdir)-win{32,64}.zip{,.sig} ../releases/$(PACKAGE)/
 	cd $(htmldir) && \
