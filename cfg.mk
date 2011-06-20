@@ -1,4 +1,4 @@
-# Copyright (C) 2006, 2007, 2008, 2009, 2010 Simon Josefsson.
+# Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -26,7 +26,10 @@ endif
 
 local-checks-to-skip = sc_prohibit_strcmp sc_program_name	\
 	sc_trailing_blank sc_GPL_version sc_immutable_NEWS
-VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(gl|tests|test)/.*
+VC_LIST_ALWAYS_EXCLUDE_REGEX = ^maint.mk|(gl|tests|test)/.*$$
+
+# Explicit syntax-check exceptions.
+exclude_file_name_regexp--sc_bindtextdomain = ^test_ntlm.c$$
 
 autoreconf:
 	test -f ./configure || autoreconf --install

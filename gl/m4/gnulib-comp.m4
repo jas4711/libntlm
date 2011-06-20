@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2010 Free Software Foundation, Inc.
+# Copyright (C) 2002-2011 Free Software Foundation, Inc.
 #
 # This file is free software, distributed under the terms of the GNU
 # General Public License.  As a special exception to the GNU General
@@ -12,7 +12,8 @@
 # This file represents the compiled summary of the specification in
 # gnulib-cache.m4. It lists the computed macro invocations that need
 # to be invoked from configure.ac.
-# In projects using CVS, this file can be treated like other built files.
+# In projects that use version control, this file can be treated like
+# other built files.
 
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -42,6 +43,10 @@ AC_DEFUN([gl_EARLY],
   # Code from module include_next:
   # Code from module inline:
   # Code from module intprops:
+  # Code from module intprops-tests:
+  # Code from module inttypes:
+  # Code from module inttypes-incomplete:
+  # Code from module inttypes-tests:
   # Code from module maintainer-makefile:
   # Code from module manywarnings:
   # Code from module multiarch:
@@ -61,6 +66,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module vc-list-files:
   # Code from module vc-list-files-tests:
   # Code from module verify:
+  # Code from module verify-tests:
   # Code from module warn-on-use:
   # Code from module warnings:
   # Code from module wchar:
@@ -81,59 +87,34 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([gl_LIBSOURCES_DIR], [])
   gl_COMMON
   gl_source_base='gl'
-  # Code from module arg-nonnull:
-  # Code from module autobuild:
-  # Code from module byteswap:
-  gl_BYTESWAP
-  # Code from module c++defs:
-  # Code from module check-version:
-  gl_CHECK_VERSION
-  # Code from module crypto/des:
-  gl_DES
-  # Code from module crypto/md4:
-  gl_MD4
-  # Code from module extensions:
-  # Code from module gnumakefile:
-  # Autoconf 2.61a.99 and earlier don't support linking a file only
-  # in VPATH builds.  But since GNUmakefile is for maintainer use
-  # only, it does not matter if we skip the link with older autoconf.
-  # Automake 1.10.1 and earlier try to remove GNUmakefile in non-VPATH
-  # builds, so use a shell variable to bypass this.
-  GNUmakefile=GNUmakefile
-  m4_if(m4_version_compare([2.61a.100],
-  	m4_defn([m4_PACKAGE_VERSION])), [1], [],
-        [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
-  	[GNUmakefile=$GNUmakefile])])
-  # Code from module include_next:
-  # Code from module inline:
-  gl_INLINE
-  # Code from module maintainer-makefile:
-  AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
-    [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
-  # Code from module manywarnings:
-  # Code from module multiarch:
-  gl_MULTIARCH
-  # Code from module stdbool:
-  AM_STDBOOL_H
-  # Code from module stddef:
-  gl_STDDEF_H
-  # Code from module stdint:
-  gl_STDINT_H
-  # Code from module string:
-  gl_HEADER_STRING_H
-  # Code from module strverscmp:
-  gl_FUNC_STRVERSCMP
-  gl_STRING_MODULE_INDICATOR([strverscmp])
-  # Code from module unistd:
-  gl_UNISTD_H
-  # Code from module useless-if-before-free:
-  # Code from module vc-list-files:
-  # Code from module warn-on-use:
-  # Code from module warnings:
-  AC_SUBST([WARN_CFLAGS])
-  # Code from module wchar:
-  gl_WCHAR_H
-  # Code from module dummy:
+gl_BYTESWAP
+gl_MD4
+# Autoconf 2.61a.99 and earlier don't support linking a file only
+# in VPATH builds.  But since GNUmakefile is for maintainer use
+# only, it does not matter if we skip the link with older autoconf.
+# Automake 1.10.1 and earlier try to remove GNUmakefile in non-VPATH
+# builds, so use a shell variable to bypass this.
+GNUmakefile=GNUmakefile
+m4_if(m4_version_compare([2.61a.100],
+        m4_defn([m4_PACKAGE_VERSION])), [1], [],
+      [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
+        [GNUmakefile=$GNUmakefile])])
+gl_INLINE
+AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
+  [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
+gl_MULTIARCH
+AM_STDBOOL_H
+gl_STDDEF_H
+gl_STDINT_H
+gl_HEADER_STRING_H
+gl_FUNC_STRVERSCMP
+if test $HAVE_STRVERSCMP = 0; then
+  AC_LIBOBJ([strverscmp])
+  gl_PREREQ_STRVERSCMP
+fi
+gl_STRING_MODULE_INDICATOR([strverscmp])
+gl_UNISTD_H
+AC_SUBST([WARN_CFLAGS])
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
@@ -180,10 +161,13 @@ changequote([, ])dnl
   AC_SUBST([gltests_WITNESS])
   gl_module_indicator_condition=$gltests_WITNESS
   m4_pushdef([gl_MODULE_INDICATOR_CONDITION], [$gl_module_indicator_condition])
-  gt_TYPE_WCHAR_T
-  gt_TYPE_WINT_T
-  abs_aux_dir=`cd "$ac_aux_dir"; pwd`
-  AC_SUBST([abs_aux_dir])
+gl_INTTYPES_H
+gl_INTTYPES_INCOMPLETE
+gt_TYPE_WCHAR_T
+gt_TYPE_WINT_T
+abs_aux_dir=`cd "$ac_aux_dir"; pwd`
+AC_SUBST([abs_aux_dir])
+gl_WCHAR_H
   m4_popdef([gl_MODULE_INDICATOR_CONDITION])
   m4_ifval(gltests_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gltests_LIBSOURCES_DIR])[ ||
@@ -286,7 +270,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/check-version.h
   lib/des.c
   lib/des.h
-  lib/dummy.c
   lib/md4.c
   lib/md4.h
   lib/stdbool.in.h
@@ -295,16 +278,15 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/string.in.h
   lib/strverscmp.c
   lib/unistd.in.h
-  lib/wchar.in.h
   m4/00gnulib.m4
   m4/autobuild.m4
   m4/byteswap.m4
-  m4/check-version.m4
-  m4/des.m4
   m4/extensions.m4
   m4/gnulib-common.m4
   m4/include_next.m4
   m4/inline.m4
+  m4/inttypes-pri.m4
+  m4/inttypes.m4
   m4/longlong.m4
   m4/manywarnings.m4
   m4/md4.m4
@@ -325,6 +307,8 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/signature.h
   tests/test-byteswap.c
   tests/test-des.c
+  tests/test-intprops.c
+  tests/test-inttypes.c
   tests/test-md4.c
   tests/test-stdbool.c
   tests/test-stddef.c
@@ -334,10 +318,14 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-unistd.c
   tests/test-vc-list-files-cvs.sh
   tests/test-vc-list-files-git.sh
+  tests/test-verify.c
+  tests/test-verify.sh
   tests/test-wchar.c
   tests=lib/dummy.c
   tests=lib/intprops.h
+  tests=lib/inttypes.in.h
   tests=lib/verify.h
+  tests=lib/wchar.in.h
   top/GNUmakefile
   top/maint.mk
 ])
