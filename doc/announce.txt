@@ -25,6 +25,16 @@ Here are the compressed sources (508K):
 Here are GPG detached signatures:
   http://josefsson.org/libntlm/releases/libntlm-1.3.tar.gz.sig
 
+Windows binaries are available.  For 32-bit Windows:
+
+http://www.nongnu.org/libntlm/releases/libntlm-1.3-win32.zip
+http://www.nongnu.org/libntlm/releases/libntlm-1.3-win32.zip.sig
+
+For 64-bit Windows:
+
+http://www.nongnu.org/libntlm/releases/libntlm-1.3-win64.zip
+http://www.nongnu.org/libntlm/releases/libntlm-1.3-win64.zip.sig
+
 The software is cryptographically signed by the maintainer using an
 OpenPGP key identified by the following information:
 
@@ -40,8 +50,13 @@ The key is available from:
 Here are the SHA-1 and SHA-224 signatures:
 
 5dd798d5fb9a75656225052aa88ceb9befbbd4a0  libntlm-1.3.tar.gz
-
 9da9dd03457d93a9beea184e0b7c032239c41ced493ee566f7db36e1  libntlm-1.3.tar.gz
+
+aa35afd931fb94e2de3cf864a42dcfc98d8a5215  libntlm-1.3-win32.zip
+a6691d4e1f5febb1905c65fda241bbd90319325d69f8886c6d128ee2  libntlm-1.3-win32.zip
+
+655a17e7ec9fdba6dd4d50bc67ed68ace2c85192  libntlm-1.3-win64.zip
+57151fe20a37d44c61bd6a59618ce1c80d61f4a65a6f4dfaad3ba485  libntlm-1.3-win64.zip
 
 Happy hacking,
 Simon
