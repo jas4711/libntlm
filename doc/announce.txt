@@ -1,0 +1,47 @@
+To: libntlm@nongnu.org
+Subject: Libntlm 1.3
+<#secure method=pgpmime mode=sign>
+Libntlm provides routines to manipulate the structures used for the
+client end of Microsoft NTLM authentication.  This code was initially
+taken (mostly) from the Samba project and was initially intended for use
+with Microsoft Exchange Server when it is configured to require NTLM
+authentication for clients of it's IMAP server.  Today, Libntlm contains
+re-written code, so that the license is now LGPLv2+.
+
+News since the last release:
+
+** Update gnulib files.
+
+The project page of the library is available at:
+  http://josefsson.org/libntlm/
+
+If you need help to use Libntlm, or want to help others, you are invited
+to join our mailing list, see:
+  http://lists.nongnu.org/mailman/listinfo/libntlm
+
+Here are the compressed sources (508K):
+  http://josefsson.org/libntlm/releases/libntlm-1.3.tar.gz
+
+Here are GPG detached signatures:
+  http://josefsson.org/libntlm/releases/libntlm-1.3.tar.gz.sig
+
+The software is cryptographically signed by the maintainer using an
+OpenPGP key identified by the following information:
+
+pub   1280R/B565716F 2002-05-05 [expires: 2012-01-24]
+      Key fingerprint = 0424 D4EE 81A0 E3D1 19C6  F835 EDA2 1E94 B565 716F
+uid                  Simon Josefsson <simon@josefsson.org>
+sub   1280R/4D5D40AE 2002-05-05 [expires: 2012-01-24]
+
+The key is available from:
+  http://josefsson.org/key.txt
+  dns:b565716f.josefsson.org?TYPE=CERT
+
+Here are the SHA-1 and SHA-224 signatures:
+
+5dd798d5fb9a75656225052aa88ceb9befbbd4a0  libntlm-1.3.tar.gz
+
+9da9dd03457d93a9beea184e0b7c032239c41ced493ee566f7db36e1  libntlm-1.3.tar.gz
+
+Happy hacking,
+Simon
