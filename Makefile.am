@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Simon Josefsson.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -22,7 +22,8 @@ SUBDIRS = gl
 
 ACLOCAL_AMFLAGS = -I m4 -I gl/m4
 
-EXTRA_DIST = libntlm.pc.in test.txt libntlm.spec
+EXTRA_DIST = cfg.mk maint.mk
+EXTRA_DIST += libntlm.pc.in test.txt libntlm.spec
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libntlm.pc
