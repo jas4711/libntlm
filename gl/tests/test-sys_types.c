@@ -1,5 +1,5 @@
-/* Test of <byteswap.h> substitute.
-   Copyright (C) 2007-2013 Free Software Foundation, Inc.
+/* Test of <sys/types.h> substitute.
+   Copyright (C) 2011-2013 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,19 +14,21 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-/* Written by Bruno Haible <bruno@clisp.org>, 2007.  */
+/* Written by Bruno Haible <bruno@clisp.org>, 2011.  */
 
 #include <config.h>
 
-#include <byteswap.h>
+#include <sys/types.h>
 
-#include "macros.h"
+/* Check that the types are all defined.  */
+pid_t t1;
+size_t t2;
+ssize_t t3;
+off_t t4;
+mode_t t5;
 
 int
-main ()
+main (void)
 {
-  ASSERT (bswap_16 (0xABCD) == 0xCDAB);
-  ASSERT (bswap_32 (0xDEADBEEF) == 0xEFBEADDE);
-
   return 0;
 }

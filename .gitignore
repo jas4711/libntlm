@@ -31,6 +31,7 @@ gl/libgnu.la
 gl/md4.lo
 gl/md4.o
 gl/string.h
+gl/sys/
 gl/tests/.deps/
 gl/tests/Makefile
 gl/tests/Makefile.in
@@ -67,6 +68,8 @@ gl/tests/test-wchar.o
 gl/tests/warn-on-use.h
 gl/tests/wchar.h
 gl/unistd.h
+gl/unistd.lo
+gl/unistd.o
 gl/warn-on-use.h
 libntlm-*.tar.gz
 libntlm-*.tar.gz.sig
