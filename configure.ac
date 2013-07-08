@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -21,7 +21,6 @@ dnl 02110-1301, USA
 
 AC_PREREQ(2.61)
 AC_INIT([libntlm], [1.3], [libntlm@nongnu.org])
-AC_COPYRIGHT([Copyright (c) 2002-2008 Simon Josefsson <simon@josefsson.org>.])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -40,6 +39,7 @@ AC_CONFIG_SRCDIR(ntlm.h.in)
 AC_PROG_CC
 gl_EARLY
 AC_LIBTOOL_WIN32_DLL
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 
 AC_C_BIGENDIAN
