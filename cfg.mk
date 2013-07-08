@@ -1,4 +1,4 @@
-# Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011 Simon Josefsson.
+# Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -62,7 +62,7 @@ prepare:
 	gpg -b $(distdir).tar.gz
 	gpg --verify $(distdir).tar.gz.sig
 	git commit -m Generated. ChangeLog
-	git tag -u b565716f! -m $(VERSION) $(tag)
+	git tag -u b565716f -m $(VERSION) $(tag)
 
 upload:
 	git push
