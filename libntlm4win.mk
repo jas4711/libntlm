@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Simon Josefsson
+# Copyright (C) 2011, 2013 Simon Josefsson
 #
 # This file is part of Libntlm.
 #
@@ -41,7 +41,7 @@ doit:
 	tar xfa $(TGZ) && \
 	cd $(distdir) && \
 	./configure --host=$(HOST) --build=x86_64-unknown-linux-gnu --prefix=$(PWD)/tmp/root CPPFLAGS=-I$(PWD)/tmp/root/include && \
-	make $(CHECK) install && \
+	make all $(CHECK) install && \
 	cd .. && \
 	cd root && \
 	zip -r ../../$(distdir)-win$(ARCH).zip *
@@ -52,8 +52,8 @@ upload:
 	gpg --verify $(distdir)-win32.zip.sig
 	gpg -b $(distdir)-win64.zip
 	gpg --verify $(distdir)-win64.zip.sig
-	cp -v $(distdir)-win{32,64}.zip{,.sig} $(htmldir)/releases/
-	cp -v $(distdir)-win{32,64}.zip{,.sig} ../releases/$(PACKAGE)/
+	cp -v $(distdir)-win*.zip* $(htmldir)/releases/
+	cp -v $(distdir)-win*.zip* ../releases/$(PACKAGE)/
 	cd $(htmldir) && \
-		cvs add -kb releases/$(distdir)-win{32,64}.zip{,.sig} && \
+		cvs add -kb releases/$(distdir)-win*.zip* && \
 		cvs commit -m "Update." releases/
