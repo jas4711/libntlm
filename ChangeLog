@@ -1,3 +1,96 @@
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Version 1.4.
+
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump versions.
+
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add.
+
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore more.
+
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Fix for recent automake.
+
+2013-07-08  Simon Josefsson <simon@josefsson.org>
+
+	* gl/m4/extern-inline.m4, gl/m4/manywarnings.m4, gl/m4/stdalign.m4,
+	gl/m4/warnings.m4, gl/stdalign.in.h, gl/tests/verify.h: Update
+	gnulib files.
+
+2013-05-13  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS, NEWS: Update.
+
+2013-05-13  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore, GNUmakefile, build-aux/arg-nonnull.h,
+	build-aux/c++defs.h, build-aux/snippet/arg-nonnull.h,
+	build-aux/snippet/c++defs.h, build-aux/snippet/warn-on-use.h,
+	build-aux/useless-if-before-free, build-aux/vc-list-files,
+	build-aux/warn-on-use.h, gl/Makefile.am, gl/byteswap.in.h,
+	gl/check-version.c, gl/check-version.h, gl/des.c, gl/des.h,
+	gl/m4/00gnulib.m4, gl/m4/autobuild.m4, gl/m4/byteswap.m4,
+	gl/m4/extensions.m4, gl/m4/extern-inline.m4, gl/m4/gnulib-cache.m4,
+	gl/m4/gnulib-common.m4, gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4,
+	gl/m4/include_next.m4, gl/m4/inline.m4, gl/m4/inttypes-pri.m4,
+	gl/m4/inttypes.m4, gl/m4/longlong.m4, gl/m4/manywarnings.m4,
+	gl/m4/md4.m4, gl/m4/multiarch.m4, gl/m4/off_t.m4, gl/m4/ssize_t.m4,
+	gl/m4/stdalign.m4, gl/m4/stdbool.m4, gl/m4/stddef_h.m4,
+	gl/m4/stdint.m4, gl/m4/string_h.m4, gl/m4/strverscmp.m4,
+	gl/m4/sys_types_h.m4, gl/m4/unistd_h.m4, gl/m4/warn-on-use.m4,
+	gl/m4/warnings.m4, gl/m4/wchar_h.m4, gl/m4/wchar_t.m4,
+	gl/m4/wint_t.m4, gl/md4.c, gl/md4.h, gl/stdalign.in.h,
+	gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h, gl/string.in.h,
+	gl/strverscmp.c, gl/sys_types.in.h, gl/tests/Makefile.am,
+	gl/tests/dummy.c, gl/tests/init.sh, gl/tests/intprops.h,
+	gl/tests/inttypes.in.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c,
+	gl/tests/test-init.sh, gl/tests/test-intprops.c,
+	gl/tests/test-inttypes.c, gl/tests/test-md4.c,
+	gl/tests/test-stdalign.c, gl/tests/test-stdbool.c,
+	gl/tests/test-stddef.c, gl/tests/test-stdint.c,
+	gl/tests/test-string.c, gl/tests/test-strverscmp.c,
+	gl/tests/test-sys_types.c, gl/tests/test-unistd.c,
+	gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify.c,
+	gl/tests/test-wchar.c, gl/tests/verify.h, gl/tests/wchar.in.h,
+	gl/unistd.c, gl/unistd.in.h, maint.mk: Update gnulib files.
+
+2013-05-13  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Dist cfg.mk and maint.mk.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* doc/announce.txt: Improve.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* libntlm4win.mk: Fix script.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* libntlm4win.mk: Add script to build Windows binaries.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Add.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* doc/announce.txt: Add announce message.
+
+2011-06-20  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2011-06-20  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.3.
