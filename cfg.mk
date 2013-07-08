@@ -68,7 +68,7 @@ upload:
 	git push
 	git push --tags
 	cp $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
-	cp -v $(distdir).tar.gz{,.sig} $(htmldir)/releases/
+	cp -v $(distdir).tar.gz $(distdir).tar.gz.sig $(htmldir)/releases/
 	cd $(htmldir) && cvs add -kb releases/$(distdir).tar.gz{,.sig} && \
 		cvs commit -m "Update." releases/
 
