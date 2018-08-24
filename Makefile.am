@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013 Simon Josefsson.
+# Copyright (C) 2002-2018 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -28,6 +28,7 @@ EXTRA_DIST += libntlm.pc.in test.txt libntlm.spec
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libntlm.pc
 
+noinst_LTLIBRARIES = libntlm_impl.la
 lib_LTLIBRARIES = libntlm.la
 
 include_HEADERS = ntlm.h
@@ -35,17 +36,18 @@ include_HEADERS = ntlm.h
 AM_CFLAGS = $(WARN_CFLAGS)
 AM_CPPFLAGS = -I$(srcdir)/gl -I$(builddir)/gl -DNTLM_SRCDIR=\"$(srcdir)\"
 
-libntlm_la_SOURCES = smbutil.c smbencrypt.c
+libntlm_impl_la_SOURCES = smbutil.c smbencrypt.c
+libntlm_la_SOURCES =
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
 	-export-symbols-regex '^(dumpSmb|buildSmb|ntlm_).*' -no-undefined
 
-libntlm_la_LIBADD = gl/libgnu.la
+libntlm_la_LIBADD = libntlm_impl.la gl/libgnu.la
 
 # test
 
 TESTS = test_ntlm
 check_PROGRAMS = $(TESTS)
-LDADD = libntlm.la gl/libgnu.la
+LDADD = libntlm_impl.la gl/libgnu.la
 CLEANFILES = test.out
 test_ntlm_LDFLAGS = -no-install
 
