@@ -1,5 +1,5 @@
 /* test_ntlm.c --- Test module for libntlm.
- * Copyright (C) 2008 Simon Josefsson
+ * Copyright (C) 2008-2018 Simon Josefsson
  * Copyright (C) 2004, 2005 Frediano Ziglio
  *
  * This file is free software; you can redistribute it and/or modify
