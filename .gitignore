@@ -118,6 +118,7 @@ gl/tests/wchar.h
 gl/unistd.h
 gl/unistd.lo
 gl/unistd.o
+libntlm-*.tar.gz*
 libntlm.la
 libntlm.pc
 libntlm.spec
