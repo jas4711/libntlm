@@ -1,4 +1,4 @@
-# Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013 Simon Josefsson.
+# Copyright (C) 2006-2018 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -53,7 +53,7 @@ ChangeLog:
 htmldir = ../www-$(PACKAGE)
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
 
-release: prepare upload
+release: prepare ship
 
 prepare:
 	! git tag -l $(tag) | grep $(PACKAGE) > /dev/null
@@ -62,9 +62,9 @@ prepare:
 	gpg -b $(distdir).tar.gz
 	gpg --verify $(distdir).tar.gz.sig
 	git commit -m Generated. ChangeLog
-	git tag -u b565716f -m $(VERSION) $(tag)
+	git tag -m $(VERSION) $(tag)
 
-upload:
+ship:
 	git push
 	git push --tags
 	cp $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
