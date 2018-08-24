@@ -1,5 +1,21 @@
 2018-08-24  Simon Josefsson <simon@josefsson.org>
 
+	* NEWS: Version 1.5.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, THANKS: Credit.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore more.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
 	* .gitlab-ci.yml: Add gitlab CI.
 
 2018-08-24  Simon Josefsson <simon@josefsson.org>
