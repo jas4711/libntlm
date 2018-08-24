@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2013 Free Software Foundation, Inc.
+# Copyright (C) 2002-2018 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this file.  If not, see <http://www.gnu.org/licenses/>.
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
 #
 # As a special exception to the GNU General Public License,
 # this file may be distributed as part of a program that
@@ -37,7 +37,12 @@ AC_DEFUN([gl_EARLY],
   m4_pattern_allow([^gl_ES$])dnl a valid locale name
   m4_pattern_allow([^gl_LIBOBJS$])dnl a variable
   m4_pattern_allow([^gl_LTLIBOBJS$])dnl a variable
+
+  # Pre-early section.
+  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   AC_REQUIRE([gl_PROG_AR_RANLIB])
+
+  # Code from module absolute-header:
   # Code from module autobuild:
   AB_INIT
   # Code from module byteswap:
@@ -48,7 +53,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module crypto/md4:
   # Code from module crypto/md4-tests:
   # Code from module extensions:
-  AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   # Code from module extern-inline:
   # Code from module gnumakefile:
   # Code from module include_next:
@@ -58,6 +62,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module inttypes:
   # Code from module inttypes-incomplete:
   # Code from module inttypes-tests:
+  # Code from module limits-h:
+  # Code from module limits-h-tests:
   # Code from module maintainer-makefile:
   # Code from module manywarnings:
   # Code from module multiarch:
@@ -121,8 +127,10 @@ AC_DEFUN([gl_INIT],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
           [GNUmakefile=$GNUmakefile])])
   gl_INLINE
+  gl_LIMITS_H
   AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
     [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
+  AC_REQUIRE([AC_PROG_SED])
   gl_MULTIARCH
   gt_TYPE_SSIZE_T
   gl_STDALIGN_H
@@ -284,16 +292,16 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
-  build-aux/snippet/arg-nonnull.h
-  build-aux/snippet/c++defs.h
-  build-aux/snippet/warn-on-use.h
   build-aux/useless-if-before-free
   build-aux/vc-list-files
+  lib/arg-nonnull.h
   lib/byteswap.in.h
+  lib/c++defs.h
   lib/check-version.c
   lib/check-version.h
   lib/des.c
   lib/des.h
+  lib/limits.in.h
   lib/md4.c
   lib/md4.h
   lib/stdalign.in.h
@@ -305,7 +313,9 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/sys_types.in.h
   lib/unistd.c
   lib/unistd.in.h
+  lib/warn-on-use.h
   m4/00gnulib.m4
+  m4/absolute-header.m4
   m4/autobuild.m4
   m4/byteswap.m4
   m4/extensions.m4
@@ -315,7 +325,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/inline.m4
   m4/inttypes-pri.m4
   m4/inttypes.m4
+  m4/limits-h.m4
   m4/longlong.m4
+  m4/manywarnings-c++.m4
   m4/manywarnings.m4
   m4/md4.m4
   m4/multiarch.m4
@@ -342,6 +354,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-init.sh
   tests/test-intprops.c
   tests/test-inttypes.c
+  tests/test-limits-h.c
   tests/test-md4.c
   tests/test-stdalign.c
   tests/test-stdbool.c
@@ -353,13 +366,17 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-unistd.c
   tests/test-vc-list-files-cvs.sh
   tests/test-vc-list-files-git.sh
+  tests/test-verify-try.c
   tests/test-verify.c
   tests/test-verify.sh
   tests/test-wchar.c
+  tests=lib/arg-nonnull.h
+  tests=lib/c++defs.h
   tests=lib/dummy.c
   tests=lib/intprops.h
   tests=lib/inttypes.in.h
   tests=lib/verify.h
+  tests=lib/warn-on-use.h
   tests=lib/wchar.in.h
   top/GNUmakefile
   top/maint.mk

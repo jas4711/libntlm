@@ -1,5 +1,6 @@
-/* Test of <byteswap.h> substitute.
-   Copyright (C) 2007-2018 Free Software Foundation, Inc.
+/* Test the "verify" module.
+
+   Copyright (C) 2017-2018 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,19 +15,7 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-/* Written by Bruno Haible <bruno@clisp.org>, 2007.  */
+/* This is a separate source file, so that the execution of test-verify.sh
+   does not interfere with the building of the 'test-verify' program.  */
 
-#include <config.h>
-
-#include <byteswap.h>
-
-#include "macros.h"
-
-int
-main ()
-{
-  ASSERT (bswap_16 (0xABCD) == 0xCDAB);
-  ASSERT (bswap_32 (0xDEADBEEF) == 0xEFBEADDE);
-
-  return 0;
-}
+#include "test-verify.c"

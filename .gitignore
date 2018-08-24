@@ -28,8 +28,6 @@ gl/.deps/
 gl/.libs/
 gl/Makefile
 gl/Makefile.in
-gl/arg-nonnull.h
-gl/c++defs.h
 gl/libgnu.la
 gl/string.h
 gl/sys/

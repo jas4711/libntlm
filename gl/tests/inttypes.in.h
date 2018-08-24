@@ -1,4 +1,4 @@
-/* Copyright (C) 2006-2013 Free Software Foundation, Inc.
+/* Copyright (C) 2006-2018 Free Software Foundation, Inc.
    Written by Paul Eggert, Bruno Haible, Derek Price.
    This file is part of gnulib.
 
@@ -13,7 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /*
  * ISO C 99 <inttypes.h> for platforms that lack it.
@@ -51,6 +51,10 @@
 #endif
 /* Get CHAR_BIT.  */
 #include <limits.h>
+/* On mingw, __USE_MINGW_ANSI_STDIO only works if <stdio.h> is also included */
+#if defined _WIN32 && ! defined __CYGWIN__
+# include <stdio.h>
+#endif
 
 #if !(INT_MIN == INT32_MIN && INT_MAX == INT32_MAX)
 # error "This file assumes that 'int' has exactly 32 bits. Please report your platform and compiler to <bug-gnulib@gnu.org>."
@@ -1063,11 +1067,13 @@ _GL_WARN_ON_USE (imaxabs, "imaxabs is unportable - "
 #endif
 
 #if @GNULIB_IMAXDIV@
-# if !@HAVE_DECL_IMAXDIV@
+# if !@HAVE_IMAXDIV_T@
 #  if !GNULIB_defined_imaxdiv_t
 typedef struct { intmax_t quot; intmax_t rem; } imaxdiv_t;
 #   define GNULIB_defined_imaxdiv_t 1
 #  endif
+# endif
+# if !@HAVE_DECL_IMAXDIV@
 extern imaxdiv_t imaxdiv (intmax_t, intmax_t);
 # endif
 #elif defined GNULIB_POSIXCHECK
@@ -1105,12 +1111,22 @@ _GL_WARN_ON_USE (strtoimax, "strtoimax is unportable - "
 #endif
 
 #if @GNULIB_STRTOUMAX@
-# if !@HAVE_DECL_STRTOUMAX@
-#  undef strtoumax
+# if @REPLACE_STRTOUMAX@
+#  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
+#   undef strtoumax
+#   define strtoumax rpl_strtoumax
+#  endif
+_GL_FUNCDECL_RPL (strtoumax, uintmax_t,
+                  (const char *, char **, int) _GL_ARG_NONNULL ((1)));
+_GL_CXXALIAS_RPL (strtoumax, uintmax_t, (const char *, char **, int));
+# else
+#  if !@HAVE_DECL_STRTOUMAX@
+#   undef strtoumax
 _GL_FUNCDECL_SYS (strtoumax, uintmax_t,
                   (const char *, char **, int) _GL_ARG_NONNULL ((1)));
-# endif
+#  endif
 _GL_CXXALIAS_SYS (strtoumax, uintmax_t, (const char *, char **, int));
+# endif
 _GL_CXXALIASWARN (strtoumax);
 #elif defined GNULIB_POSIXCHECK
 # undef strtoumax
