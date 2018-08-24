@@ -6,6 +6,7 @@ See the end for copying conditions.
 * Version 1.5 (unreleased)
 
 ** Build system fixes.
+Patch for LTO/gcc8 support from Romain GEISSLER.
 
 ** API and ABI modifications.
 No changes since last version.
