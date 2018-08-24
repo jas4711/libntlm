@@ -1,9 +1,11 @@
 Libntlm NEWS -- history of user-visible changes.                -*- outline -*-
-Copyright (C) 2002-2013 Simon Josefsson
+Copyright (C) 2002-2018 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
 * Version 1.5 (unreleased)
+
+** Build system fixes.
 
 ** API and ABI modifications.
 No changes since last version.
