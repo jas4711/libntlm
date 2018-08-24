@@ -200,7 +200,7 @@ dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
   char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Request:\n"
 	   "      Ident = %.8s\n"
-	   "      mType = %ud\n"
+	   "      mType = %u\n"
 	   "      Flags = %08x\n"
 	   "       User = %s\n"
 	   "     Domain = %s\n",
@@ -217,7 +217,7 @@ dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
   unsigned char buf[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Challenge:\n"
 	   "      Ident = %.8s\n"
-	   "      mType = %ud\n"
+	   "      mType = %u\n"
 	   "     Domain = %s\n"
 	   "      Flags = %08x\n"
 	   "  Challenge = ",
@@ -234,7 +234,7 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
   unsigned char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE], buf3[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Response:\n"
 	   "      Ident = %.8s\n"
-	   "      mType = %ud\n"
+	   "      mType = %u\n"
 	   "     LmResp = ", response->ident, UI32LE (response->msgType));
   DumpBuffer (fp, response, lmResponse);
   fprintf (fp, "     NTResp = ");
