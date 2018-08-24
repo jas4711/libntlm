@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013 Simon Josefsson.
+dnl Copyright (C) 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013, 2018 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -43,7 +43,6 @@ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 
 AC_C_BIGENDIAN
-sj_VALGRIND
 
 # For gnulib.
 gl_INIT

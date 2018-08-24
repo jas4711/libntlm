@@ -50,6 +50,7 @@
 #  manywarnings \
 #  strverscmp \
 #  unistd \
+#  valgrind-tests \
 #  warnings
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
@@ -65,6 +66,7 @@ gl_MODULES([
   manywarnings
   strverscmp
   unistd
+  valgrind-tests
   warnings
 ])
 gl_AVOID([])

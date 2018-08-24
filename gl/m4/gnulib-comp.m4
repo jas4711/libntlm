@@ -90,6 +90,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module unistd:
   # Code from module unistd-tests:
   # Code from module useless-if-before-free:
+  # Code from module valgrind-tests:
   # Code from module vc-list-files:
   # Code from module vc-list-files-tests:
   # Code from module verify:
@@ -147,6 +148,7 @@ AC_DEFUN([gl_INIT],
   gl_SYS_TYPES_H
   AC_PROG_MKDIR_P
   gl_UNISTD_H
+  gl_VALGRIND_TESTS
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gl_LIBSOURCES_DIR])[ ||
@@ -197,6 +199,7 @@ changequote([, ])dnl
   gl_INTTYPES_INCOMPLETE
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
+  gl_VALGRIND_TESTS
   abs_aux_dir=`cd "$ac_aux_dir"; pwd`
   AC_SUBST([abs_aux_dir])
   gl_WCHAR_H
@@ -341,6 +344,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/strverscmp.m4
   m4/sys_types_h.m4
   m4/unistd_h.m4
+  m4/valgrind-tests.m4
   m4/warn-on-use.m4
   m4/warnings.m4
   m4/wchar_h.m4

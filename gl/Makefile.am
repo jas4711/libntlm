@@ -45,6 +45,7 @@
 #  manywarnings \
 #  strverscmp \
 #  unistd \
+#  valgrind-tests \
 #  warnings
 
 AUTOMAKE_OPTIONS = 1.9.6 gnits
