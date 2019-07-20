@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2018 Free Software Foundation, Inc.
+# Copyright (C) 2002-2019 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -62,6 +62,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module inttypes:
   # Code from module inttypes-incomplete:
   # Code from module inttypes-tests:
+  # Code from module libc-config:
   # Code from module limits-h:
   # Code from module limits-h-tests:
   # Code from module maintainer-makefile:
@@ -128,10 +129,12 @@ AC_DEFUN([gl_INIT],
         [AC_CONFIG_LINKS([$GNUmakefile:$GNUmakefile], [],
           [GNUmakefile=$GNUmakefile])])
   gl_INLINE
+  gl___INLINE
   gl_LIMITS_H
   AC_CONFIG_COMMANDS_PRE([m4_ifdef([AH_HEADER],
     [AC_SUBST([CONFIG_INCLUDE], m4_defn([AH_HEADER]))])])
   AC_REQUIRE([AC_PROG_SED])
+  AC_REQUIRE([AC_PROG_GREP])
   gl_MULTIARCH
   gt_TYPE_SSIZE_T
   gl_STDALIGN_H
@@ -300,10 +303,12 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/arg-nonnull.h
   lib/byteswap.in.h
   lib/c++defs.h
+  lib/cdefs.h
   lib/check-version.c
   lib/check-version.h
   lib/des.c
   lib/des.h
+  lib/libc-config.h
   lib/limits.in.h
   lib/md4.c
   lib/md4.h
@@ -318,6 +323,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/unistd.in.h
   lib/warn-on-use.h
   m4/00gnulib.m4
+  m4/__inline.m4
   m4/absolute-header.m4
   m4/autobuild.m4
   m4/byteswap.m4
