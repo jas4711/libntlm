@@ -90,6 +90,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module test-framework-sh-tests:
   # Code from module unistd:
   # Code from module unistd-tests:
+  # Code from module update-copyright:
+  # Code from module update-copyright-tests:
   # Code from module useless-if-before-free:
   # Code from module valgrind-tests:
   # Code from module vc-list-files:
@@ -202,6 +204,8 @@ changequote([, ])dnl
   gl_INTTYPES_INCOMPLETE
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
+  abs_aux_dir=`cd "$ac_aux_dir"; pwd`
+  AC_SUBST([abs_aux_dir])
   gl_VALGRIND_TESTS
   abs_aux_dir=`cd "$ac_aux_dir"; pwd`
   AC_SUBST([abs_aux_dir])
@@ -298,6 +302,7 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
+  build-aux/update-copyright
   build-aux/useless-if-before-free
   build-aux/vc-list-files
   lib/arg-nonnull.h
@@ -374,6 +379,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-strverscmp.c
   tests/test-sys_types.c
   tests/test-unistd.c
+  tests/test-update-copyright.sh
   tests/test-vc-list-files-cvs.sh
   tests/test-vc-list-files-git.sh
   tests/test-verify-try.c

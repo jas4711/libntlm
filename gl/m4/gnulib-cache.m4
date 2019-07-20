@@ -50,6 +50,7 @@
 #  manywarnings \
 #  strverscmp \
 #  unistd \
+#  update-copyright \
 #  valgrind-tests \
 #  warnings
 
@@ -66,6 +67,7 @@ gl_MODULES([
   manywarnings
   strverscmp
   unistd
+  update-copyright
   valgrind-tests
   warnings
 ])

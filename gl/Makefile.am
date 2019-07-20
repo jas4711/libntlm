@@ -45,6 +45,7 @@
 #  manywarnings \
 #  strverscmp \
 #  unistd \
+#  update-copyright \
 #  valgrind-tests \
 #  warnings
 
@@ -648,6 +649,13 @@ MOSTLYCLEANFILES += unistd.h unistd.h-t
 EXTRA_DIST += unistd.in.h
 
 ## end   gnulib module unistd
+
+## begin gnulib module update-copyright
+
+
+EXTRA_DIST += $(top_srcdir)/build-aux/update-copyright
+
+## end   gnulib module update-copyright
 
 ## begin gnulib module useless-if-before-free
 
