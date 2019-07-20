@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-dnl Copyright (C) 2002-2018 Simon Josefsson.
+dnl Copyright (C) 2002-2019 Simon Josefsson.
 dnl
 dnl This file is part of Libntlm.
 dnl
@@ -19,7 +19,7 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_PREREQ(2.61)
+AC_PREREQ(2.63)
 AC_INIT([libntlm], [1.6], [libntlm@nongnu.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
