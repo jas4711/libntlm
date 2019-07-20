@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002-2018 Simon Josefsson.
+# Copyright (C) 2002-2019 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
