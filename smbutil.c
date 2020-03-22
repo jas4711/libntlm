@@ -1,5 +1,5 @@
 /* smbutil.c --- Main library functions.
- * Copyright (C) 2002-2019 Simon Josefsson
+ * Copyright (C) 2002-2020 Simon Josefsson
  * Copyright (C) 1999-2001 Grant Edwards
  * Copyright (C) 2004 Frediano Ziglio
  *
