@@ -3,3 +3,13 @@ Debian GNU/Linux build:
     - make bootstrap
   script:
     - (make && make check) || (cat *.log test-suite.log; exit 1)
+
+GLR1 build:
+  tags:
+    - glr1
+  before_script:
+    - apt-get update
+    - apt-get install -y git autoconf automake libtool make valgrind
+    - make bootstrap
+  script:
+    - (make && make check) || (cat *.log test-suite.log; exit 1)
