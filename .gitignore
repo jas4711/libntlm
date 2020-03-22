@@ -4,6 +4,7 @@
 INSTALL
 Makefile
 Makefile.in
+^m4/
 aclocal.m4
 autom4te.cache/
 build-aux/ar-lib
@@ -125,7 +126,6 @@ libntlm.pc
 libntlm.spec
 libntlm_impl.la
 libtool
-m4/
 ntlm.h
 smbencrypt.lo
 smbencrypt.o

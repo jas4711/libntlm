@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2019 Free Software Foundation, Inc.
+# Copyright (C) 2002-2020 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -118,6 +118,7 @@ AC_DEFUN([gl_INIT],
   gl_COMMON
   gl_source_base='gl'
   gl_BYTESWAP
+  AC_REQUIRE([AC_C_RESTRICT])
   gl_MD4
   AC_REQUIRE([gl_EXTERN_INLINE])
   # Autoconf 2.61a.99 and earlier don't support linking a file only
@@ -340,7 +341,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/inttypes-pri.m4
   m4/inttypes.m4
   m4/limits-h.m4
-  m4/longlong.m4
   m4/manywarnings-c++.m4
   m4/manywarnings.m4
   m4/md4.m4
@@ -361,6 +361,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/wchar_h.m4
   m4/wchar_t.m4
   m4/wint_t.m4
+  m4/zzgnulib.m4
   tests/init.sh
   tests/macros.h
   tests/signature.h
