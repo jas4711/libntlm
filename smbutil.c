@@ -46,9 +46,9 @@ char versionString[] = PACKAGE_STRING;
 
 /*
  * Must be multiple of two
- * We use a statis buffer of 1024 bytes for message
+ * We use a statis buffer of MSG_BUFSIZE [1024] bytes for message
  * At maximun we but 48 bytes (ntlm responses) and 3 unicode strings so
- * NTLM_BUFSIZE * 3 + 48 <= 1024
+ * NTLM_BUFSIZE * 3 + 48 <= MSG_BUFSIZE
  */
 #define NTLM_BUFSIZE 320
 
@@ -70,10 +70,13 @@ char versionString[] = PACKAGE_STRING;
  */
 #define AddBytes(ptr, header, buf, count) \
 { \
-  ptr->header.len = ptr->header.maxlen = UI16LE(count); \
+  size_t count2 = count; \
+  if (count2  > MSG_BUFSIZE - ptr->bufIndex)  \
+    count2 = MSG_BUFSIZE - ptr->bufIndex; \
+  ptr->header.len = ptr->header.maxlen = UI16LE(count2); \
   ptr->header.offset = UI32LE((ptr->buffer - ((uint8*)ptr)) + ptr->bufIndex); \
-  memcpy(ptr->buffer+ptr->bufIndex, buf, count); \
-  ptr->bufIndex += count; \
+  memcpy(ptr->buffer+ptr->bufIndex, buf, count2); \
+  ptr->bufIndex += count2; \
 }
 
 #define AddString(ptr, header, string) \

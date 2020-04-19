@@ -36,6 +36,8 @@ extern "C"
 
 #define NTLM_VERSION "@PACKAGE_VERSION@"
 
+#define MSG_BUFSIZE 1024
+
 /*
  * These structures are byte-order dependant, and should not
  * be manipulated except by the use of the routines provided
@@ -55,7 +57,7 @@ extern "C"
     uint32 flags;
     tSmbStrHeader user;
     tSmbStrHeader domain;
-    uint8 buffer[1024];
+    uint8 buffer[MSG_BUFSIZE];
     uint32 bufIndex;
   } tSmbNtlmAuthRequest;
 
@@ -68,7 +70,7 @@ extern "C"
     uint8 challengeData[8];
     uint8 reserved[8];
     tSmbStrHeader emptyString;
-    uint8 buffer[1024];
+    uint8 buffer[MSG_BUFSIZE];
     uint32 bufIndex;
   } tSmbNtlmAuthChallenge;
 
@@ -84,7 +86,7 @@ extern "C"
     tSmbStrHeader uWks;
     tSmbStrHeader sessionKey;
     uint32 flags;
-    uint8 buffer[1024];
+    uint8 buffer[MSG_BUFSIZE];
     uint32 bufIndex;
   } tSmbNtlmAuthResponse;
 
