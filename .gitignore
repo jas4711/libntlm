@@ -4,7 +4,6 @@
 INSTALL
 Makefile
 Makefile.in
-^m4/
 aclocal.m4
 autom4te.cache/
 build-aux/ar-lib
@@ -101,6 +100,8 @@ gl/tests/test-unistd
 gl/tests/test-unistd.log
 gl/tests/test-unistd.o
 gl/tests/test-unistd.trs
+gl/tests/test-update-copyright.sh.log
+gl/tests/test-update-copyright.sh.trs
 gl/tests/test-vc-list-files-cvs.sh.log
 gl/tests/test-vc-list-files-cvs.sh.trs
 gl/tests/test-vc-list-files-git.sh.log
@@ -126,6 +127,7 @@ libntlm.pc
 libntlm.spec
 libntlm_impl.la
 libtool
+m4/
 ntlm.h
 smbencrypt.lo
 smbencrypt.o
@@ -134,6 +136,10 @@ smbutil.o
 stamp-h1
 test-suite.log
 test.out
+test_CVE-2019-17455
+test_CVE-2019-17455.log
+test_CVE-2019-17455.o
+test_CVE-2019-17455.trs
 test_ntlm
 test_ntlm.log
 test_ntlm.o
