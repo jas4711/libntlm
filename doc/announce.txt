@@ -1,5 +1,5 @@
 To: libntlm@nongnu.org
-Subject: Libntlm 1.3
+Subject: Libntlm 1.6
 <#secure method=pgpmime mode=sign>
 Libntlm provides routines to manipulate the structures used for the
 client end of Microsoft NTLM authentication.  This code was initially
@@ -10,53 +10,45 @@ re-written code, so that the license is now LGPLv2+.
 
 News since the last release:
 
+** Fix buffer overflow in buildSmbNtlmAuth* function.  CVE-2019-17455.
+Reported by Kirin in <https://gitlab.com/jas/libntlm/-/issues/2> and
+patch provided by Cedric Buissart.  See newly introduced regression
+check test_CVE-2019-17455.c for test of a vulnerable library.
+
 ** Update gnulib files.
 
 The project page of the library is available at:
-  http://josefsson.org/libntlm/
+  https://www.nongnu.org/libntlm/
 
 If you need help to use Libntlm, or want to help others, you are invited
 to join our mailing list, see:
-  http://lists.nongnu.org/mailman/listinfo/libntlm
+  https://lists.nongnu.org/mailman/listinfo/libntlm
 
-Here are the compressed sources (508K):
-  http://josefsson.org/libntlm/releases/libntlm-1.3.tar.gz
+Here are the compressed sources (676K) and detached OpenPGP signature:
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6.tar.gz
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6.tar.gz.sig
 
-Here are GPG detached signatures:
-  http://josefsson.org/libntlm/releases/libntlm-1.3.tar.gz.sig
-
-Windows binaries are available.  For 32-bit Windows:
-
-http://www.nongnu.org/libntlm/releases/libntlm-1.3-win32.zip
-http://www.nongnu.org/libntlm/releases/libntlm-1.3-win32.zip.sig
-
-For 64-bit Windows:
-
-http://www.nongnu.org/libntlm/releases/libntlm-1.3-win64.zip
-http://www.nongnu.org/libntlm/releases/libntlm-1.3-win64.zip.sig
+Windows binaries are available:
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win32.zip
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win32.zip.sig
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win64.zip
+  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win64.zip.sig
 
 The software is cryptographically signed by the maintainer using an
 OpenPGP key identified by the following information:
 
-pub   1280R/B565716F 2002-05-05 [expires: 2012-01-24]
-      Key fingerprint = 0424 D4EE 81A0 E3D1 19C6  F835 EDA2 1E94 B565 716F
-uid                  Simon Josefsson <simon@josefsson.org>
-sub   1280R/4D5D40AE 2002-05-05 [expires: 2012-01-24]
+sec#  ed25519 2019-03-20 [SC]
+      B1D2BD1375BECB784CF4F8C4D73CF638C53C06BE
+uid           [ultimate] Simon Josefsson <simon@josefsson.org>
 
 The key is available from:
-  http://josefsson.org/key.txt
-  dns:b565716f.josefsson.org?TYPE=CERT
+  https://josefsson.org/key-20190320.txt
 
-Here are the SHA-1 and SHA-224 signatures:
+Here are the SHA-256 checksums:
 
-5dd798d5fb9a75656225052aa88ceb9befbbd4a0  libntlm-1.3.tar.gz
-9da9dd03457d93a9beea184e0b7c032239c41ced493ee566f7db36e1  libntlm-1.3.tar.gz
-
-aa35afd931fb94e2de3cf864a42dcfc98d8a5215  libntlm-1.3-win32.zip
-a6691d4e1f5febb1905c65fda241bbd90319325d69f8886c6d128ee2  libntlm-1.3-win32.zip
-
-655a17e7ec9fdba6dd4d50bc67ed68ace2c85192  libntlm-1.3-win64.zip
-57151fe20a37d44c61bd6a59618ce1c80d61f4a65a6f4dfaad3ba485  libntlm-1.3-win64.zip
+f2376b87b06d8755aa3498bb1226083fdb1d2cf4460c3982b05a9aa0b51d6821  libntlm-1.6.tar.gz
+3db3474c72e48c8f77496a76d84f47485c325938f46ef220e8f352cf7b1ba773  libntlm-1.6-win32.zip
+2dda3bda329e380cbd63b77ae379d0fb49278316e3593a065f2620077321dcc5  libntlm-1.6-win64.zip
 
 Happy hacking,
 Simon
