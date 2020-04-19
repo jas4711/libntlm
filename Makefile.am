@@ -45,7 +45,7 @@ libntlm_la_LIBADD = libntlm_impl.la gl/libgnu.la
 
 # test
 
-TESTS = test_ntlm
+TESTS = test_ntlm test_CVE-2019-17455
 check_PROGRAMS = $(TESTS)
 LDADD = libntlm_impl.la gl/libgnu.la
 CLEANFILES = test.out
