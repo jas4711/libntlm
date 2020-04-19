@@ -5,6 +5,11 @@ See the end for copying conditions.
 
 * Version 1.6 (unreleased)
 
+** Fix buffer overflow in buildSmbNtlmAuth* function.  CVE-2019-17455.
+Reported by Kirin in <https://gitlab.com/jas/libntlm/-/issues/2> and
+patch provided by Cedric Buissart.  See newly introduced regression
+check test_CVE-2019-17455.c for test of a vulnerable library.
+
 ** API and ABI modifications.
 No changes since last version.
 
