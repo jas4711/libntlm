@@ -1,3 +1,149 @@
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore more.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/update-copyright, build-aux/useless-if-before-free,
+	gl/tests/test-update-copyright.sh: Update gnulib files.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, THANKS: Add NEWS entry about buffer overflow bug.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am, test_CVE-2019-17455.c: Add regression check for
+	CVE-2019-17455 overflow.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in, smbutil.c: Improve namespace.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* ntlm.h.in, smbutil.c: Fix buffer overflow.  Patch from Cedric
+	Buissart based on report by Kirin.  CVE-2019-17455 <https://gitlab.com/jas/libntlm/-/issues/2>
+
+2020-03-22  Simon Josefsson <simon@josefsson.org>
+
+	* .clcopying, AUTHORS, ChangeLog, NEWS, README, THANKS, cfg.mk,
+	configure.ac, libntlm.pc.in, libntlm4win.mk, smbencrypt.c,
+	smbutil.c, test_ntlm.c: Update copyright years.
+
+2020-03-22  Simon Josefsson <simon@josefsson.org>
+
+	* Makefile.am: Modernize automake usage.
+
+2020-03-22  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: Run on glr1.
+
+2020-03-22  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore, GNUmakefile, build-aux/update-copyright,
+	build-aux/useless-if-before-free, build-aux/vc-list-files,
+	gl/Makefile.am, gl/arg-nonnull.h, gl/byteswap.in.h, gl/c++defs.h,
+	gl/cdefs.h, gl/check-version.c, gl/check-version.h, gl/des.c,
+	gl/des.h, gl/libc-config.h, gl/limits.in.h, gl/m4/00gnulib.m4,
+	gl/m4/__inline.m4, gl/m4/absolute-header.m4, gl/m4/autobuild.m4,
+	gl/m4/byteswap.m4, gl/m4/extensions.m4, gl/m4/extern-inline.m4,
+	gl/m4/gnulib-cache.m4, gl/m4/gnulib-common.m4,
+	gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4, gl/m4/include_next.m4,
+	gl/m4/inline.m4, gl/m4/inttypes-pri.m4, gl/m4/inttypes.m4,
+	gl/m4/limits-h.m4, gl/m4/longlong.m4, gl/m4/manywarnings-c++.m4,
+	gl/m4/manywarnings.m4, gl/m4/md4.m4, gl/m4/multiarch.m4,
+	gl/m4/off_t.m4, gl/m4/ssize_t.m4, gl/m4/stdalign.m4,
+	gl/m4/stdbool.m4, gl/m4/stddef_h.m4, gl/m4/stdint.m4,
+	gl/m4/string_h.m4, gl/m4/strverscmp.m4, gl/m4/sys_types_h.m4,
+	gl/m4/unistd_h.m4, gl/m4/valgrind-tests.m4, gl/m4/warn-on-use.m4,
+	gl/m4/warnings.m4, gl/m4/wchar_h.m4, gl/m4/wchar_t.m4,
+	gl/m4/wint_t.m4, gl/m4/zzgnulib.m4, gl/md4.c, gl/md4.h,
+	gl/stdalign.in.h, gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h,
+	gl/string.in.h, gl/strverscmp.c, gl/sys_types.in.h,
+	gl/tests/Makefile.am, gl/tests/arg-nonnull.h, gl/tests/c++defs.h,
+	gl/tests/dummy.c, gl/tests/init.sh, gl/tests/intprops.h,
+	gl/tests/inttypes.in.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c,
+	gl/tests/test-init.sh, gl/tests/test-intprops.c,
+	gl/tests/test-inttypes.c, gl/tests/test-limits-h.c,
+	gl/tests/test-md4.c, gl/tests/test-stdalign.c,
+	gl/tests/test-stdbool.c, gl/tests/test-stddef.c,
+	gl/tests/test-stdint.c, gl/tests/test-string.c,
+	gl/tests/test-strverscmp.c, gl/tests/test-sys_types.c,
+	gl/tests/test-unistd.c, gl/tests/test-update-copyright.sh,
+	gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify-try.c,
+	gl/tests/test-verify.c, gl/tests/test-wchar.c, gl/tests/verify.h,
+	gl/tests/warn-on-use.h, gl/tests/wchar.in.h, gl/unistd.in.h,
+	gl/warn-on-use.h, maint.mk: Update gnulib files.
+
+2019-07-20  Simon Josefsson <simon@josefsson.org>
+
+	* .clcopying, AUTHORS, ChangeLog, Makefile.am, NEWS, README,
+	THANKS, cfg.mk, libntlm.pc.in, libntlm4win.mk, smbencrypt.c,
+	smbutil.c, test_ntlm.c: Update copyright years.
+
+2019-07-20  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/update-copyright, gl/Makefile.am,
+	gl/m4/gnulib-cache.m4, gl/m4/gnulib-comp.m4, gl/tests/Makefile.am,
+	gl/tests/test-update-copyright.sh: Add update-copyright gnulib
+	module.
+
+2019-07-20  Simon Josefsson <simon@josefsson.org>
+
+	* GNUmakefile, build-aux/useless-if-before-free,
+	build-aux/vc-list-files, gl/Makefile.am, gl/arg-nonnull.h,
+	gl/byteswap.in.h, gl/c++defs.h, gl/cdefs.h, gl/check-version.c,
+	gl/check-version.h, gl/des.c, gl/des.h, gl/libc-config.h,
+	gl/limits.in.h, gl/m4/00gnulib.m4, gl/m4/__inline.m4,
+	gl/m4/absolute-header.m4, gl/m4/autobuild.m4, gl/m4/byteswap.m4,
+	gl/m4/extensions.m4, gl/m4/extern-inline.m4, gl/m4/gnulib-cache.m4,
+	gl/m4/gnulib-common.m4, gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4,
+	gl/m4/include_next.m4, gl/m4/inline.m4, gl/m4/inttypes-pri.m4,
+	gl/m4/inttypes.m4, gl/m4/limits-h.m4, gl/m4/longlong.m4,
+	gl/m4/manywarnings-c++.m4, gl/m4/manywarnings.m4, gl/m4/md4.m4,
+	gl/m4/multiarch.m4, gl/m4/off_t.m4, gl/m4/ssize_t.m4,
+	gl/m4/stdalign.m4, gl/m4/stdbool.m4, gl/m4/stddef_h.m4,
+	gl/m4/stdint.m4, gl/m4/string_h.m4, gl/m4/strverscmp.m4,
+	gl/m4/sys_types_h.m4, gl/m4/unistd_h.m4, gl/m4/valgrind-tests.m4,
+	gl/m4/warn-on-use.m4, gl/m4/warnings.m4, gl/m4/wchar_h.m4,
+	gl/m4/wchar_t.m4, gl/m4/wint_t.m4, gl/md4.c, gl/md4.h,
+	gl/stdalign.in.h, gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h,
+	gl/string.in.h, gl/strverscmp.c, gl/sys_types.in.h,
+	gl/tests/Makefile.am, gl/tests/arg-nonnull.h, gl/tests/c++defs.h,
+	gl/tests/dummy.c, gl/tests/init.sh, gl/tests/intprops.h,
+	gl/tests/inttypes.in.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c,
+	gl/tests/test-init.sh, gl/tests/test-intprops.c,
+	gl/tests/test-inttypes.c, gl/tests/test-limits-h.c,
+	gl/tests/test-md4.c, gl/tests/test-stdalign.c,
+	gl/tests/test-stdbool.c, gl/tests/test-stddef.c,
+	gl/tests/test-stdint.c, gl/tests/test-string.c,
+	gl/tests/test-strverscmp.c, gl/tests/test-sys_types.c,
+	gl/tests/test-unistd.c, gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify-try.c,
+	gl/tests/test-verify.c, gl/tests/test-wchar.c, gl/tests/verify.h,
+	gl/tests/warn-on-use.h, gl/tests/wchar.in.h, gl/unistd.in.h,
+	gl/warn-on-use.h, maint.mk: Update gnulib files.
+
+2019-07-20  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Bump AC_PREREQ for gnulib.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore more.
+
+2018-08-24  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2018-08-24  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.5.
