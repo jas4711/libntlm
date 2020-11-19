@@ -1,18 +1,21 @@
+stages:
+ - build
+
 Debian:
   image: debian:latest
   stage: build
   before_script:
-    - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
+  - apt-get update -qq
+  - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
   script:
-    - ./bootstrap
-    - ./configure WARN_CFLAGS=-Werror
-    - make syntax-check
-    - make
-    - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
-    - make dist
-    - sha224sum *.tar.gz
+  - ./bootstrap
+  - ./configure WARN_CFLAGS=-Werror
+  - make syntax-check
+  - make
+  - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make dist
+  - sha224sum *.tar.gz
   artifacts:
     expire_in: 2 weeks
     paths:
-      - *.tar.gz
+    - *.tar.gz
