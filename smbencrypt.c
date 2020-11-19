@@ -88,8 +88,7 @@ ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 
 void
 ntlm_smb_nt_encrypt (const char *passwd,
-		     const uint8 * challenge,
-		     uint8 * answer)
+		     const uint8 * challenge, uint8 * answer)
 {
   size_t len, i;
   unsigned char hash[24];

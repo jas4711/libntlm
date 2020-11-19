@@ -32,12 +32,12 @@
 #include "ntlm.h"
 
 #ifdef NTLM_UNIQUE_MODULE
-# include "des.c"
-# include "md4.c"
-# include "smbencrypt.c"
+#include "des.c"
+#include "md4.c"
+#include "smbencrypt.c"
 #else
-# include "des.h"
-# include "md4.h"
+#include "des.h"
+#include "md4.h"
 #endif
 
 char versionString[] = PACKAGE_STRING;
@@ -53,15 +53,15 @@ char versionString[] = PACKAGE_STRING;
 #define NTLM_BUFSIZE 320
 
 /*
- * all bytes in our structures are aligned so just swap bytes so 
- * we have just to swap order 
+ * all bytes in our structures are aligned so just swap bytes so
+ * we have just to swap order
  */
 #ifdef WORDS_BIGENDIAN
-# define UI16LE(n) bswap_16(n)
-# define UI32LE(n) bswap_32(n)
+#define UI16LE(n) bswap_16(n)
+#define UI32LE(n) bswap_32(n)
 #else
-# define UI16LE(n) (n)
-# define UI32LE(n) (n)
+#define UI16LE(n) (n)
+#define UI32LE(n) (n)
 #endif
 
 /* I am not crazy about these macros -- they seem to have gotten

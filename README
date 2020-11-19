@@ -42,8 +42,8 @@ sufficient:
  $ make install
 
 Usage
------  
-  
+-----
+
 The application program must convert these structures to/from
 base64 which is used to transfer data for IMAP authentication.
 For example usage see the sources for the mutt MUA or the
@@ -60,18 +60,18 @@ extern char *seqTag;  /* IMAP sequence number */
 
 int imap_auth_ntlm(char *user, char *domain, char *pass)
 {
-  tSmbNtlmAuthRequest   request;              
+  tSmbNtlmAuthRequest   request;
   tSmbNtlmAuthChallenge challenge;
   tSmbNtlmAuthResponse  response;
   char buffer[512];
   char tmpstr[32];
-  
+
   writeToServer("%s AUTHENTICATE NTLM\r\n",seqTag);
   readFromServer(buffer)
-  
+
   /* buffer should be "+", but we won't show code to check */
 
-  /* 
+  /*
    * prepare the request, convert to base64, and send it to
    * the server.  My server didn't care about domain, and NULL
    * worked fine.
@@ -80,33 +80,33 @@ int imap_auth_ntlm(char *user, char *domain, char *pass)
   buildSmbNtlmAuthRequest(&request,user,domain);
   convertToBase64(buffer, &request, SmbLength(&request));
   writeToServer("%s\r\n",buffer);
-  
+
   /* read challange data from server, convert from base64 */
-  
+
   readFromServer(buffer);
-  
+
   /* buffer should contain the string "+ [base 64 data]" */
-  
+
   convertFromBase64(&challenge, buffer+2);
-  
+
   /* prepare response, convert to base64, send to server */
-  
+
   buildSmbNtlmAuthResponse(&challenge, &response, user, pass);
   convertToBase64(buffer,&response,SmbLength(&response));
   writeToServer("%s\r\n",buffer);
-  
+
   /* read line from server, it should be "[seq] OK blah blah blah" */
-  
+
   readFromServer(buffer);
-  
+
   sprintf(tmpstr,"%s OK",seqTag);
-  
+
   if (strncmp(buffer,tmpstr,strlen(tmpstr)))
   {
     /* login failed */
     return -1;
   }
-  
+
   return 0;
 }
 

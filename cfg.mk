@@ -17,16 +17,14 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-local-checks-to-skip = sc_prohibit_strcmp sc_program_name	\
-	sc_trailing_blank sc_GPL_version sc_immutable_NEWS
-VC_LIST_ALWAYS_EXCLUDE_REGEX = ^maint.mk|(gl|tests|test)/.*$$
+local-checks-to-skip = sc_GPL_version sc_bindtextdomain
+VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(examples|lib)/.*$$
 
-# Explicit syntax-check exceptions.
-exclude_file_name_regexp--sc_bindtextdomain = ^test_ntlm.c$$
+exclude_file_name_regexp--sc_trailing_blank = ^test.txt$$
 
 W32ROOT ?= $(HOME)/w32root
 
-mingw32: autoreconf 
+mingw32: autoreconf
 	./configure --host=i586-mingw32msvc --build=`./config.guess` --prefix=$(W32ROOT)
 
 INDENT_SOURCES = $(SOURCES)
