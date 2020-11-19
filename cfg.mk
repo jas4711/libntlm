@@ -17,25 +17,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-WFLAGS ?= WARN_CFLAGS=-Werror
-CFGFLAGS ?= $(WFLAGS)
-
-ifeq ($(.DEFAULT_GOAL),abort-due-to-no-makefile)
-.DEFAULT_GOAL := bootstrap
-endif
-
 local-checks-to-skip = sc_prohibit_strcmp sc_program_name	\
 	sc_trailing_blank sc_GPL_version sc_immutable_NEWS
 VC_LIST_ALWAYS_EXCLUDE_REGEX = ^maint.mk|(gl|tests|test)/.*$$
 
 # Explicit syntax-check exceptions.
 exclude_file_name_regexp--sc_bindtextdomain = ^test_ntlm.c$$
-
-autoreconf:
-	test -f ./configure || autoreconf --install
-
-bootstrap: autoreconf
-	./configure $(CFGFLAGS)
 
 W32ROOT ?= $(HOME)/w32root
 

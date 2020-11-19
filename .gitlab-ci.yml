@@ -1,15 +1,18 @@
-Debian GNU/Linux build:
+Debian:
+  image: debian:latest
+  stage: build
   before_script:
-    - make bootstrap
+    - apt-get update -qq
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
   script:
-    - (make && make check) || (cat *.log test-suite.log; exit 1)
-
-GLR1 build:
-  tags:
-    - glr1
-  before_script:
-    - apt-get update
-    - apt-get install -y git autoconf automake libtool make valgrind
-    - make bootstrap
-  script:
-    - (make && make check) || (cat *.log test-suite.log; exit 1)
+    - ./bootstrap
+    - ./configure WARN_CFLAGS=-Werror
+    - make syntax-check
+    - make
+    - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
+    - make dist
+    - sha224sum *.tar.gz
+  artifacts:
+    expire_in: 2 weeks
+    paths:
+      - *.tar.gz
