@@ -14,8 +14,8 @@ Debian:
   - make
   - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make dist
-  - sha224sum *.tar.gz
+  - sha224sum libntlm-*.tar.gz
   artifacts:
     expire_in: 2 weeks
     paths:
-    - *.tar.gz
+    - libntlm-*.tar.gz
