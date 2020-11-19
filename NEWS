@@ -5,6 +5,8 @@ See the end for copying conditions.
 
 * Version 1.7 (unreleased)
 
+** Use gnulib ./bootstrap for building from version controlled sources.
+
 ** API and ABI modifications.
 No changes since last version.
 
