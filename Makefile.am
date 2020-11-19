@@ -18,9 +18,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-SUBDIRS = gl
+SUBDIRS = lib
 
-ACLOCAL_AMFLAGS = -I m4 -I gl/m4
+ACLOCAL_AMFLAGS = -I m4
 
 EXTRA_DIST = cfg.mk maint.mk
 EXTRA_DIST += libntlm.pc.in test.txt libntlm.spec
@@ -34,20 +34,20 @@ lib_LTLIBRARIES = libntlm.la
 include_HEADERS = ntlm.h
 
 AM_CFLAGS = $(WARN_CFLAGS)
-AM_CPPFLAGS = -I$(srcdir)/gl -I$(builddir)/gl -DNTLM_SRCDIR=\"$(srcdir)\"
+AM_CPPFLAGS = -I$(srcdir)/lib -I$(builddir)/lib -DNTLM_SRCDIR=\"$(srcdir)\"
 
 libntlm_impl_la_SOURCES = smbutil.c smbencrypt.c
 libntlm_la_SOURCES =
 libntlm_la_LDFLAGS = -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
 	-export-symbols-regex '^(dumpSmb|buildSmb|ntlm_).*' -no-undefined
 
-libntlm_la_LIBADD = libntlm_impl.la gl/libgnu.la
+libntlm_la_LIBADD = libntlm_impl.la lib/libgnu.la
 
 # test
 
 TESTS = test_ntlm test_CVE-2019-17455
 check_PROGRAMS = $(TESTS)
-LDADD = libntlm_impl.la gl/libgnu.la
+LDADD = libntlm_impl.la lib/libgnu.la
 CLEANFILES = test.out
 test_ntlm_LDFLAGS = -no-install
 

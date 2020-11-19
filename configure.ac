@@ -68,8 +68,8 @@ fi
 
 AC_CONFIG_FILES([
   Makefile
-  gl/Makefile
-  gl/tests/Makefile
+  lib/Makefile
+  lib/tests/Makefile
   libntlm.pc
   libntlm.spec
   ntlm.h
