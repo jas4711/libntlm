@@ -8,6 +8,7 @@ Debian:
   - apt-get update -qq
   - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
   script:
+  - git submodule update --init
   - ./bootstrap
   - ./configure WARN_CFLAGS=-Werror
   - make syntax-check
