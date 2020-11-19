@@ -17,7 +17,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-local-checks-to-skip = sc_GPL_version sc_bindtextdomain
+local-checks-to-skip = sc_GPL_version sc_bindtextdomain	\
+	sc_immutable_NEWS
 VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(examples|lib)/.*$$
 
 exclude_file_name_regexp--sc_trailing_blank = ^test.txt$$
