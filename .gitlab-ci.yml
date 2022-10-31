@@ -3,14 +3,24 @@ variables:
   GIT_DEPTH: 100
   GIT_SUBMODULE_STRATEGY: normal
 
+.test:
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+    - "*.tar.gz"
+    - ./*.log
+    - ./config.h
+    - ./**/*.log
+
 Debian:
+  extends: .test
   image: debian:latest
   stage: build
   before_script:
   - apt-get update -qq
   - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
   script:
-  - git submodule update --init
   - ./bootstrap
   - ./configure WARN_CFLAGS=-Werror
   - make syntax-check
@@ -18,18 +28,14 @@ Debian:
   - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make dist
   - sha224sum libntlm-*.tar.gz
-  artifacts:
-    expire_in: 2 weeks
-    paths:
-    - libntlm-*.tar.gz
 
 # https://docs.gitlab.com/ee/ci/runners/saas/macos/environment.html
 Macos11xcode12:
+  extends: .test
   stage: build
   tags: [ shared-macos-amd64 ]
   image: macos-11-xcode-12
   script:
-  - git submodule update --init
   - ./bootstrap
   - ./configure WARN_CFLAGS=-Werror
   - make syntax-check
@@ -37,7 +43,3 @@ Macos11xcode12:
   - make check || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make dist
   - sha224sum libntlm-*.tar.gz
-  artifacts:
-    expire_in: 2 weeks
-    paths:
-    - libntlm-*.tar.gz
