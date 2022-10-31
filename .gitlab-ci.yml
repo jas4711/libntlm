@@ -19,7 +19,7 @@ Debian:
   stage: build
   before_script:
   - apt-get update -qq
-  - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git autoconf automake libtool make valgrind
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind indent
   script:
   - ./bootstrap
   - ./configure WARN_CFLAGS=-Werror
