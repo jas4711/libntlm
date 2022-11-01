@@ -87,7 +87,7 @@ updates related to the project are here:
 # Download
 
 Tarball releases are available from
-[https://www.nongnu.org/libntlm/releases/](https://www.nongnu.org/libntlm/releases/).
+[https://download.savannah.nongnu.org/releases/libntlm/](https://download.savannah.nongnu.org/releases/libntlm/).
 
 The tarballs are signed with [Simon Josefsson's OpenPGP
 key](https://josefsson.org/key-20190320.txt):
