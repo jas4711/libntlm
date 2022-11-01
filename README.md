@@ -35,11 +35,10 @@ The [Libntlm project page at
 Savannah](https://savannah.nongnu.org/projects/libntlm/) manages the
 tarball distribution and the mailing list.
 
-If you want to discuss something related to Libntlm we have a
-[https://lists.nongnu.org/mailman/listinfo/libntlm](mailing list)
-reachable at libntlm@nongnu.org.  Old discussions are available from
-the [Libntlm mailing list
-archive](https://lists.nongnu.org/archive/html/libntlm/).
+If you want to discuss something related to Libntlm we have a [mailing
+list](https://lists.nongnu.org/mailman/listinfo/libntlm) reachable at
+libntlm@nongnu.org.  Old discussions are available from the [Libntlm
+mailing list archive](https://lists.nongnu.org/archive/html/libntlm/).
 
 # History
 
