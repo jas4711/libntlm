@@ -90,7 +90,6 @@ AS_IF([test "$enable_gcc_warnings" != no], [
 AC_CONFIG_FILES([
   Makefile
   lib/Makefile
-  lib/tests/Makefile
   libntlm.pc
   libntlm.spec
   ntlm.h
