@@ -145,8 +145,35 @@ main (void)
 
   printf ("ntlm.h %s libntlm %s\n", NTLM_VERSION, ntlm_check_version (NULL));
 
+  if (!ntlm_check_version ("1.2"))
+    {
+      puts ("FAIL: check_version (1.2)");
+      return 1;
+    }
+
+  if (ntlm_check_version ("4711.42.23"))
+    {
+      puts ("FAIL: check_version (4711.42.23)");
+      return 1;
+    }
+
+  if (ntlm_check_version ("UNKNOWN"))
+    {
+      puts ("FAIL: check_version (UNKNOWN)");
+      return 1;
+    }
+
   if (!ntlm_check_version (NTLM_VERSION))
-    return 1;
+    {
+      puts ("FAIL: !check_version (NTLM_VERSION)");
+      return 1;
+    }
+
+  if (strcmp (NTLM_VERSION, ntlm_check_version (NULL)) != 0)
+    {
+      puts ("FAIL: strcmp (NTLM_VERSION, check_version (NULL))");
+      return 1;
+    }
 
   /* do some test then dump */
   buildSmbNtlmAuthRequest (&request, "myuser", "mydomain");

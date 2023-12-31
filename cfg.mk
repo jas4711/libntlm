@@ -22,8 +22,12 @@ update-copyright-env = \
 	UPDATE_COPYRIGHT_USE_INTERVALS=2		\
 	UPDATE_COPYRIGHT_FORCE=1
 
-local-checks-to-skip = sc_GPL_version sc_bindtextdomain	\
-	sc_immutable_NEWS
+local-checks-to-skip = \
+	sc_GPL_version		\
+	sc_bindtextdomain	\
+	sc_immutable_NEWS	\
+	sc_prohibit_strcmp
+
 VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(examples|lib)/.*$$
 
 exclude_file_name_regexp--sc_trailing_blank = ^test.txt$$
