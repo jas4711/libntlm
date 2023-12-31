@@ -123,7 +123,8 @@ cd libntlm
 ./bootstrap
 ```
 
-Then build it as usual.
+Then build it as usual.  See [CONTRIBUTING.md](CONTRIBUTING.md) for
+more information.
 
 # Usage
 

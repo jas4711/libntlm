@@ -23,6 +23,7 @@ SUBDIRS = lib
 ACLOCAL_AMFLAGS = -I m4
 
 EXTRA_DIST = cfg.mk maint.mk
+EXTRA_DIST += CONTRIBUTING.md
 EXTRA_DIST += libntlm.pc.in test.txt libntlm.spec
 
 pkgconfigdir = $(libdir)/pkgconfig

@@ -32,12 +32,13 @@ VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(examples|lib)/.*$$
 
 exclude_file_name_regexp--sc_trailing_blank = ^test.txt$$
 
-W32ROOT ?= $(HOME)/w32root
-
-mingw32: autoreconf
-	./configure --host=i586-mingw32msvc --build=`./config.guess` --prefix=$(W32ROOT)
-
 INDENT_SOURCES = $(SOURCES)
+
+# maint.mk's public-submodule-commit breaks on shallow gnulib
+# https://lists.gnu.org/archive/html/bug-gnulib/2022-08/msg00040.html
+# so let's disable it - XXX FIXME let's revisit this later
+submodule-checks =
+gl_public_submodule_commit =
 
 # Maintainer targets
 
@@ -45,29 +46,27 @@ ChangeLog:
 	git2cl > ChangeLog
 	cat .clcopying >> ChangeLog
 
-htmldir = ../www-$(PACKAGE)
-tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
-
 release: prepare ship
 
 prepare:
-	! git tag -l $(tag) | grep $(PACKAGE) > /dev/null
+	! git tag -v v$(VERSION) 2>&1 | grep $(PACKAGE) > /dev/null
 	rm -f ChangeLog
 	$(MAKE) ChangeLog distcheck
+	make -f libntlm4win.mk libntlm4win VERSION=$(VERSION)
 	gpg -b $(distdir).tar.gz
+	gpg -b $(distdir)-win32.zip
+	gpg -b $(distdir)-win64.zip
 	gpg --verify $(distdir).tar.gz.sig
-	git commit -m Generated. ChangeLog
-	git tag -m $(VERSION) $(tag)
+	gpg --verify $(distdir)-win32.zip.sig
+	gpg --verify $(distdir)-win64.zip.sig
 
 ship:
+	git commit -m Generated. ChangeLog
+	git tag -m "$(PACKAGE) $(VERSION)" v$(VERSION)
+	cp -v $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
 	git push
 	git push --tags
-	cp $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
-	cp -v $(distdir).tar.gz $(distdir).tar.gz.sig $(htmldir)/releases/
-	cd $(htmldir) && \
-		cvs add -kb releases/$(distdir).tar.gz \
-			releases/$(distdir).tar.gz.sig && \
-		cvs commit -m "Update." releases/
+	scp $(distdir).tar.gz $(distdir).tar.gz.sig jas@dl.sv.nongnu.org:/releases/libntlm/
 
 review-diff:
 	git diff `git describe --abbrev=0`.. \
