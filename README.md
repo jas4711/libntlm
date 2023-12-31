@@ -55,6 +55,7 @@ shares the same function interfaces.
 See [NEWS](NEWS) for more detailed release information, however brief
 updates related to the project are here:
 
+ * 2023-12-31: Version 1.7 released. Maintainance fixes.
  * 2020-04-19: Version 1.6 released. Security bugfix for buffer overflow. CVE-2019-17455.
  * 2018-08-24: Version 1.5 released. LTO/gcc8 support. Git repository moved to GitLab.
  * 2013-07-08: Version 1.4 released. Build fixes.
