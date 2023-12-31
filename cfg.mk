@@ -63,10 +63,10 @@ prepare:
 ship:
 	git commit -m Generated. ChangeLog
 	git tag -m "$(PACKAGE) $(VERSION)" v$(VERSION)
-	cp -v $(distdir).tar.gz $(distdir).tar.gz.sig ../releases/$(PACKAGE)/
+	cp -v $(distdir).tar.gz* $(distdir)-win??.zip* ../releases/$(PACKAGE)/
 	git push
 	git push --tags
-	scp $(distdir).tar.gz $(distdir).tar.gz.sig jas@dl.sv.nongnu.org:/releases/libntlm/
+	scp $(distdir).tar.gz* $(distdir)-win??.zip* jas@dl.sv.nongnu.org:/releases/libntlm/
 
 review-diff:
 	git diff `git describe --abbrev=0`.. \
