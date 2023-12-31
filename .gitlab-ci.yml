@@ -155,7 +155,7 @@ B-macOS14Xcode15:
   - git diff --exit-code
 
 # https://docs.gitlab.com/ee/ci/runners/saas/windows_saas_runner.html
-B-Windows:
+B-Windows-UCRT64:
   tags: [ shared-windows, windows-1809 ]
   stage: build
   script: # https://www.msys2.org/docs/ci/#other-systems
@@ -168,7 +168,7 @@ B-Windows:
   - C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
   - C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
   - |
-    C:\msys64\usr\bin\bash -lc '
+    C:\msys64\usr\bin\bash -lcx '
     pacman --noconfirm -Syu git autoconf automake libtool make mingw-w64-ucrt-x86_64-gcc
     ./bootstrap
     ./configure
@@ -258,6 +258,27 @@ Fedora39:
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+
+Windows-MINGW64:
+  tags: [ shared-windows, windows-1809 ]
+  stage: test
+  needs: [B-Trisquel11]
+  script: # https://www.msys2.org/docs/ci/#other-systems
+  - wget.exe -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
+  - ./msys2.exe -y -oC:\
+  - Remove-Item msys2.exe
+  - $env:CHERE_INVOKING = 'yes'
+  - $env:MSYSTEM = 'MINGW64' # https://www.msys2.org/docs/environments/
+  - C:\msys64\usr\bin\bash -lc ' '
+  - C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
+  - C:\msys64\usr\bin\bash -lc 'pacman --noconfirm -Syuu'
+  - |
+    C:\msys64\usr\bin\bash -lcx '
+    pacman --noconfirm -Syu  make mingw-w64-x86_64-gcc
+    tar xfa libntlm-*.tar.gz
+    cd `ls -d libntlm-* | grep -v tar.gz`
+    ./configure --enable-gcc-warnings
+    make V=1 check VERBOSE=t'
 
 Ubuntu-rolling:
   image: ubuntu:rolling
