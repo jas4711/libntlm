@@ -49,7 +49,7 @@ static void ntlm_encrypt_answer (char *hash,
 static void ntlm_convert_key (char *key_56, gl_des_ctx * ks);
 
 void
-ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
+ntlm_smb_encrypt (const char *passwd, const uint8 *challenge, uint8 *answer)
 {
 #define MAX_PW_SZ 14
   int len;
@@ -88,7 +88,7 @@ ntlm_smb_encrypt (const char *passwd, const uint8 * challenge, uint8 * answer)
 
 void
 ntlm_smb_nt_encrypt (const char *passwd,
-		     const uint8 * challenge, uint8 * answer)
+		     const uint8 *challenge, uint8 *answer)
 {
   size_t len, i;
   unsigned char hash[24];
@@ -140,7 +140,7 @@ ntlm_encrypt_answer (char *hash, const char *challenge, char *answer)
  * turns a 56 bit key into the 64 bit, and sets the key schedule ks.
  */
 static void
-ntlm_convert_key (char *key_56, gl_des_ctx * ks)
+ntlm_convert_key (char *key_56, gl_des_ctx *ks)
 {
   char key[8];
 

@@ -63,7 +63,7 @@ diffFile (const char *name1, const char *name2)
 }
 
 static void
-dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
+dumpRaw (FILE *fp, const unsigned char *buf, size_t len)
 {
   size_t i;
 
@@ -100,7 +100,7 @@ intelEndian32 (uint32 n)
 }
 
 static void
-fillUnicode (tSmbStrHeader * header, char *buffer, int buffer_start,
+fillUnicode (tSmbStrHeader *header, char *buffer, int buffer_start,
 	     int *idx, const char *s)
 {
   int len = strlen (s);
@@ -116,7 +116,7 @@ fillUnicode (tSmbStrHeader * header, char *buffer, int buffer_start,
 }
 
 static void
-fillChallenge (tSmbNtlmAuthChallenge * challenge, const char *domain)
+fillChallenge (tSmbNtlmAuthChallenge *challenge, const char *domain)
 {
   int idx = 0;
 

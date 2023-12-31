@@ -108,7 +108,7 @@ dumpBuffer(fp, UI32LE(structPtr->header.offset), UI16LE(structPtr->header.len), 
 
 
 static void
-dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
+dumpRaw (FILE *fp, const unsigned char *buf, size_t len)
 {
   size_t i;
 
@@ -119,7 +119,7 @@ dumpRaw (FILE * fp, const unsigned char *buf, size_t len)
 }
 
 static inline void
-dumpBuffer (FILE * fp, uint32 offset, uint32 len, char *structPtr,
+dumpBuffer (FILE *fp, uint32 offset, uint32 len, char *structPtr,
 	    size_t buf_start, size_t buf_len)
 {
   /* prevent buffer reading overflow */
@@ -198,7 +198,7 @@ getString (uint32 offset, uint32 len, char *structPtr, size_t buf_start,
 }
 
 void
-dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
+dumpSmbNtlmAuthRequest (FILE *fp, tSmbNtlmAuthRequest *request)
 {
   char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Request:\n"
@@ -215,7 +215,7 @@ dumpSmbNtlmAuthRequest (FILE * fp, tSmbNtlmAuthRequest * request)
 }
 
 void
-dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
+dumpSmbNtlmAuthChallenge (FILE *fp, tSmbNtlmAuthChallenge *challenge)
 {
   unsigned char buf[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Challenge:\n"
@@ -232,7 +232,7 @@ dumpSmbNtlmAuthChallenge (FILE * fp, tSmbNtlmAuthChallenge * challenge)
 }
 
 void
-dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
+dumpSmbNtlmAuthResponse (FILE *fp, tSmbNtlmAuthResponse *response)
 {
   unsigned char buf1[NTLM_BUFSIZE], buf2[NTLM_BUFSIZE], buf3[NTLM_BUFSIZE];
   fprintf (fp, "NTLM Response:\n"
@@ -254,7 +254,7 @@ dumpSmbNtlmAuthResponse (FILE * fp, tSmbNtlmAuthResponse * response)
 }
 
 static void
-buildSmbNtlmAuthRequest_userlen (tSmbNtlmAuthRequest * request,
+buildSmbNtlmAuthRequest_userlen (tSmbNtlmAuthRequest *request,
 				 const char *user,
 				 size_t user_len, const char *domain)
 {
@@ -268,7 +268,7 @@ buildSmbNtlmAuthRequest_userlen (tSmbNtlmAuthRequest * request,
 }
 
 void
-buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
+buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest *request,
 			 const char *user, const char *domain)
 {
   const char *p = strchr (user, '@');
@@ -285,7 +285,7 @@ buildSmbNtlmAuthRequest (tSmbNtlmAuthRequest * request,
 }
 
 void
-buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
+buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest *request,
 				   const char *user, const char *domain)
 {
   buildSmbNtlmAuthRequest_userlen (request, user, strlen (user), domain);
@@ -293,8 +293,8 @@ buildSmbNtlmAuthRequest_noatsplit (tSmbNtlmAuthRequest * request,
 
 
 static void
-buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge * challenge,
-				  tSmbNtlmAuthResponse * response,
+buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge *challenge,
+				  tSmbNtlmAuthResponse *response,
 				  const char *user, size_t user_len,
 				  const char *domain, const char *password)
 {
@@ -320,8 +320,8 @@ buildSmbNtlmAuthResponse_userlen (tSmbNtlmAuthChallenge * challenge,
 }
 
 void
-buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
-			  tSmbNtlmAuthResponse * response,
+buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge *challenge,
+			  tSmbNtlmAuthResponse *response,
 			  const char *user, const char *password)
 {
   const char *p = strchr (user, '@');
@@ -340,8 +340,8 @@ buildSmbNtlmAuthResponse (tSmbNtlmAuthChallenge * challenge,
 }
 
 void
-buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge * challenge,
-				    tSmbNtlmAuthResponse * response,
+buildSmbNtlmAuthResponse_noatsplit (tSmbNtlmAuthChallenge *challenge,
+				    tSmbNtlmAuthResponse *response,
 				    const char *user, const char *password)
 {
   unsigned char buf[NTLM_BUFSIZE];
