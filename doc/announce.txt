@@ -1,6 +1,8 @@
 To: libntlm@nongnu.org
-Subject: Libntlm 1.6
+Subject: Libntlm 1.7
 <#secure method=pgpmime mode=sign>
+This is to announce libntlm-1.7, a stable release.
+
 Libntlm provides routines to manipulate the structures used for the
 client end of Microsoft NTLM authentication.  This code was initially
 taken (mostly) from the Samba project and was initially intended for use
@@ -8,31 +10,24 @@ with Microsoft Exchange Server when it is configured to require NTLM
 authentication for clients of it's IMAP server.  Today, Libntlm contains
 re-written code, so that the license is now LGPLv2+.
 
-News since the last release:
-
-** Fix buffer overflow in buildSmbNtlmAuth* function.  CVE-2019-17455.
-Reported by Kirin in <https://gitlab.com/jas/libntlm/-/issues/2> and
-patch provided by Cedric Buissart.  See newly introduced regression
-check test_CVE-2019-17455.c for test of a vulnerable library.
-
-** Update gnulib files.
+See the NEWS below for a brief summary.
 
 The project page of the library is available at:
-  https://www.nongnu.org/libntlm/
+  https://gitlab.com/gsasl/libntlm/
 
 If you need help to use Libntlm, or want to help others, you are invited
 to join our mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/libntlm
 
-Here are the compressed sources (676K) and detached OpenPGP signature:
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6.tar.gz
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6.tar.gz.sig
+Here are the compressed sources (600K) and detached OpenPGP signature:
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7.tar.gz
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7.tar.gz.sig
 
 Windows binaries are available:
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win32.zip
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win32.zip.sig
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win64.zip
-  https://www.nongnu.org/libntlm/releases/libntlm-1.6-win64.zip.sig
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7-win64.zip
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7-win64.zip.sig
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7-win32.zip
+  https://download.savannah.nongnu.org/releases/libntlm/libntlm-1.7-win32.zip.sig
 
 The software is cryptographically signed by the maintainer using an
 OpenPGP key identified by the following information:
@@ -46,9 +41,20 @@ The key is available from:
 
 Here are the SHA-256 checksums:
 
-f2376b87b06d8755aa3498bb1226083fdb1d2cf4460c3982b05a9aa0b51d6821  libntlm-1.6.tar.gz
-3db3474c72e48c8f77496a76d84f47485c325938f46ef220e8f352cf7b1ba773  libntlm-1.6-win32.zip
-2dda3bda329e380cbd63b77ae379d0fb49278316e3593a065f2620077321dcc5  libntlm-1.6-win64.zip
+d805ebb901cbc9ff411e704cbbf6de4d28e7bcb05c9eca2124f582cbff31c0b1  libntlm-1.7.tar.gz
+14b349ea09486bd7e5d7111050c60f7fe8d7865b882549a15ee06eb32f00df24  libntlm-1.7-win32.zip
+37c4690c1b5fb92cd304938417ab664decc91513e29b9d016a4cbb93963586c4  libntlm-1.7-win64.zip
 
-Happy hacking,
+Happy New Years Eve Hacking,
 Simon
+
+NEWS
+
+* Version 1.7 (released 2023-12-31)
+
+** Moved GitLab URL to <https://gitlab.com/gsasl/libntlm>.
+
+** Use gnulib ./bootstrap for building from version controlled sources.
+
+** API and ABI modifications.
+No changes since last version.
