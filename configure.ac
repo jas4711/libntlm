@@ -19,7 +19,7 @@ dnl License along with Libntlm; if not, write to the Free Software
 dnl Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 dnl 02110-1301, USA
 
-AC_INIT([libntlm], [1.7], [libntlm@nongnu.org])
+AC_INIT([libntlm], [1.8], [libntlm@nongnu.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -28,7 +28,7 @@ AC_CONFIG_MACRO_DIR([m4])
 # No interfaces changed:                   REVISION++
 AC_SUBST(LT_CURRENT, 0)
 AC_SUBST(LT_AGE, 0)
-AC_SUBST(LT_REVISION, 22)
+AC_SUBST(LT_REVISION, 23)
 
 AM_INIT_AUTOMAKE([1.10 gnits -Wall])
 AC_CONFIG_HEADERS(config.h)
