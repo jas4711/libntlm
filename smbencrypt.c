@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2020 Simon Josefsson
+ * Copyright (C) 2005-2023 Simon Josefsson
  * Copyright (C) 1998-1999  Brian Bruns
  * Copyright (C) 2004 Frediano Ziglio
  *

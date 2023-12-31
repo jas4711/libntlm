@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2020 Simon Josefsson.
+# Copyright (C) 2006-2023 Simon Josefsson.
 #
 # This file is part of Libntlm.
 #
@@ -16,6 +16,11 @@
 # License along with Libntlm; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
+
+update-copyright-env = \
+	UPDATE_COPYRIGHT_HOLDER="Simon Josefsson"	\
+	UPDATE_COPYRIGHT_USE_INTERVALS=2		\
+	UPDATE_COPYRIGHT_FORCE=1
 
 local-checks-to-skip = sc_GPL_version sc_bindtextdomain	\
 	sc_immutable_NEWS
