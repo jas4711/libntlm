@@ -1,3 +1,243 @@
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, README.md: Version 1.7.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Drop -Werror from AM_INIT_AUTOMAKE.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* CONTRIBUTING.md, Makefile.am, README.md, cfg.mk,
+	doc/release-process.txt: Add CONTRIBUTING.md and clean up release
+	process.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Use UCRT64 gcc on Windows.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk, test_ntlm.c: Improve ntlm_check_version testing.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Improve pipeline.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* .clcopying, AUTHORS, ChangeLog, Makefile.am, NEWS, README.md,
+	THANKS, cfg.mk, configure.ac, libntlm.pc.in, libntlm4win.mk,
+	smbencrypt.c, smbutil.c, test_CVE-2019-17455.c, test_ntlm.c: Bump
+	copyright years.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Refresh .gitignore.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* smbencrypt.c, smbutil.c, test_ntlm.c: Indent using GNU indent
+	2.2.13.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* bootstrap.conf, configure.ac: Drop gnulib tests.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Modernize configure.ac.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore, autogen.sh, autopull.sh, bootstrap,
+	bootstrap-funclib.sh: Run ./bootstrap --bootstrap-sync.  Drop
+	autogen.sh/autopull.sh.
+
+2023-12-31  Simon Josefsson <simon@josefsson.org>
+
+	* gnulib: Update gnulib.
+
+2022-11-01  Simon Josefsson <simon@josefsson.org>
+
+	* README.md: Fix mailing list URL.
+
+2022-11-01  Simon Josefsson <simon@josefsson.org>
+
+	* README.md: Fix tarball download link.
+
+2022-11-01  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Mention new URL in NEWS.
+
+2022-11-01  Simon Josefsson <simon@josefsson.org>
+
+	* README, README.md: Markdown README.
+
+2022-11-01  Simon Josefsson <simon@josefsson.org>
+
+	* gnulib: Update gnulib submodule.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Check indentation.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* smbutil.c: Indent code.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitmodules, .gnulib => gnulib: Move gnulib from .gnulib/ to
+	gnulib/.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Adapt to gitlab submodules.  Export
+	artifacts.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* autogen.sh, autopull.sh, bootstrap, bootstrap-funclib.sh: Update
+	bootstrap.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gnulib: Update gnulib submodule.
+
+2022-10-31  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Speed up git submodule's.
+
+2022-10-30  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: cicd: Build on MacOS.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* cfg.mk: Fix syntax-check.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: CICD: Fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: CICD: Fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml: CICD: Fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* README, cfg.mk, libntlm.pc.in, libntlm.spec.in, smbencrypt.c,
+	smbutil.c, test_CVE-2019-17455.c: Indent and fix syntax-check rule.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* {test => examples}/COPYING, {test => examples}/Makefile, {test =>
+	examples}/README, {test => examples}/dumper.c, {test =>
+	examples}/getargs.c, {test => examples}/getargs.h: Rename test/
+	directory, contains old example CLI code.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitlab-ci.yml, cfg.mk: Drop old bootstrap rules.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore: Ignore fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitignore, GNUmakefile, Makefile.am, bootstrap.conf,
+	configure.ac, maint.mk: Update for bootstrap usage.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* build-aux/update-copyright, build-aux/useless-if-before-free,
+	build-aux/vc-list-files, gl/Makefile.am, gl/arg-nonnull.h,
+	gl/byteswap.in.h, gl/c++defs.h, gl/cdefs.h, gl/check-version.c,
+	gl/check-version.h, gl/des.c, gl/des.h, gl/libc-config.h,
+	gl/limits.in.h, gl/m4/00gnulib.m4, gl/m4/__inline.m4,
+	gl/m4/absolute-header.m4, gl/m4/autobuild.m4, gl/m4/byteswap.m4,
+	gl/m4/extensions.m4, gl/m4/extern-inline.m4, gl/m4/gnulib-cache.m4,
+	gl/m4/gnulib-common.m4, gl/m4/gnulib-comp.m4, gl/m4/gnulib-tool.m4,
+	gl/m4/include_next.m4, gl/m4/inline.m4, gl/m4/inttypes-pri.m4,
+	gl/m4/inttypes.m4, gl/m4/limits-h.m4, gl/m4/manywarnings-c++.m4,
+	gl/m4/manywarnings.m4, gl/m4/md4.m4, gl/m4/multiarch.m4,
+	gl/m4/off_t.m4, gl/m4/ssize_t.m4, gl/m4/stdalign.m4,
+	gl/m4/stdbool.m4, gl/m4/stddef_h.m4, gl/m4/stdint.m4,
+	gl/m4/string_h.m4, gl/m4/strverscmp.m4, gl/m4/sys_types_h.m4,
+	gl/m4/unistd_h.m4, gl/m4/valgrind-tests.m4, gl/m4/warn-on-use.m4,
+	gl/m4/warnings.m4, gl/m4/wchar_h.m4, gl/m4/wchar_t.m4,
+	gl/m4/wint_t.m4, gl/m4/zzgnulib.m4, gl/md4.c, gl/md4.h,
+	gl/stdalign.in.h, gl/stdbool.in.h, gl/stddef.in.h, gl/stdint.in.h,
+	gl/string.in.h, gl/strverscmp.c, gl/sys_types.in.h,
+	gl/tests/Makefile.am, gl/tests/arg-nonnull.h, gl/tests/c++defs.h,
+	gl/tests/dummy.c, gl/tests/init.sh, gl/tests/intprops.h,
+	gl/tests/inttypes.in.h, gl/tests/macros.h, gl/tests/signature.h,
+	gl/tests/test-byteswap.c, gl/tests/test-des.c,
+	gl/tests/test-init.sh, gl/tests/test-intprops.c,
+	gl/tests/test-inttypes.c, gl/tests/test-limits-h.c,
+	gl/tests/test-md4.c, gl/tests/test-stdalign.c,
+	gl/tests/test-stdbool.c, gl/tests/test-stddef.c,
+	gl/tests/test-stdint.c, gl/tests/test-string.c,
+	gl/tests/test-strverscmp.c, gl/tests/test-sys_types.c,
+	gl/tests/test-unistd.c, gl/tests/test-update-copyright.sh,
+	gl/tests/test-vc-list-files-cvs.sh,
+	gl/tests/test-vc-list-files-git.sh, gl/tests/test-verify-try.c,
+	gl/tests/test-verify.c, gl/tests/test-verify.sh,
+	gl/tests/test-wchar.c, gl/tests/verify.h, gl/tests/warn-on-use.h,
+	gl/tests/wchar.in.h, gl/unistd.c, gl/unistd.in.h, gl/warn-on-use.h: 
+	Remove old gnulib copy.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS: Add NEWS blurb.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* bootstrap.conf: Bootstrap config fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* configure.ac: Gnulib requires autoconf 2.64 now.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* bootstrap.conf: Bootstrap config fixes.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* .gitmodules, .gnulib: Add gnulib submodule.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* bootstrap, bootstrap.conf: Use bootstrap instead of storing gnulib
+	copy.
+
+2020-11-19  Simon Josefsson <simon@josefsson.org>
+
+	* AUTHORS: Drop obsolete PGP key.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* doc/release-process.txt: Add.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* NEWS, configure.ac: Bump versions.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* doc/announce.txt: Announcement for v1.6.
+
+2020-04-19  Simon Josefsson <simon@josefsson.org>
+
+	* ChangeLog: Generated.
+
 2020-04-19  Simon Josefsson <simon@josefsson.org>
 
 	* NEWS: Version 1.6.
