@@ -196,7 +196,7 @@ int imap_auth_ntlm(char *user, char *domain, char *pass)
 
 ----------------------------------------------------------------------
 ```
-Copyright (C) 2002-2023 Simon Josefsson
+Copyright (C) 2002-2024 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
