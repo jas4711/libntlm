@@ -26,7 +26,8 @@ local-checks-to-skip = \
 	sc_GPL_version		\
 	sc_bindtextdomain	\
 	sc_immutable_NEWS	\
-	sc_prohibit_strcmp
+	sc_prohibit_strcmp	\
+	sc_copyright_check
 
 VC_LIST_ALWAYS_EXCLUDE_REGEX = ^(examples|lib)/.*$$
 
