@@ -17,10 +17,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-# https://docs.gitlab.com/ee/ci/git_submodules.html
 variables:
-  GIT_DEPTH: 100
-  GIT_SUBMODULE_STRATEGY: normal
+  GNULIB_URL: https://gitlab.com/libidn/gnulib-mirror.git
 
 default:
   interruptible: true
@@ -45,6 +43,8 @@ B-gcc:
   - ./configure CC="gcc -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -60,6 +60,8 @@ B-clang:
   - ./configure CC="clang -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -76,7 +78,8 @@ B-Alpine:
   - make -j$(nproc) V=1
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -85,7 +88,7 @@ B-Debian-latest:
   stage: build
   before_script:
   - apt-get update -qq
-  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
   script:
   - ./bootstrap
   - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
@@ -93,7 +96,8 @@ B-Debian-latest:
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -102,7 +106,7 @@ B-Debian-testing:
   stage: build
   before_script:
   - apt-get update -qq
-  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind indent
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind indent ca-certificates
   script:
   - ./bootstrap
   - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
@@ -110,7 +114,8 @@ B-Debian-testing:
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -120,7 +125,7 @@ B-Trisquel11:
   stage: build
   before_script:
   - apt-get update -qq
-  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
   script:
   - ./bootstrap
   - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
@@ -128,6 +133,8 @@ B-Trisquel11:
   - make -j$(nproc) V=1 check VERBOSE=t
   - make syntax-check
   - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -150,7 +157,8 @@ B-macOS14Xcode15:
   - make -j$(nproc) V=1 distcheck VERBOSE=t
   - make syntax-check
   - make dist
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
+  - sha256sum libntlm-*.tar.gz
   - git status
   - git diff --exit-code
 
@@ -159,7 +167,7 @@ B-Windows-UCRT64:
   tags: [ shared-windows, windows-1809 ]
   stage: build
   script: # https://www.msys2.org/docs/ci/#other-systems
-  - wget.exe -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
+  - wget.exe --no-check-certificate -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
   - ./msys2.exe -y -oC:\
   - Remove-Item msys2.exe
   - $env:CHERE_INVOKING = 'yes'
@@ -186,6 +194,7 @@ AlmaLinux8:
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.gz
 
 Alpine:
   image: alpine:latest
@@ -215,6 +224,7 @@ ArchLinux:
   - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.gz
 
 macOS13Xcode14:
   image: macos-13-xcode-14
@@ -229,6 +239,7 @@ macOS13Xcode14:
   - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.gz
 
 CentOS7:
   image: centos:7
@@ -258,13 +269,14 @@ Fedora39:
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.gz
 
 Windows-MINGW64:
   tags: [ shared-windows, windows-1809 ]
   stage: test
   needs: [B-Trisquel11]
   script: # https://www.msys2.org/docs/ci/#other-systems
-  - wget.exe -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
+  - wget.exe --no-check-certificate -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
   - ./msys2.exe -y -oC:\
   - Remove-Item msys2.exe
   - $env:CHERE_INVOKING = 'yes'
@@ -293,3 +305,4 @@ Ubuntu-rolling:
   - ./configure
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.gz

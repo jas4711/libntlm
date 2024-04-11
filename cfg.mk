@@ -42,6 +42,9 @@ gl_public_submodule_commit =
 
 # Maintainer targets
 
+srcdist:
+	git archive --prefix=libntlm-1.8/ -o libntlm-1.8-src.tar.gz HEAD
+
 ChangeLog:
 	git2cl > ChangeLog
 	cat .clcopying >> ChangeLog
