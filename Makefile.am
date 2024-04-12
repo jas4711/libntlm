@@ -26,6 +26,8 @@ EXTRA_DIST = cfg.mk maint.mk
 EXTRA_DIST += CONTRIBUTING.md
 EXTRA_DIST += libntlm.pc.in test.txt libntlm.spec
 
+EXTRA_DIST += bootstrap.conf bootstrap bootstrap-funclib.sh
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libntlm.pc
 
