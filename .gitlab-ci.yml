@@ -17,10 +17,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
-# https://docs.gitlab.com/ee/ci/git_submodules.html
 variables:
-  GIT_DEPTH: 100
-  GIT_SUBMODULE_STRATEGY: normal
+  GNULIB_URL: https://gitlab.com/libidn/gnulib-mirror.git
 
 default:
   interruptible: true
@@ -28,62 +26,99 @@ default:
     expire_in: 2 weeks
     when: always
     paths:
-    - "*.tar.gz"
+    - "*.tar.*"
+    - "**/*.tar.*"
     - ./*.log
     - ./config.h
     - ./**/*.log
 
-B-gcc:
-  image: gcc:latest
+B-AlmaLinux8:
+  image: almalinux:8
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
   before_script:
-  - apt-get update -qq
-  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind
+  - cat /etc/os-release
+  - dnf update -y
+  - dnf install -y gcc make autoconf automake git libtool diffutils
   script:
-  - gcc --version
   - ./bootstrap
-  - ./configure CC="gcc -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
-  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -j$(nproc) V=1 check VERBOSE=t
+# FIXME XXX  - make syntax-check
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
-B-clang:
-  image: silkeh/clang:latest
+B-AlmaLinux9:
+  image: almalinux:9
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
   before_script:
-  - apt-get update -qq
-  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make
+  - cat /etc/os-release
+  - dnf update -y
+  - dnf install -y gcc make autoconf automake git libtool diffutils
   script:
-  - clang --version
   - ./bootstrap
-  - ./configure CC="clang -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
-  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -j$(nproc) V=1 check VERBOSE=t
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 B-Alpine:
   image: alpine:latest
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
-  needs: [B-Trisquel11]
   before_script:
+  - cat /etc/os-release
   - apk update
-  - apk add build-base git autoconf automake libtool make coreutils valgrind
+  - apk add build-base git autoconf automake libtool make gzip coreutils valgrind
   script:
   - ./bootstrap
   - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
   - make syntax-check
-  - make -j$(nproc) V=1 check VERBOSE=t
-  - sha224sum libntlm-*.tar.gz
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
-B-Debian-latest:
-  image: debian:latest
+B-ArchLinux:
+  image: archlinux:latest
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
   before_script:
+  - cat /etc/os-release
+  - pacman -Syu --noconfirm make gcc autoconf automake libtool git
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-Debian11:
+  image: debian:11-slim
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
   - apt-get update -qq
   - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
   script:
@@ -93,14 +128,39 @@ B-Debian-latest:
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-Debian12:
+  image: debian:12
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make syntax-check
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 check VERBOSE=t
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 B-Debian-testing:
   image: debian:testing-slim
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
   before_script:
+  - cat /etc/os-release
   - apt-get update -qq
   - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind indent ca-certificates
   script:
@@ -110,15 +170,81 @@ B-Debian-testing:
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
-  - sha224sum libntlm-*.tar.gz
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-PureOS10:
+  image: pureos/byzantium:latest
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make syntax-check
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 check VERBOSE=t
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-RockyLinux8:
+  image: rockylinux:8
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - dnf update -y
+  - dnf install -y gcc make autoconf automake git libtool diffutils
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 check VERBOSE=t
+# FIXME XXX  - make syntax-check
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-RockyLinux9:
+  image: rockylinux:9
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - dnf update -y
+  - dnf install -y gcc make autoconf automake git libtool diffutils
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 check VERBOSE=t
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 B-Trisquel11:
   image: kpengboy/trisquel:11.0
   tags: [ saas-linux-medium-amd64 ]
   stage: build
   before_script:
+  - cat /etc/os-release
   - apt-get update -qq
   - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
   script:
@@ -128,31 +254,53 @@ B-Trisquel11:
   - make -j$(nproc) V=1 check VERBOSE=t
   - make syntax-check
   - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
-# https://docs.gitlab.com/ee/ci/runners/saas/macos/environment.html
-B-macOS14Xcode15:
+B-Ubuntu2204:
+  image: ubuntu:22.04
+  tags: [ saas-linux-medium-amd64 ]
   stage: build
-  image: macos-14-xcode-15
-  tags: [ saas-macos-medium-m1 ]
-  variables:
-    HOMEBREW_NO_AUTO_UPDATE: 1
-    HOMEBREW_NO_INSTALL_UPGRADE: 1
-    HOMEBREW_NO_INSTALL_CLEANUP: 1
-    HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
   before_script:
-  - brew install autoconf automake libtool
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
   script:
   - ./bootstrap
   - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
   - make -j$(nproc) V=1
-  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -j$(nproc) V=1 check VERBOSE=t
   - make syntax-check
-  - make dist
-  - sha224sum libntlm-*.tar.gz
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
   - git status
   - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-Ubuntu2404:
+  image: ubuntu:24.04
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind ca-certificates
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 check VERBOSE=t
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 # https://docs.gitlab.com/ee/ci/runners/saas/windows_saas_runner.html
 B-Windows-UCRT64:
@@ -172,73 +320,166 @@ B-Windows-UCRT64:
     pacman --noconfirm -Syu git autoconf automake libtool make mingw-w64-ucrt-x86_64-gcc
     ./bootstrap
     ./configure
-    make V=1 check VERBOSE=t'
+    make V=1 check VERBOSE=t
+    make dist
+    make -f cfg.mk srcdist
+    sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log'
+
+B-clang:
+  image: silkeh/clang:latest
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make
+  script:
+  - clang --version
+  - ./bootstrap
+  - ./configure CC="clang -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+B-gcc:
+  image: gcc:latest
+  tags: [ saas-linux-medium-amd64 ]
+  stage: build
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy --no-install-recommends git autoconf automake libtool make valgrind
+  script:
+  - gcc --version
+  - ./bootstrap
+  - ./configure CC="gcc -std=gnu2x" --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+# https://docs.gitlab.com/ee/ci/runners/saas/macos/environment.html
+B-macOS14Xcode15:
+  stage: build
+  image: macos-14-xcode-15
+  tags: [ saas-macos-medium-m1 ]
+  variables:
+    HOMEBREW_NO_AUTO_UPDATE: 1
+    HOMEBREW_NO_INSTALL_UPGRADE: 1
+    HOMEBREW_NO_INSTALL_CLEANUP: 1
+    HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+  before_script:
+  - brew install autoconf automake libtool coreutils
+  script:
+  - ./bootstrap
+  - ./configure --enable-gcc-warnings WARN_CFLAGS=-Werror
+  - make -j$(nproc) V=1
+  - env PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH" make -j$(nproc) V=1 distcheck VERBOSE=t
+  - make syntax-check
+  - make -f cfg.mk srcdist
+  - git status
+  - git diff --exit-code
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+000-reproducability:
+  image: debian:12-slim
+  tags: [ saas-linux-medium-amd64 ]
+  stage: test
+  needs: [ B-AlmaLinux8, B-AlmaLinux9, B-Alpine, B-ArchLinux, B-Debian11, B-Debian12, B-Debian-testing, B-PureOS10, B-RockyLinux8, B-RockyLinux9, B-Trisquel11, B-Ubuntu2204, B-Ubuntu2404, B-clang, B-gcc, B-macOS14Xcode15, AlmaLinux8, Alpine, ArchLinux, CentOS7, Fedora39, Ubuntu2204, Ubuntu2204-autoreconf, Ubuntu2204-rebootstrap, Ubuntu-rolling, macOS13Xcode14 ]
+  script:
+  - cat /etc/os-release
+  - mv -v libntlm-*/* .
+  - echo diffoscope libntlm-*.tar.*-b-trisquel11 libntlm-*.tar.*-b-pureos10
+  - echo diffoscope libntlm-*.tar.*-b-almalinux9 libntlm-*.tar.*-b-rockylinux9
+  - echo diffoscope libntlm-*.tar.*-b-almalinux8 libntlm-*.tar.*-b-rockylinux8
+  - echo diffoscope libntlm-*.tar.*-b-macos14xcode15 libntlm-*.tar.*-b-debian-testing
+  - echo diffoscope libntlm-*.tar.*-fedora39 libntlm-*.tar.*-b-debian12
+  - sha256sum libntlm-*.tar.*
+  - tail -v SHA256SUMS-*
+  - cat SHA256SUMS-* | sort | uniq -c
+  - cat SHA256SUMS-* | grep -- -src.tar. | sort | uniq -c | grep -v '^      1 '
+  - cat SHA256SUMS-* | grep -v -- -src.tar. | sort | uniq -c | grep -v '^      1 '
+  - find . -name "libntlm-*-src.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG-src" \;
+  - echo diffoscope libntlm-*.tar.*-b-trisquel11 libntlm-*.tar.*-b-ubuntu2204
+  - echo diffoscope libntlm-*.tar.*-b-pureos10 libntlm-*.tar.*-b-debian11
+  - cmp libntlm-*.tar.*-b-trisquel11 libntlm-*.tar.*-b-ubuntu2204
+  - cmp libntlm-*.tar.*-b-pureos10 libntlm-*.tar.*-b-debian11
+  - cmp libntlm-*.tar.*-b-almalinux8 libntlm-*.tar.*-b-rockylinux8
+  - cmp libntlm-*.tar.*-b-almalinux9 libntlm-*.tar.*-b-rockylinux9
 
 AlmaLinux8:
   image: almalinux:8
+  tags: [ saas-linux-medium-amd64 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   before_script:
-  - yum -y install make gcc
+  - dnf update -y
+  - dnf -y install make gcc diffutils
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 Alpine:
   image: alpine:latest
+  tags: [ saas-linux-medium-amd64 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   before_script:
   - apk update
   - apk add build-base valgrind
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
+  - apk add gzip # busybox doesn't support gzip --best
+  - make dist
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 ArchLinux:
   image: archlinux:latest
+  tags: [ saas-linux-medium-amd64 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   before_script:
   - pacman -Syu --noconfirm make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - mkdir b
   - cd b
   - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
-macOS13Xcode14:
-  image: macos-13-xcode-14
-  tags: [ saas-macos-medium-m1 ]
-  stage: test
-  needs: [B-Trisquel11]
-  script:
-  - gzip -cd libntlm-*.tar.gz | tar xf -
-  - cd `ls -d libntlm-* | grep -v tar.gz`
-  - mkdir b
-  - cd b
-  - ../configure --enable-gcc-warnings
-  - make syntax-check
-  - make -j$(nproc) V=1 distcheck VERBOSE=t
-
+# Too old for 'make dist': tar: unrecognized option '--sort=name'
 CentOS7:
   image: centos:7
+  tags: [ saas-linux-medium-amd64 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   before_script:
   - yum -y install make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - mkdir b
   - cd b
   - ../configure --enable-gcc-warnings
@@ -247,22 +488,142 @@ CentOS7:
 
 Fedora39:
   image: fedora:39
+  tags: [ saas-linux-medium-amd64 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   before_script:
   - dnf update -y
   - dnf install -y gcc make
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+Ubuntu2204:
+  image: ubuntu:22.04
+  tags: [ saas-linux-medium-amd64 ]
+  stage: test
+  needs: [ B-Trisquel11 ]
+  before_script:
+  - apt-get update -qq
+  - apt-get install -qqy make gcc
+  script:
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
+  - ./configure
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
+
+Ubuntu2204-autoreconf:
+  image: ubuntu:22.04
+  tags: [ saas-linux-medium-amd64 ]
+  stage: test
+  needs: [ B-Trisquel11 ]
+  before_script:
+  - apt-get update -qq
+  - apt-get install -qqy make gcc autoconf automake libtool
+  script:
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
+  - mkdir -v t
+  - autoreconf -fvi
+  - ./configure
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-1" \;
+  - make clean
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-2" \;
+  - make distclean
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-3" \;
+  - make maintainer-clean
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-4" \;
+  - make maintainer-clean
+  - autoreconf -fvi
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-5" \;
+  - mv -v t/* .
+  - rmdir -v t
+  - cat SHA256SUMS-$CI_JOB_NAME_SLUG.log
+
+Ubuntu2204-rebootstrap:
+  image: ubuntu:22.04
+  tags: [ saas-linux-medium-amd64 ]
+  stage: test
+  needs: [ B-Trisquel11 ]
+  before_script:
+  - apt-get update -qq
+  - apt-get install -qqy make gcc autoconf automake libtool git
+  script:
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
+  - mkdir -v t
+  - ./bootstrap --force
+  - ./configure
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-1" \;
+  - make clean
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-2" \;
+  - make distclean
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-3" \;
+  - make maintainer-clean
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-4" \;
+  - make maintainer-clean
+  - ./bootstrap --force
+  - ./configure
+  - make distcheck
+  - sha256sum libntlm-*.tar.* | tee -a SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "t/{}-$CI_JOB_NAME_SLUG-5" \;
+  - mv t/* .
+  - rmdir t
+  - cat SHA256SUMS-$CI_JOB_NAME_SLUG.log
+
+Ubuntu-rolling:
+  image: ubuntu:rolling
+  tags: [ saas-linux-medium-amd64 ]
+  stage: test
+  needs: [ B-Trisquel11 ]
+  before_script:
+  - cat /etc/os-release
+  - apt-get update -qq
+  - apt-get install -qqy make gcc
+  script:
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
+  - ./configure
+  - make syntax-check
+  - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
 
 Windows-MINGW64:
   tags: [ shared-windows, windows-1809 ]
   stage: test
-  needs: [B-Trisquel11]
+  needs: [ B-Trisquel11 ]
   script: # https://www.msys2.org/docs/ci/#other-systems
   - wget.exe --no-check-certificate -nv -O msys2.exe https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe
   - ./msys2.exe -y -oC:\
@@ -275,21 +636,24 @@ Windows-MINGW64:
   - |
     C:\msys64\usr\bin\bash -lcx '
     pacman --noconfirm -Syu  make mingw-w64-x86_64-gcc
-    tar xfa libntlm-*.tar.gz
-    cd `ls -d libntlm-* | grep -v tar.gz`
+    tar xfa `ls -d libntlm-*.tar.* | grep -v -- -src.tar.`
+    cd `ls -d libntlm-* | grep -v .tar.`
     ./configure --enable-gcc-warnings
-    make V=1 check VERBOSE=t'
+    make V=1 distcheck VERBOSE=t
+    sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log'
 
-Ubuntu-rolling:
-  image: ubuntu:rolling
+macOS13Xcode14:
+  image: macos-13-xcode-14
+  tags: [ saas-macos-medium-m1 ]
   stage: test
-  needs: [B-Trisquel11]
-  before_script:
-  - apt-get update -qq
-  - apt-get install -qqy make gcc
+  needs: [ B-Trisquel11 ]
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
-  - ./configure
+  - gzip -cd `ls -d libntlm-*.tar.* | grep -v -- -src.tar.` | tar xf -
+  - cd `ls -d libntlm-* | grep -v .tar.`
+  - mkdir b
+  - cd b
+  - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
+  - sha256sum libntlm-*.tar.* | tee SHA256SUMS-$CI_JOB_NAME_SLUG.log
+  - find . -name "libntlm-*.tar.*" -exec mv "{}" "{}-$CI_JOB_NAME_SLUG" \;
