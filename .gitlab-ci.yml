@@ -26,7 +26,7 @@ default:
     expire_in: 2 weeks
     when: always
     paths:
-    - "*.tar.gz"
+    - "*.tar.*"
     - ./*.log
     - ./config.h
     - ./**/*.log
@@ -44,7 +44,7 @@ B-gcc:
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 distcheck VERBOSE=t
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -61,7 +61,7 @@ B-clang:
   - make -j$(nproc) V=1
   - make -j$(nproc) V=1 distcheck VERBOSE=t
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -79,7 +79,7 @@ B-Alpine:
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -97,7 +97,7 @@ B-Debian-latest:
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -115,7 +115,7 @@ B-Debian-testing:
   - make -j$(nproc) V=1 check VERBOSE=t
   - make -j$(nproc) V=1 distcheck
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -134,7 +134,7 @@ B-Trisquel11:
   - make syntax-check
   - make -j$(nproc) V=1 distcheck
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -158,7 +158,7 @@ B-macOS14Xcode15:
   - make syntax-check
   - make dist
   - make -f cfg.mk srcdist
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
   - git status
   - git diff --exit-code
 
@@ -189,12 +189,12 @@ AlmaLinux8:
   before_script:
   - yum -y install make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
 
 Alpine:
   image: alpine:latest
@@ -204,8 +204,8 @@ Alpine:
   - apk update
   - apk add build-base valgrind
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 check VERBOSE=t
@@ -217,14 +217,14 @@ ArchLinux:
   before_script:
   - pacman -Syu --noconfirm make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - mkdir b
   - cd b
   - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
 
 macOS13Xcode14:
   image: macos-13-xcode-14
@@ -233,13 +233,13 @@ macOS13Xcode14:
   needs: [B-Trisquel11]
   script:
   - gzip -cd libntlm-*.tar.gz | tar xf -
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - mkdir b
   - cd b
   - ../configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
 
 CentOS7:
   image: centos:7
@@ -248,8 +248,8 @@ CentOS7:
   before_script:
   - yum -y install make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - mkdir b
   - cd b
   - ../configure --enable-gcc-warnings
@@ -264,12 +264,12 @@ Fedora39:
   - dnf update -y
   - dnf install -y gcc make
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure --enable-gcc-warnings
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
 
 Windows-MINGW64:
   tags: [ shared-windows, windows-1809 ]
@@ -287,8 +287,8 @@ Windows-MINGW64:
   - |
     C:\msys64\usr\bin\bash -lcx '
     pacman --noconfirm -Syu  make mingw-w64-x86_64-gcc
-    tar xfa libntlm-*.tar.gz
-    cd `ls -d libntlm-* | grep -v tar.gz`
+    tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+    cd `ls -d libntlm-* | grep -v .tar.`
     ./configure --enable-gcc-warnings
     make V=1 check VERBOSE=t'
 
@@ -300,9 +300,9 @@ Ubuntu-rolling:
   - apt-get update -qq
   - apt-get install -qqy make gcc
   script:
-  - tar xfa libntlm-*.tar.gz
-  - cd `ls -d libntlm-* | grep -v tar.gz`
+  - tar xfa `ls -d libntlm-*.tar.* | grep -v -src.tar.`
+  - cd `ls -d libntlm-* | grep -v .tar.`
   - ./configure
   - make syntax-check
   - make -j$(nproc) V=1 distcheck VERBOSE=t
-  - sha256sum libntlm-*.tar.gz
+  - sha256sum libntlm-*.tar.*
