@@ -55,3 +55,14 @@ CLEANFILES = test.out
 test_ntlm_LDFLAGS = -no-install
 
 LOG_COMPILER = $(VALGRIND)
+
+# dist
+
+dist-hook: mtime-NEWS-to-git-HEAD
+
+.PHONY: mtime-NEWS-to-git-HEAD
+mtime-NEWS-to-git-HEAD:
+	$(AM_V_GEN)if test -e $(srcdir)/.git \
+			&& command -v git > /dev/null; then \
+		touch -m -d @"$$(git log -1 --format=%ct)" $(srcdir)/NEWS; \
+	fi

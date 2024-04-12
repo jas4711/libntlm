@@ -17,6 +17,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
 # USA
 
+TAR_OPTIONS += --mode=go+u,go-w --mtime=$(srcdir)/NEWS
+
 update-copyright-env = \
 	UPDATE_COPYRIGHT_HOLDER="Simon Josefsson"	\
 	UPDATE_COPYRIGHT_USE_INTERVALS=2		\
