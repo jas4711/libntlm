@@ -62,8 +62,10 @@ prepare:
 	gpg --verify $(distdir)-win32.zip.sig
 	gpg --verify $(distdir)-win64.zip.sig
 
-ship:
-	git tag -m "$(PACKAGE) $(VERSION)" v$(VERSION)
+tag:
+	git tag -s -m "$(PACKAGE) $(VERSION)" v$(VERSION)
+
+ship:	tag
 	cp -v $(distdir)*.tar.gz* $(distdir)-win??.zip* ../releases/$(PACKAGE)/
 	git push
 	git push --tags
