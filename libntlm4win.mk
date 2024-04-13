@@ -20,7 +20,7 @@ SHELL=bash
 PACKAGE = libntlm
 distdir = $(PACKAGE)-$(VERSION)
 TGZ = $(distdir).tar.gz
-URL = http://www.nongnu.org/$(PACKAGE)/releases/$(TGZ)
+URL = https://download.savannah.nongnu.org/releases/$(PACKAGE)/$(TGZ)
 
 all:
 	@echo 'Usage examples:'
@@ -38,22 +38,10 @@ libntlm4win64:
 doit:
 	rm -rf tmp && mkdir tmp && cd tmp && \
 	cp ../$(TGZ) . || wget $(URL) && \
-	tar xfa $(TGZ) && \
+	env TAR_OPTIONS= tar xfa $(TGZ) && \
 	cd $(distdir) && \
 	./configure --host=$(HOST) --build=x86_64-unknown-linux-gnu --prefix=$(PWD)/tmp/root CPPFLAGS=-I$(PWD)/tmp/root/include && \
 	make all $(CHECK) install && \
 	cd .. && \
 	cd root && \
 	zip -r ../../$(distdir)-win$(ARCH).zip *
-
-htmldir = ../www-$(PACKAGE)
-upload:
-	gpg -b $(distdir)-win32.zip
-	gpg --verify $(distdir)-win32.zip.sig
-	gpg -b $(distdir)-win64.zip
-	gpg --verify $(distdir)-win64.zip.sig
-	cp -v $(distdir)-win*.zip* $(htmldir)/releases/
-	cp -v $(distdir)-win*.zip* ../releases/$(PACKAGE)/
-	cd $(htmldir) && \
-		cvs add -kb releases/$(distdir)-win*.zip* && \
-		cvs commit -m "Update." releases/
