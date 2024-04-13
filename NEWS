@@ -3,7 +3,22 @@ Copyright (C) 2002-2024 Simon Josefsson
 Copyright (C) 1999 Grant Edwards
 See the end for copying conditions.
 
-* Version 1.8 (unreleased)
+* Version 1.8 (released 2024-04-13)
+
+** The release tarball is now reproducible.
+It was created using Trisquel 11 aramo, and has been reproduced on at
+least Ubuntu 22.04 and AlmaLinux 8.
+
+** We publish a minimal source-only tarball.
+This tarball does not contain any generated files, and is sufficient
+to reproduce the full tarball (assuming build dependencies are
+available).
+
+** We no longer manually curate a ChangeLog file.
+You may use `git log` to show git commit log messages.
+This file used to be automatically generated from git history, but
+that made it impossible to re-create the tarball from a "git
+archive"-style copy of the project.
 
 ** API and ABI modifications.
 No changes since last version.
