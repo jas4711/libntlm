@@ -42,16 +42,11 @@ gl_public_submodule_commit =
 
 # Maintainer targets
 
-ChangeLog:
-	git2cl > ChangeLog
-	cat .clcopying >> ChangeLog
-
 release: prepare ship
 
 prepare:
 	! git tag -v v$(VERSION) 2>&1 | grep $(PACKAGE) > /dev/null
-	rm -f ChangeLog
-	$(MAKE) ChangeLog distcheck
+	$(MAKE) distcheck
 	make -f libntlm4win.mk libntlm4win VERSION=$(VERSION)
 	gpg -b $(distdir).tar.gz
 	gpg -b $(distdir)-win32.zip
@@ -61,7 +56,6 @@ prepare:
 	gpg --verify $(distdir)-win64.zip.sig
 
 ship:
-	git commit -m Generated. ChangeLog
 	git tag -m "$(PACKAGE) $(VERSION)" v$(VERSION)
 	cp -v $(distdir).tar.gz* $(distdir)-win??.zip* ../releases/$(PACKAGE)/
 	git push
@@ -71,5 +65,5 @@ ship:
 review-diff:
 	git diff `git describe --abbrev=0`.. \
 	| grep -v -e ^index -e '^diff --git' \
-	| filterdiff -p 1 -x 'build-aux/*' -x 'gl/*' -x 'maint.mk' -x '.gitignore' -x '.x-sc*' -x ChangeLog -x GNUmakefile \
+	| filterdiff -p 1 -x 'build-aux/*' -x 'gl/*' -x 'maint.mk' -x '.gitignore' -x '.x-sc*' -x GNUmakefile \
 	| less
