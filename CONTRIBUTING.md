@@ -29,14 +29,16 @@ make prepare
 
 ## Review of diff since last release
 
-In particular make sure `AC_INIT` and `LT_REVISION` in `configure.ac`
-has the right version information.
+Make sure `AC_INIT` and `LT_REVISION` in `configure.ac` has the right
+version information.  Check `srcdist` in `cfg.mk`.
+
+Make sure NEWS entries describe all significant modifications:
 
 ```
 make review-diff
 ```
 
-## Update NEWS entry and add release date
+## Update NEWS & README with release date
 
 ## GitLab CI/CD checks
 
@@ -48,7 +50,8 @@ Check https://gitlab.com/gsasl/libntlm/-/pipelines
 
 # Release process
 
-Prepare tarball, sign and upload them.
+Prepare tarball, sign and upload them.  Verify that SHA256 checksums
+of your tarballs match some version generated via pipeline.
 
 ```
 make prepare
