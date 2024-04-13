@@ -51,21 +51,23 @@ release: prepare ship
 
 prepare:
 	! git tag -v v$(VERSION) 2>&1 | grep $(PACKAGE) > /dev/null
-	$(MAKE) distcheck
+	$(MAKE) distcheck srcdist
 	make -f libntlm4win.mk libntlm4win VERSION=$(VERSION)
 	gpg -b $(distdir).tar.gz
+	gpg -b $(distdir)-src.tar.gz
 	gpg -b $(distdir)-win32.zip
 	gpg -b $(distdir)-win64.zip
 	gpg --verify $(distdir).tar.gz.sig
+	gpg --verify $(distdir)-src.tar.gz.sig
 	gpg --verify $(distdir)-win32.zip.sig
 	gpg --verify $(distdir)-win64.zip.sig
 
 ship:
 	git tag -m "$(PACKAGE) $(VERSION)" v$(VERSION)
-	cp -v $(distdir).tar.gz* $(distdir)-win??.zip* ../releases/$(PACKAGE)/
+	cp -v $(distdir)*.tar.gz* $(distdir)-win??.zip* ../releases/$(PACKAGE)/
 	git push
 	git push --tags
-	scp $(distdir).tar.gz* $(distdir)-win??.zip* jas@dl.sv.nongnu.org:/releases/libntlm/
+	scp $(distdir)*.tar.gz* $(distdir)-win??.zip* jas@dl.sv.nongnu.org:/releases/libntlm/
 
 review-diff:
 	git diff `git describe --abbrev=0`.. \
